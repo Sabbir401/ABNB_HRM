@@ -70,6 +70,16 @@
           />
         </div>
         <div class="col-lg-2 col-md-3 col-sm-6">
+          <label for="exampleInputEmail1" class=""
+            >Marital Status<i class="fa fa-birthday-cake" aria-hidden="true"></i
+          ></label>
+          <select name="" id="" class="form-control">
+            <option value="">-select-</option>
+            <option value="">Married</option>
+            <option value="">Unmarried</option>
+          </select>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-6">
           <label for="exampleInputEmail1" class="">Date of Birth</label>
           <input
             type="date"
@@ -78,19 +88,8 @@
             aria-describedby="emailHelp"
           />
         </div>
-        <div class="col-lg-2 col-md-3 col-sm-6">
-          <label for="exampleInputEmail1" class=""
-            >Place of <i class="fa fa-birthday-cake" aria-hidden="true"></i
-          ></label>
-          <input
-            type="date"
-            class="form-control"
-            id="disabledTextInput"
-            aria-describedby="emailHelp"
-          />
-        </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="exampleInputEmail1" class="">Birth Certificate</label>
+          <label for="exampleInputEmail1" class="">Place of Birth</label>
           <input
             type="text"
             class="form-control"
@@ -130,15 +129,6 @@
           />
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="exampleInputEmail1" class="">Personal Email</label>
-          <input
-            type="email"
-            class="form-control"
-            id="disabledTextInput"
-            aria-describedby="emailHelp"
-          />
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12">
           <label for="exampleInputEmail1" class="">Emergency Contact</label>
           <input
             type="text"
@@ -147,9 +137,6 @@
             aria-describedby="emailHelp"
           />
         </div>
-      </div>
-
-      <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
           <label for="" class="">Gender</label>
           <select name="" id="" class="form-control">
@@ -159,19 +146,26 @@
             <option value="">Other</option>
           </select>
         </div>
+      </div>
+
+      <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="" class="">Blood Group</label>
-          <select name="" id="" class="form-control">
-            <option value="">-select-</option>
-            <option value="A+VE">A+(ve)</option>
-            <option value="A-VE">A-(ve)</option>
-            <option value="B+VE">B+(ve)</option>
-            <option value="B-VE">B-(ve)</option>
-            <option value="O+VE">O+(ve)</option>
-            <option value="O-VE">O-(ve)</option>
-            <option value="AB+VE">AB+(ve)</option>
-            <option value="AB-VE">AB-(ve)</option>
-          </select>
+          <label for="exampleInputEmail1" class="">Personal Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="disabledTextInput"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <label for="exampleInputEmail1" class="">Official Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="disabledTextInput"
+            aria-describedby="emailHelp"
+          />
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <label for="" class="">Religion</label>
@@ -187,11 +181,17 @@
 
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="" class="">Marital Status</label>
+          <label for="" class="">Blood Group</label>
           <select name="" id="" class="form-control">
             <option value="">-select-</option>
-            <option value="A+VE">Married</option>
-            <option value="A-VE">Unmarried</option>
+            <option value="A+VE">A+(ve)</option>
+            <option value="A-VE">A-(ve)</option>
+            <option value="B+VE">B+(ve)</option>
+            <option value="B-VE">B-(ve)</option>
+            <option value="O+VE">O+(ve)</option>
+            <option value="O-VE">O-(ve)</option>
+            <option value="AB+VE">AB+(ve)</option>
+            <option value="AB-VE">AB-(ve)</option>
           </select>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -223,6 +223,6 @@
 
 <style scoped>
 * {
-  font-size: 14px;
+  font-size: 16px;
 }
 </style>

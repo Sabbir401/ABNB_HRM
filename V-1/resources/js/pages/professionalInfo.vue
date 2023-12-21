@@ -76,6 +76,18 @@ export default {
                   </select>
                 </div>
                 <div class="col-lg-6 col-sm-12">
+                  <label for="" class="">Board</label>
+                  <select name="" id="" class="form-control">
+                    <option value="">-select-</option>
+                    <option value="">Dhaka</option>
+                    <option value="">Cumilla</option>
+                    <option value="">Rajshahi</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-lg-12 col-sm-12">
                   <label for="exampleInputEmail1" class="">Institute</label>
                   <input
                     type="text"
@@ -89,7 +101,7 @@ export default {
               <div class="row mb-2">
                 <div class="col-lg-6 col-sm-12">
                   <label for="exampleInputEmail1" class=""
-                    >Board/University</label
+                    >Major Group</label
                   >
                   <input
                     type="text"
@@ -612,6 +624,11 @@ export default {
     max-width: 90% !important;
   }
 }
+
+*{
+    font-size: 16px;
+}
+
 </style>
 
 

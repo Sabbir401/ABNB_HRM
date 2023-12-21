@@ -3,6 +3,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import employee from './pages/employeeInfo.vue';
 import personal from './pages/personalInfo.vue';
 import professonal from './pages/professionalInfo.vue';
+import official from './pages/OfficialInfo.vue';
 
 const routes = [
     {
@@ -19,6 +20,10 @@ const routes = [
         path : '/professonal',
         name: 'professonal',
         component: professonal
+    },{
+        path : '/official',
+        name: 'official',
+        component: official
     }
 ]
 
