@@ -34,7 +34,7 @@
                     @mouseover="class_val='my-card shadow-20'"
                     @mouseleave="class_val='my-card shadow-'">
               <q-img src="https://miipublications.com.my/wp-content/uploads/2019/10/shop-online-760x490.jpg"></q-img>
-  
+
               <q-card-section class="q-pb-xs q-pt-md">
                 <!--<q-btn-->
                 <!--fab-->
@@ -43,7 +43,7 @@
                 <!--class="absolute"-->
                 <!--style="top: 0; right: 12px; transform: translateY(-50%);"-->
                 <!--&gt;</q-btn>-->
-  
+
                 <div class="row no-wrap items-center">
                   <div class="col text-subtitle2 ellipsis-2-lines text-grey-10">
                     Benling C200-BLK Smartwatch (Black Strap Free Size)
@@ -53,10 +53,10 @@
                     <!--250 ft-->
                   </div>
                 </div>
-  
+
                 <q-rating v-model="stars" color="orange" :max="5" readonly size="17px"></q-rating>
               </q-card-section>
-  
+
               <q-card-section class="q-py-sm">
                 <div>
                   <div class="text-caption text-green-8 text-weight-bolder">Special Price</div>
@@ -71,9 +71,9 @@
                 <!--Small plates, salads & sandwiches in an intimate setting.-->
                 <!--</div>-->
               </q-card-section>
-  
+
               <q-separator></q-separator>
-  
+
               <q-card-actions>
                 <q-btn flat class="text-weight-bold text-capitalize" dense color="primary">
                   View details
@@ -85,7 +85,7 @@
       </div>
     </div>
   </template>
-  
+
   <script>
     export default {
       name: "category.vue",
@@ -129,7 +129,7 @@
                 }
               ]
             },
-  
+
             {
               "label": "Sleeve",
               "items": [
@@ -219,11 +219,11 @@
       }
     }
   </script>
-  
+
   <style scoped>
     .my-card {
       width: 100%;
       max-width: 300px;
     }
   </style>
-  
+

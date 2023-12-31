@@ -1,41 +1,141 @@
 <template>
-  <div class="container mt-5">
+  <div class="container q-my-xl q-mx-xl">
     <q-form @submit="onSubmit" @reset="onReset">
       <div class="row bg-white q-mt-sm">
-        <div class="col-lg-4 col-md-4 col-sm-12 q-px-sm">
-          <q-input
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-input dense filled v-model="Company" label="Company Name" />
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-input dense filled v-model="name" label="Employee ID" />
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-input dense filled v-model="name" label="Card No" />
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-input dense filled v-model="name" label="Full Name" />
+        </div>
+      </div>
+
+      <div class="row bg-white q-mt-sm">
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-input dense filled v-model="Company" label="Father's Name" />
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-input dense filled v-model="name" label="Mother's Name" />
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-input dense filled v-model="name" label="Spouse Name" />
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-select
             filled
-            v-model="Company"
-            label="Your name *"
-            hint="Name and surname"
-            lazy-rules
-            :rules="[
-              (val) => (val && val.length > 0) || 'Please type something',
-            ]"
+            dense
+            v-model="model"
+            :options="options"
+            label="Marital Status"
           />
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 q-px-sm">
+      </div>
+
+      <div class="row bg-white q-mt-sm">
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-input dense filled v-model="Company" label="Place of Birth" />
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <div>
+            <q-input
+              filled
+              dense
+              v-model="date"
+              mask="date"
+              label="Date of Birth"
+              :rules="['date']"
+            >
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy
+                    cover
+                    transition-show="scale"
+                    transition-hide="scale"
+                  >
+                    <q-date dense v-model="date">
+                      <div class="row items-center justify-end">
+                        <q-btn
+                          v-close-popup
+                          label="Close"
+                          color="primary"
+                          flat
+                        />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-input dense filled v-model="name" label="Official Contact" />
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-input dense filled v-model="name" label="Emergency Contact" />
+        </div>
+      </div>
+
+      <div class="row bg-white">
+        <div class="col-lg-6 col-md-6 col-sm-12 q-px-sm">
           <q-input
+            v-model="text"
             filled
-            v-model="name"
-            label="Your name *"
-            hint="Name and surname"
-            lazy-rules
-            :rules="[
-              (val) => (val && val.length > 0) || 'Please type something',
-            ]"
+            dense
+            type="textarea"
+            label="Permanent Address"
           />
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 q-px-sm">
+        <div class="col-lg-6 col-md-6 col-sm-12 q-px-sm">
           <q-input
+            v-model="text"
             filled
-            v-model="name"
-            label="Your name *"
-            hint="Name and surname"
-            lazy-rules
-            :rules="[
-              (val) => (val && val.length > 0) || 'Please type something',
-            ]"
+            dense
+            type="textarea"
+            label="Present Address"
+          />
+        </div>
+      </div>
+
+      <div class="row bg-white q-mt-sm">
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-select
+            filled
+            dense
+            v-model="model"
+            :options="gender"
+            label="Gender"
+          />
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-input filled dense v-model="email" type="email" label="Personal Email">
+            <template v-slot:append>
+              <q-icon name="mail" />
+            </template>
+          </q-input>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+            <q-input filled dense v-model="email" type="email" label="Official Email">
+            <template v-slot:append>
+              <q-icon name="mail" />
+            </template>
+          </q-input>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+            <q-select
+            filled
+            dense
+            v-model="model"
+            :options="religion"
+            label="Religion"
           />
         </div>
       </div>
@@ -44,42 +144,20 @@
 
   <div class="q-pa-md" style="max-width: 400px">
     <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-      <q-input
-        filled
-        v-model="name"
-        label="Your name *"
-        hint="Name and surname"
-        lazy-rules
-        :rules="[(val) => (val && val.length > 0) || 'Please type something']"
+      <q-toggle
+        class="q-ml-xl"
+        v-model="accept"
+        label="I accept the license and terms"
       />
-
-      <q-input
-        filled
-        type="number"
-        v-model="age"
-        label="Your age *"
-        lazy-rules
-        :rules="[
-          (val) => (val !== null && val !== '') || 'Please type your age',
-          (val) => (val > 0 && val < 100) || 'Please type a real age',
-        ]"
-      />
-
-      <q-toggle v-model="accept" label="I accept the license and terms"/>
 
       <div>
-        <q-btn label="Submit" type="submit" color="primary" />
-        <q-btn
-          label="Reset"
-          type="reset"
-          color="primary"
-          flat
-          class="q-ml-sm"
-        />
+        <q-btn label="Submit" type="submit" color="info" class="q-ml-xl" />
+        <q-btn label="Reset" type="reset" color="primary" class="q-ml-md" />
       </div>
     </q-form>
   </div>
 </template>
+
 
 
 <script>
@@ -92,7 +170,7 @@ export default {
 
     const name = ref(null);
     const age = ref(null);
-    const comapny = ref(null)
+    const comapny = ref(null);
     const accept = ref(false);
 
     return {
@@ -100,6 +178,13 @@ export default {
       age,
       comapny,
       accept,
+
+      date: ref("2019/02/01"),
+      model: ref(null),
+      options: ["Married", "Unmarried"],
+      text: ref(""),
+      gender: ["Male", "Female"],
+      religion: ["Muslim", "Hindu", "Buddhist"],
 
       onSubmit() {
         if (accept.value !== true) {

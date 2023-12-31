@@ -3,53 +3,9 @@
     ><!--
       <q-header reveal elevated style="background-color: #1f509e;"> -->
 
-    <q-header reveal elevated style="background-color: #1f509e">
-      <q-toolbar v-if="!$q.platform.is.desktop" class="q-py-sm">
-        <div class="row">
-          <div class="col-sm-12 col-xs-12">
-            <q-toolbar-title>
-              <img
-                @click="$router.push('/home')"
-                class="cursor-pointer float-left"
-                src="../assets/bu_logo(64x64).png"
-                style="width: 12%"
-              />
-              <span
-                class="float-left q-mt-xs q-ml-md text-h6 text-weight-bold"
-                style="font-size: 17px"
-                >E-Commerce</span
-              >
-            </q-toolbar-title>
-          </div>
-          <div class="col-sm-12 col-xs-12 q-mt-md">
-            <q-input
-              class="float-left q-mx-md full-width"
-              square
-              bg-color="white"
-              dense
-              outlined
-              v-model="text"
-              label="Search for products, brands and more"
-            />
-          </div>
-          <div class="col-sm-12 col-xs-12 q-mt-md">
-            <div>
-              <q-btn class="q-mr-md" dense round flat icon="shopping_cart">
-                <q-badge color="red" class="text-bold" floating transparent>
-                  2
-                </q-badge>
-              </q-btn>
-              <q-btn flat round dense icon="settings" class="q-mr-md" to="/" />
-              <q-btn flat round dense icon="fas fa-sign-out-alt" to="/" />
-            </div>
-          </div>
-        </div>
-        <!--          <q-btn @click="left = !left" flat round dense icon="menu" class="q-mr-sm" />-->
+    <q-header reveal elevated style="background-color: #1f9e3b">
 
-        <!--<q-btn flat dense icon="shopping_cart" class="text-capitalize q-mr-md text-bold" label="Cart"/>-->
-      </q-toolbar>
       <q-toolbar v-if="$q.platform.is.desktop" class="q-py-sm">
-        <!--          <q-btn @click="left = !left" flat round dense icon="menu" class="q-mr-sm" />-->
         <img
           @click="$router.push('/home')"
           class="cursor-pointer"
@@ -60,7 +16,7 @@
           <span
             class="float-left q-mt-xs text-h6 text-weight-bold"
             style="font-size: 17px"
-            >E-Commerce</span
+            >Artisan HR</span
           >
           <q-input
             class="float-left q-ml-xl"
@@ -77,7 +33,7 @@
         <!--<q-btn flat dense icon="shopping_cart" class="text-capitalize q-mr-md text-bold" label="Cart"/>-->
         <q-btn class="q-mr-md" dense round flat icon="shopping_cart">
           <q-badge color="red" class="text-bold" floating transparent>
-            4
+            3
           </q-badge>
         </q-btn>
         <q-btn flat round dense icon="settings" class="q-mr-md" />
@@ -221,7 +177,7 @@
       </div>
     </q-header>
 
-    <q-page-container style="background-color: #f1f2f6">
+    <q-page-container style="background-color: #ffff">
       <router-view />
       <div class="q-mt-sm">
         <div class="row q-pa-md bg-primary">
@@ -294,7 +250,7 @@
               class="text-blue-1 hover_underline_white"
               style="text-decoration: none"
               href="https://butechltd.com"
-              >BU Tech</a
+              >Sabbir</a
             >.
           </div>
         </div>
@@ -318,6 +274,7 @@ export default {
 </script>
 
   <style>
+
 .q-drawer {
   /*background-image: url(https://demos.creative-tim.com/vue-material-dashboard/img/sidebar-2.32103624.jpg) !important;*/
   background-image: url("/images/lake.jpg") !important;
