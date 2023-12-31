@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Scale extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'Name',
+    ];
+
+    public function academic()
+    {
+        return $this->hasOne(Academic_Info::class, 'Sacle_Id');
+    }
 }

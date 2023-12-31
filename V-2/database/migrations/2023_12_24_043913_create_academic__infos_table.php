@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreign('EID')->references('id')->on('employees')->onDelete('cascade');
             $table->foreign('Level_of_Education_Id')->references('id')->on('level_of__education')->onDelete('cascade');
             $table->foreign('Sacle_Id')->references('id')->on('scales')->onDelete('cascade');
-        });
+        }); 
     }
 
     /**

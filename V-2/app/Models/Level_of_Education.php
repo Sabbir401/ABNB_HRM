@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Level_of_Education extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'Name',
+    ];
+
+    public function degree()
+    {
+        return $this->hasMany(Degree::class, 'Level_of_Education_Id');
+    }
+    public function academic()
+    {
+        return $this->hasMany(Academic_Info::class, 'Level_of_Education_Id');
+    }
 }
