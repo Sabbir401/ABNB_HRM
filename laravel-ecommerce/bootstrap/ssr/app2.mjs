@@ -49,188 +49,10 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
         _push2(ssrRenderComponent(_component_q_header, {
           reveal: "",
           elevated: "",
-          style: { "background-color": "#1f509e" }
+          style: { "background-color": "#1f9e3b" }
         }, {
           default: withCtx((_2, _push3, _parent3, _scopeId2) => {
             if (_push3) {
-              if (!_ctx.$q.platform.is.desktop) {
-                _push3(ssrRenderComponent(_component_q_toolbar, { class: "q-py-sm" }, {
-                  default: withCtx((_3, _push4, _parent4, _scopeId3) => {
-                    if (_push4) {
-                      _push4(`<div class="row"${_scopeId3}><div class="col-sm-12 col-xs-12"${_scopeId3}>`);
-                      _push4(ssrRenderComponent(_component_q_toolbar_title, null, {
-                        default: withCtx((_4, _push5, _parent5, _scopeId4) => {
-                          if (_push5) {
-                            _push5(`<img class="cursor-pointer float-left"${ssrRenderAttr("src", _imports_0)} style="${ssrRenderStyle({ "width": "12%" })}"${_scopeId4}><span class="float-left q-mt-xs q-ml-md text-h6 text-weight-bold" style="${ssrRenderStyle({ "font-size": "17px" })}"${_scopeId4}>E-Commerce</span>`);
-                          } else {
-                            return [
-                              createVNode("img", {
-                                onClick: ($event) => _ctx.$router.push("/home"),
-                                class: "cursor-pointer float-left",
-                                src: _imports_0,
-                                style: { "width": "12%" }
-                              }, null, 8, ["onClick"]),
-                              createVNode("span", {
-                                class: "float-left q-mt-xs q-ml-md text-h6 text-weight-bold",
-                                style: { "font-size": "17px" }
-                              }, "E-Commerce")
-                            ];
-                          }
-                        }),
-                        _: 1
-                      }, _parent4, _scopeId3));
-                      _push4(`</div><div class="col-sm-12 col-xs-12 q-mt-md"${_scopeId3}>`);
-                      _push4(ssrRenderComponent(_component_q_input, {
-                        class: "float-left q-mx-md full-width",
-                        square: "",
-                        "bg-color": "white",
-                        dense: "",
-                        outlined: "",
-                        modelValue: $data.text,
-                        "onUpdate:modelValue": ($event) => $data.text = $event,
-                        label: "Search for products, brands and more"
-                      }, null, _parent4, _scopeId3));
-                      _push4(`</div><div class="col-sm-12 col-xs-12 q-mt-md"${_scopeId3}><div${_scopeId3}>`);
-                      _push4(ssrRenderComponent(_component_q_btn, {
-                        class: "q-mr-md",
-                        dense: "",
-                        round: "",
-                        flat: "",
-                        icon: "shopping_cart"
-                      }, {
-                        default: withCtx((_4, _push5, _parent5, _scopeId4) => {
-                          if (_push5) {
-                            _push5(ssrRenderComponent(_component_q_badge, {
-                              color: "red",
-                              class: "text-bold",
-                              floating: "",
-                              transparent: ""
-                            }, {
-                              default: withCtx((_5, _push6, _parent6, _scopeId5) => {
-                                if (_push6) {
-                                  _push6(` 4 `);
-                                } else {
-                                  return [
-                                    createTextVNode(" 4 ")
-                                  ];
-                                }
-                              }),
-                              _: 1
-                            }, _parent5, _scopeId4));
-                          } else {
-                            return [
-                              createVNode(_component_q_badge, {
-                                color: "red",
-                                class: "text-bold",
-                                floating: "",
-                                transparent: ""
-                              }, {
-                                default: withCtx(() => [
-                                  createTextVNode(" 4 ")
-                                ]),
-                                _: 1
-                              })
-                            ];
-                          }
-                        }),
-                        _: 1
-                      }, _parent4, _scopeId3));
-                      _push4(ssrRenderComponent(_component_q_btn, {
-                        flat: "",
-                        round: "",
-                        dense: "",
-                        icon: "settings",
-                        class: "q-mr-md"
-                      }, null, _parent4, _scopeId3));
-                      _push4(ssrRenderComponent(_component_q_btn, {
-                        flat: "",
-                        round: "",
-                        dense: "",
-                        icon: "fas fa-sign-out-alt",
-                        to: "/"
-                      }, null, _parent4, _scopeId3));
-                      _push4(`</div></div></div>`);
-                    } else {
-                      return [
-                        createVNode("div", { class: "row" }, [
-                          createVNode("div", { class: "col-sm-12 col-xs-12" }, [
-                            createVNode(_component_q_toolbar_title, null, {
-                              default: withCtx(() => [
-                                createVNode("img", {
-                                  onClick: ($event) => _ctx.$router.push("/home"),
-                                  class: "cursor-pointer float-left",
-                                  src: _imports_0,
-                                  style: { "width": "12%" }
-                                }, null, 8, ["onClick"]),
-                                createVNode("span", {
-                                  class: "float-left q-mt-xs q-ml-md text-h6 text-weight-bold",
-                                  style: { "font-size": "17px" }
-                                }, "E-Commerce")
-                              ]),
-                              _: 1
-                            })
-                          ]),
-                          createVNode("div", { class: "col-sm-12 col-xs-12 q-mt-md" }, [
-                            createVNode(_component_q_input, {
-                              class: "float-left q-mx-md full-width",
-                              square: "",
-                              "bg-color": "white",
-                              dense: "",
-                              outlined: "",
-                              modelValue: $data.text,
-                              "onUpdate:modelValue": ($event) => $data.text = $event,
-                              label: "Search for products, brands and more"
-                            }, null, 8, ["modelValue", "onUpdate:modelValue"])
-                          ]),
-                          createVNode("div", { class: "col-sm-12 col-xs-12 q-mt-md" }, [
-                            createVNode("div", null, [
-                              createVNode(_component_q_btn, {
-                                class: "q-mr-md",
-                                dense: "",
-                                round: "",
-                                flat: "",
-                                icon: "shopping_cart"
-                              }, {
-                                default: withCtx(() => [
-                                  createVNode(_component_q_badge, {
-                                    color: "red",
-                                    class: "text-bold",
-                                    floating: "",
-                                    transparent: ""
-                                  }, {
-                                    default: withCtx(() => [
-                                      createTextVNode(" 4 ")
-                                    ]),
-                                    _: 1
-                                  })
-                                ]),
-                                _: 1
-                              }),
-                              createVNode(_component_q_btn, {
-                                flat: "",
-                                round: "",
-                                dense: "",
-                                icon: "settings",
-                                class: "q-mr-md"
-                              }),
-                              createVNode(_component_q_btn, {
-                                flat: "",
-                                round: "",
-                                dense: "",
-                                icon: "fas fa-sign-out-alt",
-                                to: "/"
-                              })
-                            ])
-                          ])
-                        ])
-                      ];
-                    }
-                  }),
-                  _: 1
-                }, _parent3, _scopeId2));
-              } else {
-                _push3(`<!---->`);
-              }
               if (_ctx.$q.platform.is.desktop) {
                 _push3(ssrRenderComponent(_component_q_toolbar, { class: "q-py-sm" }, {
                   default: withCtx((_3, _push4, _parent4, _scopeId3) => {
@@ -239,7 +61,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                       _push4(ssrRenderComponent(_component_q_toolbar_title, null, {
                         default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                           if (_push5) {
-                            _push5(`<span class="float-left q-mt-xs text-h6 text-weight-bold" style="${ssrRenderStyle({ "font-size": "17px" })}"${_scopeId4}>E-Commerce</span>`);
+                            _push5(`<span class="float-left q-mt-xs text-h6 text-weight-bold" style="${ssrRenderStyle({ "font-size": "17px" })}"${_scopeId4}>Artisan HR</span>`);
                             _push5(ssrRenderComponent(_component_q_input, {
                               class: "float-left q-ml-xl",
                               style: { "width": "650px" },
@@ -256,7 +78,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                               createVNode("span", {
                                 class: "float-left q-mt-xs text-h6 text-weight-bold",
                                 style: { "font-size": "17px" }
-                              }, "E-Commerce"),
+                              }, "Artisan HR"),
                               createVNode(_component_q_input, {
                                 class: "float-left q-ml-xl",
                                 style: { "width": "650px" },
@@ -290,10 +112,10 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                             }, {
                               default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                 if (_push6) {
-                                  _push6(` 4 `);
+                                  _push6(` 3 `);
                                 } else {
                                   return [
-                                    createTextVNode(" 4 ")
+                                    createTextVNode(" 3 ")
                                   ];
                                 }
                               }),
@@ -308,7 +130,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                                 transparent: ""
                               }, {
                                 default: withCtx(() => [
-                                  createTextVNode(" 4 ")
+                                  createTextVNode(" 3 ")
                                 ]),
                                 _: 1
                               })
@@ -344,7 +166,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                             createVNode("span", {
                               class: "float-left q-mt-xs text-h6 text-weight-bold",
                               style: { "font-size": "17px" }
-                            }, "E-Commerce"),
+                            }, "Artisan HR"),
                             createVNode(_component_q_input, {
                               class: "float-left q-ml-xl",
                               style: { "width": "650px" },
@@ -374,7 +196,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                               transparent: ""
                             }, {
                               default: withCtx(() => [
-                                createTextVNode(" 4 ")
+                                createTextVNode(" 3 ")
                               ]),
                               _: 1
                             })
@@ -421,7 +243,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                       default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                         if (_push5) {
                           _push5(ssrRenderComponent(_component_q_item, {
-                            onClick: ($event) => _ctx.$router.push("/category"),
+                            onClick: ($event) => _ctx.$router.push("/details"),
                             clickable: ""
                           }, {
                             default: withCtx((_5, _push6, _parent6, _scopeId5) => {
@@ -452,7 +274,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                             _: 1
                           }, _parent5, _scopeId4));
                           _push5(ssrRenderComponent(_component_q_item, {
-                            onClick: ($event) => _ctx.$router.push("/category"),
+                            onClick: ($event) => _ctx.$router.push("/employeeInfo"),
                             clickable: ""
                           }, {
                             default: withCtx((_5, _push6, _parent6, _scopeId5) => {
@@ -578,7 +400,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                         } else {
                           return [
                             createVNode(_component_q_item, {
-                              onClick: ($event) => _ctx.$router.push("/category"),
+                              onClick: ($event) => _ctx.$router.push("/details"),
                               clickable: ""
                             }, {
                               default: withCtx(() => [
@@ -592,7 +414,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                               _: 1
                             }, 8, ["onClick"]),
                             createVNode(_component_q_item, {
-                              onClick: ($event) => _ctx.$router.push("/category"),
+                              onClick: ($event) => _ctx.$router.push("/employeeInfo"),
                               clickable: ""
                             }, {
                               default: withCtx(() => [
@@ -660,7 +482,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                       }, {
                         default: withCtx(() => [
                           createVNode(_component_q_item, {
-                            onClick: ($event) => _ctx.$router.push("/category"),
+                            onClick: ($event) => _ctx.$router.push("/details"),
                             clickable: ""
                           }, {
                             default: withCtx(() => [
@@ -674,7 +496,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                             _: 1
                           }, 8, ["onClick"]),
                           createVNode(_component_q_item, {
-                            onClick: ($event) => _ctx.$router.push("/category"),
+                            onClick: ($event) => _ctx.$router.push("/employeeInfo"),
                             clickable: ""
                           }, {
                             default: withCtx(() => [
@@ -1317,87 +1139,8 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
               _push3(`</div><div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 cursor-pointer hover-blue"${_scopeId2}> Offers </div></div></div>`);
             } else {
               return [
-                !_ctx.$q.platform.is.desktop ? (openBlock(), createBlock(_component_q_toolbar, {
-                  key: 0,
-                  class: "q-py-sm"
-                }, {
-                  default: withCtx(() => [
-                    createVNode("div", { class: "row" }, [
-                      createVNode("div", { class: "col-sm-12 col-xs-12" }, [
-                        createVNode(_component_q_toolbar_title, null, {
-                          default: withCtx(() => [
-                            createVNode("img", {
-                              onClick: ($event) => _ctx.$router.push("/home"),
-                              class: "cursor-pointer float-left",
-                              src: _imports_0,
-                              style: { "width": "12%" }
-                            }, null, 8, ["onClick"]),
-                            createVNode("span", {
-                              class: "float-left q-mt-xs q-ml-md text-h6 text-weight-bold",
-                              style: { "font-size": "17px" }
-                            }, "E-Commerce")
-                          ]),
-                          _: 1
-                        })
-                      ]),
-                      createVNode("div", { class: "col-sm-12 col-xs-12 q-mt-md" }, [
-                        createVNode(_component_q_input, {
-                          class: "float-left q-mx-md full-width",
-                          square: "",
-                          "bg-color": "white",
-                          dense: "",
-                          outlined: "",
-                          modelValue: $data.text,
-                          "onUpdate:modelValue": ($event) => $data.text = $event,
-                          label: "Search for products, brands and more"
-                        }, null, 8, ["modelValue", "onUpdate:modelValue"])
-                      ]),
-                      createVNode("div", { class: "col-sm-12 col-xs-12 q-mt-md" }, [
-                        createVNode("div", null, [
-                          createVNode(_component_q_btn, {
-                            class: "q-mr-md",
-                            dense: "",
-                            round: "",
-                            flat: "",
-                            icon: "shopping_cart"
-                          }, {
-                            default: withCtx(() => [
-                              createVNode(_component_q_badge, {
-                                color: "red",
-                                class: "text-bold",
-                                floating: "",
-                                transparent: ""
-                              }, {
-                                default: withCtx(() => [
-                                  createTextVNode(" 4 ")
-                                ]),
-                                _: 1
-                              })
-                            ]),
-                            _: 1
-                          }),
-                          createVNode(_component_q_btn, {
-                            flat: "",
-                            round: "",
-                            dense: "",
-                            icon: "settings",
-                            class: "q-mr-md"
-                          }),
-                          createVNode(_component_q_btn, {
-                            flat: "",
-                            round: "",
-                            dense: "",
-                            icon: "fas fa-sign-out-alt",
-                            to: "/"
-                          })
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _: 1
-                })) : createCommentVNode("", true),
                 _ctx.$q.platform.is.desktop ? (openBlock(), createBlock(_component_q_toolbar, {
-                  key: 1,
+                  key: 0,
                   class: "q-py-sm"
                 }, {
                   default: withCtx(() => [
@@ -1412,7 +1155,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                         createVNode("span", {
                           class: "float-left q-mt-xs text-h6 text-weight-bold",
                           style: { "font-size": "17px" }
-                        }, "E-Commerce"),
+                        }, "Artisan HR"),
                         createVNode(_component_q_input, {
                           class: "float-left q-ml-xl",
                           style: { "width": "650px" },
@@ -1442,7 +1185,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                           transparent: ""
                         }, {
                           default: withCtx(() => [
-                            createTextVNode(" 4 ")
+                            createTextVNode(" 3 ")
                           ]),
                           _: 1
                         })
@@ -1491,7 +1234,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                           }, {
                             default: withCtx(() => [
                               createVNode(_component_q_item, {
-                                onClick: ($event) => _ctx.$router.push("/category"),
+                                onClick: ($event) => _ctx.$router.push("/details"),
                                 clickable: ""
                               }, {
                                 default: withCtx(() => [
@@ -1505,7 +1248,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                                 _: 1
                               }, 8, ["onClick"]),
                               createVNode(_component_q_item, {
-                                onClick: ($event) => _ctx.$router.push("/category"),
+                                onClick: ($event) => _ctx.$router.push("/employeeInfo"),
                                 clickable: ""
                               }, {
                                 default: withCtx(() => [
@@ -1770,11 +1513,13 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
           }),
           _: 1
         }, _parent2, _scopeId));
-        _push2(ssrRenderComponent(_component_q_page_container, { style: { "background-color": "#f1f2f6" } }, {
+        _push2(ssrRenderComponent(_component_q_page_container, { style: { "background-color": "#ffff" } }, {
           default: withCtx((_2, _push3, _parent3, _scopeId2) => {
             if (_push3) {
               _push3(ssrRenderComponent(_component_router_view, null, null, _parent3, _scopeId2));
-              _push3(`<div class="q-mt-sm"${_scopeId2}><div class="row q-pa-md bg-primary"${_scopeId2}><div class="col-lg-1 col-md-1 col-sm-12 col-xs-12"${_scopeId2}></div><div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white"${_scopeId2}><div class="text-subtitle1 text-weight-bold"${_scopeId2}>About</div><div class="text-caption hover_underline_white q-mt-sm"${_scopeId2}>Contact us</div><div class="text-caption hover_underline_white"${_scopeId2}>About Us</div><div class="text-caption hover_underline_white"${_scopeId2}>Careers</div><div class="text-caption hover_underline_white"${_scopeId2}>Our Stories</div><div class="text-caption hover_underline_white"${_scopeId2}>Press</div></div><div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white"${_scopeId2}><div class="text-subtitle1 text-weight-bold"${_scopeId2}>Connect with Us</div><div class="text-caption hover_underline_white q-mt-sm"${_scopeId2}>Facebook</div><div class="text-caption hover_underline_white"${_scopeId2}>Instagram</div><div class="text-caption hover_underline_white"${_scopeId2}>Twitter</div></div><div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white"${_scopeId2}><div class="text-subtitle1 text-weight-bold"${_scopeId2}>Policy</div><div class="text-caption hover_underline_white q-mt-sm"${_scopeId2}>Return Policy</div><div class="text-caption hover_underline_white"${_scopeId2}>Terms Of Use</div><div class="text-caption hover_underline_white"${_scopeId2}>Security</div><div class="text-caption hover_underline_white"${_scopeId2}>Privacy</div><div class="text-caption hover_underline_white"${_scopeId2}>Sitemap</div></div><div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white"${_scopeId2}><div class="text-subtitle1 text-weight-bold"${_scopeId2}>Help</div><div class="text-caption hover_underline_white q-mt-sm"${_scopeId2}>Payments</div><div class="text-caption hover_underline_white"${_scopeId2}>Shipping</div><div class="text-caption hover_underline_white"${_scopeId2}>Cancellation &amp; Returns</div><div class="text-caption hover_underline_white"${_scopeId2}>FAQ</div></div><div class="${ssrRenderClass([_ctx.$q.platform.is.desktop ? "q-pl-xl" : "", "col-lg-3 col-md-3 col-sm-12 col-xs-12 text-white"])}" style="${ssrRenderStyle(_ctx.$q.platform.is.desktop ? "border-left: 1px solid grey;" : "")}"${_scopeId2}><div class="text-subtitle1 text-weight-bold"${_scopeId2}>Registered Office Address:</div><div class="text-caption q-mt-sm"${_scopeId2}>335, Gokhale Wadi, Grant Road</div><div class="text-caption"${_scopeId2}>Mumbai, Maharashtra</div><div class="text-caption"${_scopeId2}>412207</div><div class="text-caption"${_scopeId2}>India</div></div></div><div style="${ssrRenderStyle({ "background-color": "#163758" })}"${_scopeId2}><div class="q-mr-md text-right q-py-xs text-weight-bold text-grey-6" style="${ssrRenderStyle({})}"${_scopeId2}> Made with <span style="${ssrRenderStyle({ "color": "#e25555", "font-size": "16px" })}"${_scopeId2}>♥</span> using <a target="_blank" class="text-blue-1 hover_underline_white" style="${ssrRenderStyle({ "text-decoration": "none" })}" href="https://quasar-framework.org"${_scopeId2}> Quasar </a> by <a target="_blank" class="text-blue-1 hover_underline_white" style="${ssrRenderStyle({ "text-decoration": "none" })}" href="https://github.com/mayur091193"${_scopeId2}>Mayur</a>. </div></div></div>`);
+              _push3(`<div class="q-mt-sm"${_scopeId2}><div class="row q-pa-md bg-primary"${_scopeId2}><div class="col-lg-1 col-md-1 col-sm-12 col-xs-12"${_scopeId2}></div><div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white"${_scopeId2}><div class="text-subtitle1 text-weight-bold"${_scopeId2}>About</div><div class="text-caption hover_underline_white q-mt-sm"${_scopeId2}> Contact us </div><div class="text-caption hover_underline_white"${_scopeId2}>About Us</div><div class="text-caption hover_underline_white"${_scopeId2}>Careers</div><div class="text-caption hover_underline_white"${_scopeId2}>Our Stories</div><div class="text-caption hover_underline_white"${_scopeId2}>Press</div></div><div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white"${_scopeId2}><div class="text-subtitle1 text-weight-bold"${_scopeId2}>Connect with Us</div><div class="text-caption hover_underline_white q-mt-sm"${_scopeId2}> Facebook </div><div class="text-caption hover_underline_white"${_scopeId2}>Instagram</div><div class="text-caption hover_underline_white"${_scopeId2}>Twitter</div></div><div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white"${_scopeId2}><div class="text-subtitle1 text-weight-bold"${_scopeId2}>Policy</div><div class="text-caption hover_underline_white q-mt-sm"${_scopeId2}> Return Policy </div><div class="text-caption hover_underline_white"${_scopeId2}>Terms Of Use</div><div class="text-caption hover_underline_white"${_scopeId2}>Security</div><div class="text-caption hover_underline_white"${_scopeId2}>Privacy</div><div class="text-caption hover_underline_white"${_scopeId2}>Sitemap</div></div><div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white"${_scopeId2}><div class="text-subtitle1 text-weight-bold"${_scopeId2}>Help</div><div class="text-caption hover_underline_white q-mt-sm"${_scopeId2}> Payments </div><div class="text-caption hover_underline_white"${_scopeId2}>Shipping</div><div class="text-caption hover_underline_white"${_scopeId2}> Cancellation &amp; Returns </div><div class="text-caption hover_underline_white"${_scopeId2}>FAQ</div></div><div class="${ssrRenderClass([_ctx.$q.platform.is.desktop ? "q-pl-xl" : "", "col-lg-3 col-md-3 col-sm-12 col-xs-12 text-white"])}" style="${ssrRenderStyle(
+                _ctx.$q.platform.is.desktop ? "border-left: 1px solid grey;" : ""
+              )}"${_scopeId2}><div class="text-subtitle1 text-weight-bold"${_scopeId2}> Registered Office Address: </div><div class="text-caption q-mt-sm"${_scopeId2}> 335, Gokhale Wadi, Grant Road </div><div class="text-caption"${_scopeId2}>Mumbai, Maharashtra</div><div class="text-caption"${_scopeId2}>412207</div><div class="text-caption"${_scopeId2}>India</div></div></div><div style="${ssrRenderStyle({ "background-color": "#163758" })}"${_scopeId2}><div class="q-mr-md text-right q-py-xs text-weight-bold text-grey-6" style="${ssrRenderStyle({})}"${_scopeId2}> Developed By <a target="_blank" class="text-blue-1 hover_underline_white" style="${ssrRenderStyle({ "text-decoration": "none" })}" href="https://butechltd.com"${_scopeId2}>Sabbir</a>. </div></div></div>`);
             } else {
               return [
                 createVNode(_component_router_view),
@@ -1783,7 +1528,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                     createVNode("div", { class: "col-lg-1 col-md-1 col-sm-12 col-xs-12" }),
                     createVNode("div", { class: "col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white" }, [
                       createVNode("div", { class: "text-subtitle1 text-weight-bold" }, "About"),
-                      createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, "Contact us"),
+                      createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, " Contact us "),
                       createVNode("div", { class: "text-caption hover_underline_white" }, "About Us"),
                       createVNode("div", { class: "text-caption hover_underline_white" }, "Careers"),
                       createVNode("div", { class: "text-caption hover_underline_white" }, "Our Stories"),
@@ -1791,13 +1536,13 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                     ]),
                     createVNode("div", { class: "col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white" }, [
                       createVNode("div", { class: "text-subtitle1 text-weight-bold" }, "Connect with Us"),
-                      createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, "Facebook"),
+                      createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, " Facebook "),
                       createVNode("div", { class: "text-caption hover_underline_white" }, "Instagram"),
                       createVNode("div", { class: "text-caption hover_underline_white" }, "Twitter")
                     ]),
                     createVNode("div", { class: "col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white" }, [
                       createVNode("div", { class: "text-subtitle1 text-weight-bold" }, "Policy"),
-                      createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, "Return Policy"),
+                      createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, " Return Policy "),
                       createVNode("div", { class: "text-caption hover_underline_white" }, "Terms Of Use"),
                       createVNode("div", { class: "text-caption hover_underline_white" }, "Security"),
                       createVNode("div", { class: "text-caption hover_underline_white" }, "Privacy"),
@@ -1805,17 +1550,17 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                     ]),
                     createVNode("div", { class: "col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white" }, [
                       createVNode("div", { class: "text-subtitle1 text-weight-bold" }, "Help"),
-                      createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, "Payments"),
+                      createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, " Payments "),
                       createVNode("div", { class: "text-caption hover_underline_white" }, "Shipping"),
-                      createVNode("div", { class: "text-caption hover_underline_white" }, "Cancellation & Returns"),
+                      createVNode("div", { class: "text-caption hover_underline_white" }, " Cancellation & Returns "),
                       createVNode("div", { class: "text-caption hover_underline_white" }, "FAQ")
                     ]),
                     createVNode("div", {
                       class: ["col-lg-3 col-md-3 col-sm-12 col-xs-12 text-white", _ctx.$q.platform.is.desktop ? "q-pl-xl" : ""],
                       style: _ctx.$q.platform.is.desktop ? "border-left: 1px solid grey;" : ""
                     }, [
-                      createVNode("div", { class: "text-subtitle1 text-weight-bold" }, "Registered Office Address:"),
-                      createVNode("div", { class: "text-caption q-mt-sm" }, "335, Gokhale Wadi, Grant Road"),
+                      createVNode("div", { class: "text-subtitle1 text-weight-bold" }, " Registered Office Address: "),
+                      createVNode("div", { class: "text-caption q-mt-sm" }, " 335, Gokhale Wadi, Grant Road "),
                       createVNode("div", { class: "text-caption" }, "Mumbai, Maharashtra"),
                       createVNode("div", { class: "text-caption" }, "412207"),
                       createVNode("div", { class: "text-caption" }, "India")
@@ -1826,22 +1571,13 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                       class: "q-mr-md text-right q-py-xs text-weight-bold text-grey-6",
                       style: {}
                     }, [
-                      createTextVNode(" Made with "),
-                      createVNode("span", { style: { "color": "#e25555", "font-size": "16px" } }, "♥"),
-                      createTextVNode(" using "),
+                      createTextVNode(" Developed By "),
                       createVNode("a", {
                         target: "_blank",
                         class: "text-blue-1 hover_underline_white",
                         style: { "text-decoration": "none" },
-                        href: "https://quasar-framework.org"
-                      }, " Quasar "),
-                      createTextVNode(" by "),
-                      createVNode("a", {
-                        target: "_blank",
-                        class: "text-blue-1 hover_underline_white",
-                        style: { "text-decoration": "none" },
-                        href: "https://github.com/mayur091193"
-                      }, "Mayur"),
+                        href: "https://butechltd.com"
+                      }, "Sabbir"),
                       createTextVNode(". ")
                     ])
                   ])
@@ -1856,90 +1592,11 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
           createVNode(_component_q_header, {
             reveal: "",
             elevated: "",
-            style: { "background-color": "#1f509e" }
+            style: { "background-color": "#1f9e3b" }
           }, {
             default: withCtx(() => [
-              !_ctx.$q.platform.is.desktop ? (openBlock(), createBlock(_component_q_toolbar, {
-                key: 0,
-                class: "q-py-sm"
-              }, {
-                default: withCtx(() => [
-                  createVNode("div", { class: "row" }, [
-                    createVNode("div", { class: "col-sm-12 col-xs-12" }, [
-                      createVNode(_component_q_toolbar_title, null, {
-                        default: withCtx(() => [
-                          createVNode("img", {
-                            onClick: ($event) => _ctx.$router.push("/home"),
-                            class: "cursor-pointer float-left",
-                            src: _imports_0,
-                            style: { "width": "12%" }
-                          }, null, 8, ["onClick"]),
-                          createVNode("span", {
-                            class: "float-left q-mt-xs q-ml-md text-h6 text-weight-bold",
-                            style: { "font-size": "17px" }
-                          }, "E-Commerce")
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    createVNode("div", { class: "col-sm-12 col-xs-12 q-mt-md" }, [
-                      createVNode(_component_q_input, {
-                        class: "float-left q-mx-md full-width",
-                        square: "",
-                        "bg-color": "white",
-                        dense: "",
-                        outlined: "",
-                        modelValue: $data.text,
-                        "onUpdate:modelValue": ($event) => $data.text = $event,
-                        label: "Search for products, brands and more"
-                      }, null, 8, ["modelValue", "onUpdate:modelValue"])
-                    ]),
-                    createVNode("div", { class: "col-sm-12 col-xs-12 q-mt-md" }, [
-                      createVNode("div", null, [
-                        createVNode(_component_q_btn, {
-                          class: "q-mr-md",
-                          dense: "",
-                          round: "",
-                          flat: "",
-                          icon: "shopping_cart"
-                        }, {
-                          default: withCtx(() => [
-                            createVNode(_component_q_badge, {
-                              color: "red",
-                              class: "text-bold",
-                              floating: "",
-                              transparent: ""
-                            }, {
-                              default: withCtx(() => [
-                                createTextVNode(" 4 ")
-                              ]),
-                              _: 1
-                            })
-                          ]),
-                          _: 1
-                        }),
-                        createVNode(_component_q_btn, {
-                          flat: "",
-                          round: "",
-                          dense: "",
-                          icon: "settings",
-                          class: "q-mr-md"
-                        }),
-                        createVNode(_component_q_btn, {
-                          flat: "",
-                          round: "",
-                          dense: "",
-                          icon: "fas fa-sign-out-alt",
-                          to: "/"
-                        })
-                      ])
-                    ])
-                  ])
-                ]),
-                _: 1
-              })) : createCommentVNode("", true),
               _ctx.$q.platform.is.desktop ? (openBlock(), createBlock(_component_q_toolbar, {
-                key: 1,
+                key: 0,
                 class: "q-py-sm"
               }, {
                 default: withCtx(() => [
@@ -1954,7 +1611,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                       createVNode("span", {
                         class: "float-left q-mt-xs text-h6 text-weight-bold",
                         style: { "font-size": "17px" }
-                      }, "E-Commerce"),
+                      }, "Artisan HR"),
                       createVNode(_component_q_input, {
                         class: "float-left q-ml-xl",
                         style: { "width": "650px" },
@@ -1984,7 +1641,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                         transparent: ""
                       }, {
                         default: withCtx(() => [
-                          createTextVNode(" 4 ")
+                          createTextVNode(" 3 ")
                         ]),
                         _: 1
                       })
@@ -2033,7 +1690,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                         }, {
                           default: withCtx(() => [
                             createVNode(_component_q_item, {
-                              onClick: ($event) => _ctx.$router.push("/category"),
+                              onClick: ($event) => _ctx.$router.push("/details"),
                               clickable: ""
                             }, {
                               default: withCtx(() => [
@@ -2047,7 +1704,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                               _: 1
                             }, 8, ["onClick"]),
                             createVNode(_component_q_item, {
-                              onClick: ($event) => _ctx.$router.push("/category"),
+                              onClick: ($event) => _ctx.$router.push("/employeeInfo"),
                               clickable: ""
                             }, {
                               default: withCtx(() => [
@@ -2310,7 +1967,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
             ]),
             _: 1
           }),
-          createVNode(_component_q_page_container, { style: { "background-color": "#f1f2f6" } }, {
+          createVNode(_component_q_page_container, { style: { "background-color": "#ffff" } }, {
             default: withCtx(() => [
               createVNode(_component_router_view),
               createVNode("div", { class: "q-mt-sm" }, [
@@ -2318,7 +1975,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                   createVNode("div", { class: "col-lg-1 col-md-1 col-sm-12 col-xs-12" }),
                   createVNode("div", { class: "col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white" }, [
                     createVNode("div", { class: "text-subtitle1 text-weight-bold" }, "About"),
-                    createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, "Contact us"),
+                    createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, " Contact us "),
                     createVNode("div", { class: "text-caption hover_underline_white" }, "About Us"),
                     createVNode("div", { class: "text-caption hover_underline_white" }, "Careers"),
                     createVNode("div", { class: "text-caption hover_underline_white" }, "Our Stories"),
@@ -2326,13 +1983,13 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                   ]),
                   createVNode("div", { class: "col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white" }, [
                     createVNode("div", { class: "text-subtitle1 text-weight-bold" }, "Connect with Us"),
-                    createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, "Facebook"),
+                    createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, " Facebook "),
                     createVNode("div", { class: "text-caption hover_underline_white" }, "Instagram"),
                     createVNode("div", { class: "text-caption hover_underline_white" }, "Twitter")
                   ]),
                   createVNode("div", { class: "col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white" }, [
                     createVNode("div", { class: "text-subtitle1 text-weight-bold" }, "Policy"),
-                    createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, "Return Policy"),
+                    createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, " Return Policy "),
                     createVNode("div", { class: "text-caption hover_underline_white" }, "Terms Of Use"),
                     createVNode("div", { class: "text-caption hover_underline_white" }, "Security"),
                     createVNode("div", { class: "text-caption hover_underline_white" }, "Privacy"),
@@ -2340,17 +1997,17 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                   ]),
                   createVNode("div", { class: "col-lg-2 col-md-2 col-sm-12 col-xs-12 text-white" }, [
                     createVNode("div", { class: "text-subtitle1 text-weight-bold" }, "Help"),
-                    createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, "Payments"),
+                    createVNode("div", { class: "text-caption hover_underline_white q-mt-sm" }, " Payments "),
                     createVNode("div", { class: "text-caption hover_underline_white" }, "Shipping"),
-                    createVNode("div", { class: "text-caption hover_underline_white" }, "Cancellation & Returns"),
+                    createVNode("div", { class: "text-caption hover_underline_white" }, " Cancellation & Returns "),
                     createVNode("div", { class: "text-caption hover_underline_white" }, "FAQ")
                   ]),
                   createVNode("div", {
                     class: ["col-lg-3 col-md-3 col-sm-12 col-xs-12 text-white", _ctx.$q.platform.is.desktop ? "q-pl-xl" : ""],
                     style: _ctx.$q.platform.is.desktop ? "border-left: 1px solid grey;" : ""
                   }, [
-                    createVNode("div", { class: "text-subtitle1 text-weight-bold" }, "Registered Office Address:"),
-                    createVNode("div", { class: "text-caption q-mt-sm" }, "335, Gokhale Wadi, Grant Road"),
+                    createVNode("div", { class: "text-subtitle1 text-weight-bold" }, " Registered Office Address: "),
+                    createVNode("div", { class: "text-caption q-mt-sm" }, " 335, Gokhale Wadi, Grant Road "),
                     createVNode("div", { class: "text-caption" }, "Mumbai, Maharashtra"),
                     createVNode("div", { class: "text-caption" }, "412207"),
                     createVNode("div", { class: "text-caption" }, "India")
@@ -2361,22 +2018,13 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
                     class: "q-mr-md text-right q-py-xs text-weight-bold text-grey-6",
                     style: {}
                   }, [
-                    createTextVNode(" Made with "),
-                    createVNode("span", { style: { "color": "#e25555", "font-size": "16px" } }, "♥"),
-                    createTextVNode(" using "),
+                    createTextVNode(" Developed By "),
                     createVNode("a", {
                       target: "_blank",
                       class: "text-blue-1 hover_underline_white",
                       style: { "text-decoration": "none" },
-                      href: "https://quasar-framework.org"
-                    }, " Quasar "),
-                    createTextVNode(" by "),
-                    createVNode("a", {
-                      target: "_blank",
-                      class: "text-blue-1 hover_underline_white",
-                      style: { "text-decoration": "none" },
-                      href: "https://github.com/mayur091193"
-                    }, "Mayur"),
+                      href: "https://butechltd.com"
+                    }, "Sabbir"),
                     createTextVNode(". ")
                   ])
                 ])
@@ -2398,8 +2046,10 @@ _sfc_main.setup = (props, ctx) => {
 };
 const app = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", _sfc_ssrRender]]);
 const routes = [
-  { path: "/", component: () => import("./assets/home-e9724d5e.mjs") },
-  { path: "/table", component: () => import("./assets/home-e9724d5e.mjs") }
+  { path: "/", component: () => import("./assets/home-847c06e2.mjs") },
+  { path: "/category", component: () => import("./assets/category-5777b1f5.mjs") },
+  { path: "/details", component: () => import("./assets/details-90919bfb.mjs") },
+  { path: "/employeeInfo", component: () => import("./assets/employeeInfo-5975b883.mjs") }
 ];
 const router = createRouter({
   history: createWebHistory(),

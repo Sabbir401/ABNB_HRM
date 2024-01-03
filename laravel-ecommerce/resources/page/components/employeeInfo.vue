@@ -3,34 +3,34 @@
     <q-form @submit="onSubmit" @reset="onReset">
       <div class="row bg-white q-mt-sm">
         <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-          <q-input dense filled v-model="Company" label="Company Name" />
+          <q-input dense filled v-model="cmpname" label="Company Name" />
         </div>
         <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-          <q-input dense filled v-model="name" label="Employee ID" />
+          <q-input dense filled v-model="id" label="Employee ID" />
         </div>
         <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-          <q-input dense filled v-model="name" label="Card No" />
+          <q-input dense filled v-model="card" label="Card No" />
         </div>
         <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-          <q-input dense filled v-model="name" label="Full Name" />
+          <q-input dense filled v-model="fullname" label="Full Name" />
         </div>
       </div>
 
       <div class="row bg-white q-mt-sm">
         <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-          <q-input dense filled v-model="Company" label="Father's Name" />
+          <q-input dense filled v-model="fathername" label="Father's Name" />
         </div>
         <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-          <q-input dense filled v-model="name" label="Mother's Name" />
+          <q-input dense filled v-model="mothername" label="Mother's Name" />
         </div>
         <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-          <q-input dense filled v-model="name" label="Spouse Name" />
+          <q-input dense filled v-model="spousename" label="Spouse Name" />
         </div>
         <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
           <q-select
             filled
+            v-model="mary"
             dense
-            v-model="model"
             :options="options"
             label="Marital Status"
           />
@@ -39,7 +39,7 @@
 
       <div class="row bg-white q-mt-sm">
         <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-          <q-input dense filled v-model="Company" label="Place of Birth" />
+          <q-input dense v-model="pob" filled label="Place of Birth" />
         </div>
 
         <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
@@ -77,17 +77,22 @@
         </div>
 
         <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-          <q-input dense filled v-model="name" label="Official Contact" />
+          <q-input dense filled v-model="offcontact" label="Official Contact" />
         </div>
         <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-          <q-input dense filled v-model="name" label="Emergency Contact" />
+          <q-input
+            dense
+            filled
+            v-model="emercontact"
+            label="Emergency Contact"
+          />
         </div>
       </div>
 
       <div class="row bg-white">
         <div class="col-lg-6 col-md-6 col-sm-12 q-px-sm">
           <q-input
-            v-model="text"
+            v-model="permanent"
             filled
             dense
             type="textarea"
@@ -96,7 +101,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 q-px-sm">
           <q-input
-            v-model="text"
+            v-model="present"
             filled
             dense
             type="textarea"
@@ -110,34 +115,65 @@
           <q-select
             filled
             dense
-            v-model="model"
-            :options="gender"
+            v-model="gender"
+            :options="gen"
             label="Gender"
           />
         </div>
         <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-          <q-input filled dense v-model="email" type="email" label="Personal Email">
-            <template v-slot:append>
-              <q-icon name="mail" />
-            </template>
-          </q-input>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-input filled dense v-model="email" type="email" label="Official Email">
-            <template v-slot:append>
-              <q-icon name="mail" />
-            </template>
-          </q-input>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-select
+          <q-input
             filled
             dense
-            v-model="model"
-            :options="religion"
+            v-model="peremail"
+            type="email"
+            label="Personal Email"
+          >
+            <template v-slot:append>
+              <q-icon name="mail" />
+            </template>
+          </q-input>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-input
+            filled
+            dense
+            v-model="offemail"
+            type="email"
+            label="Official Email"
+          >
+            <template v-slot:append>
+              <q-icon name="mail" />
+            </template>
+          </q-input>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-select
+            filled
+            dense
+            v-model="religion"
+            :options="reli"
             label="Religion"
           />
         </div>
+      </div>
+
+      <div class="row bg-white q-mt-sm">
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-select
+            filled
+            dense
+            v-model="blood"
+            :options="bld"
+            label="Blood group"
+          />
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-input dense v-model="nation" filled label="Nationality" />
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
+          <q-input dense v-model="nid" filled label="NID" />
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm"></div>
       </div>
     </q-form>
   </div>
@@ -168,23 +204,64 @@ export default {
   setup() {
     const $q = useQuasar();
 
-    const name = ref(null);
-    const age = ref(null);
-    const comapny = ref(null);
+    const fullname = ref(null);
+    const cmpname = ref(null);
+    const fathername = ref(null);
+    const mothername = ref(null);
+    const sopusename = ref(null);
+    const mary = ref(null);
+    const pob = ref(null);
+    const offcontact = ref(null);
+    const emercontact = ref(null);
+    const permanent = ref(null);
+    const present = ref(null);
+    const gender = ref(null);
+    const peremail = ref(null);
+    const offemail = ref(null);
+    const religion = ref(null);
+    const blood = ref(null);
+    const nation = ref(null);
+    const nid = ref(null);
+
     const accept = ref(false);
 
     return {
-      name,
-      age,
-      comapny,
+      fullname,
+      cmpname,
+      fathername,
+      mothername,
+      sopusename,
+      mary,
       accept,
+      pob,
+      offcontact,
+      emercontact,
+      permanent,
+      present,
+      gender,
+      peremail,
+      offemail,
+      religion,
+      blood,
+      nation,
+      nid,
 
       date: ref("2019/02/01"),
       model: ref(null),
       options: ["Married", "Unmarried"],
       text: ref(""),
-      gender: ["Male", "Female"],
-      religion: ["Muslim", "Hindu", "Buddhist"],
+      gen: ["Male", "Female"],
+      reli: ["Muslim", "Hindu", "Buddhist"],
+      bld: [
+        "A+(ve)",
+        "A-(ve)",
+        "B+(ve)",
+        "B-(ve)",
+        "O+(ve)",
+        "O-(ve)",
+        "AB+(ve)",
+        "AB-(ve)",
+      ],
 
       onSubmit() {
         if (accept.value !== true) {
@@ -205,8 +282,25 @@ export default {
       },
 
       onReset() {
-        name.value = null;
-        age.value = null;
+        fullname.value = null;
+        cmpname.value = null;
+        fathername.value = null;
+        mothername.value = null;
+        sopusename.value = null;
+        mary.value = null;
+        pob.value = null,
+        offcontact.value = null;
+        emercontact.value = null;
+        permanent.value = null;
+        present.value = null;
+        gender.value = null;
+        peremail.value = null;
+        offemail.value = null;
+        religion.value = null;
+        blood.value = null;
+        nation.value = null;
+        nid.value = null;
+
         accept.value = false;
       },
     };

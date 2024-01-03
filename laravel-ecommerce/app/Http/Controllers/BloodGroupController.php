@@ -15,6 +15,16 @@ class BloodGroupController extends Controller
         //
     }
 
+    public function submitForm(Request $request)
+    {
+        dd($request);
+        $Name = $request->input('Name');
+
+        // Process the data as needed
+
+        return response()->json(['message' => 'Form submitted successfully']);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

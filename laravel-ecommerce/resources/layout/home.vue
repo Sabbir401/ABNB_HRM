@@ -3,13 +3,13 @@
     ><!--
       <q-header reveal elevated style="background-color: #1f509e;"> -->
 
-    <q-header reveal elevated style="background-color: #1f9e3b">
+    <q-header reveal elevated style="background-color: #1f6f9e">
 
       <q-toolbar v-if="$q.platform.is.desktop" class="q-py-sm">
         <img
           @click="$router.push('/home')"
           class="cursor-pointer"
-          src="../assets/bu_logo(64x64).png"
+          src="../assets/artisan_logo.png"
           style="width: 3%"
         />
         <q-toolbar-title>
@@ -48,7 +48,7 @@
             class="col-lg-2 col-md-2 col-sm-12 col-xs-12 cursor-pointer hover-blue"
             @mouseover="menu_cat_elc = true"
           >
-            Electronics
+            Employee
             <q-menu
               fit
               @mouseleave="menu_cat_elc = false"
@@ -57,20 +57,20 @@
               transition-hide="flip-left"
             >
               <q-list dense class="text-grey-9 text-caption">
+                <q-item @click="$router.push('/employee')" clickable>
+                  <q-item-section>Employee Information</q-item-section>
+                </q-item>
                 <q-item @click="$router.push('/details')" clickable>
-                  <q-item-section>Mobiles</q-item-section>
+                  <q-item-section>Employee List</q-item-section>
                 </q-item>
-                <q-item @click="$router.push('/employeeInfo')" clickable>
-                  <q-item-section>Laptops</q-item-section>
-                </q-item>
-                <q-item @click="$router.push('/category')" clickable>
+                <q-item @click="$router.push('/employee')" clickable>
                   <q-item-section>Health Care Appliances</q-item-section>
                 </q-item>
                 <!--<q-separator/>-->
                 <q-item @click="$router.push('/category')" clickable>
                   <q-item-section>Speakers</q-item-section>
                 </q-item>
-                <q-item @click="$router.push('/category')" clickable>
+                <q-item @click="$router.push('/test')" clickable>
                   <q-item-section>Smart Home Automation</q-item-section>
                 </q-item>
               </q-list>
@@ -232,11 +232,11 @@
               Registered Office Address:
             </div>
             <div class="text-caption q-mt-sm">
-              335, Gokhale Wadi, Grant Road
+                Level # A-1, The Legend
             </div>
-            <div class="text-caption">Mumbai, Maharashtra</div>
-            <div class="text-caption">412207</div>
-            <div class="text-caption">India</div>
+            <div class="text-caption">House # 13 Rd 09</div>
+            <div class="text-caption">Dhaka 1212</div>
+            <div class="text-caption">Bangladesh</div>
           </div>
         </div>
         <div style="background-color: #163758">
