@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\API\azizAuthController;
+use App\Http\Controllers\BloodGroupController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,3 +41,7 @@ Route::resource('/brand', BrandController::class);
 // Route::post('/store/{id}/update', [StoreController::class, 'update'])->name('store.update');
 
 Route::resource('/store', StoreController::class);
+Route::resource('/blood', BloodGroupController::class);
+Route::resource('/religion', ReligionController::class);
+Route::resource('/company', CompanyController::class);
+

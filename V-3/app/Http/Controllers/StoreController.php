@@ -50,9 +50,7 @@ class StoreController extends Controller
      */
     public function show(store $store)
     {
-        $store = store::all();
 
-        return response()->json($store);
     }
 
     /**

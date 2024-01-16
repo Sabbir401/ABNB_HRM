@@ -12,7 +12,9 @@ class ReligionController extends Controller
      */
     public function index()
     {
-        //
+        $religion = religion::all();
+
+        return response()->json($religion);
     }
 
     /**
