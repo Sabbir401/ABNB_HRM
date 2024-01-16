@@ -2,6 +2,7 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import store from "./components/storecomponent.vue";
+import { Bootstrap5Pagination } from "laravel-vue-pagination";
 
 const isModalOpened = ref(false);
 const stores = ref([]);
@@ -23,9 +24,9 @@ const choose = () => {
   openModal();
 };
 
-const getData = async () => {
+const getData = async (page = 1) => {
   try {
-    const response = await axios.get("api/store");
+    const response = await axios.get(`api/store?page=${page}`);
     stores.value = response.data;
   } catch (err) {
     error.value = err.message || "Error fetching data";
@@ -49,6 +50,7 @@ const submitHandler = async () => {
   await getData();
 };
 
+
 onMounted(() => getData());
 </script>
 
@@ -66,16 +68,36 @@ onMounted(() => getData());
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <div class="row mb-2">
-          <h4 class="card-title m-2">Store table</h4>
-          <button
-            @click="choose"
-            style="float: left"
-            type="button"
-            class="btn btn-success btn-icon"
-          >
-            <i class="mdi mdi-plus"></i>
-          </button>
+        <div class="d-flex">
+          <div class="mr-auto p-2">
+            <div class="row">
+              <h4 class="card-title m-2">Store table</h4>
+              <button
+                @click="choose"
+                style="float: left"
+                type="button"
+                class="btn btn-success btn-icon"
+              >
+                <i class="mdi mdi-plus"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="p-2">
+            <select name="" id="" class="form-control">
+              <option value="">All</option>
+              <option value="">Active</option>
+              <option value="">Inactive</option>
+            </select>
+          </div>
+          <div class="p-2">
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputUsername1"
+              placeholder="Search..."
+            />
+          </div>
         </div>
 
         <div class="table-responsive">
@@ -91,7 +113,7 @@ onMounted(() => getData());
               </tr>
             </thead>
             <tbody>
-              <tr v-for="store in stores" :key="store.id">
+              <tr v-for="store in stores.data" :key="store.id">
                 <td>{{ store.id }}</td>
                 <td>{{ store.Name }}</td>
                 <td>{{ store.Address }}</td>
@@ -108,8 +130,9 @@ onMounted(() => getData());
               </tr>
             </tbody>
           </table>
+          <br />
           <Bootstrap5Pagination
-            :data="laravelData"
+            :data="stores"
             @pagination-change-page="getData"
           />
         </div>

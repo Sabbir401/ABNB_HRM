@@ -12,7 +12,7 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $store = store::all();
+        $store = store::paginate(2);
 
         return response()->json($store);
     }
