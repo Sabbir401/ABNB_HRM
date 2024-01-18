@@ -1,11 +1,10 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import academic from "../components/academicComponent.vue";
-import training from "../components/trainingComponent.vue";
-import work from "../components/workComponent.vue";
+import academic from "../employee/component/academicComponent.vue";
+import training from "../employee/component/trainingComponent.vue";
+import work from "../employee/component/workComponent.vue";
 
-const isModalOpened = ref(false);
 const stores = ref([]);
 const isLoading = ref(true);
 const error = ref(null);
@@ -116,20 +115,8 @@ onMounted(() => getData());
               </tr>
             </thead>
             <tbody>
-              <tr v-for="store in stores" :key="store.id">
-                <td>{{ store.id }}</td>
-                <td>{{ store.Name }}</td>
-                <td>{{ store.Address }}</td>
-                <td>{{ store.Date }}</td>
-                <td>{{ store.Status }}</td>
-                <td>
-                  <button
-                    class="btn btn-success"
-                    @click="editHandler(store.id)"
-                  >
-                    Edit
-                  </button>
-                </td>
+              <tr >
+
               </tr>
             </tbody>
           </table>
@@ -178,21 +165,7 @@ onMounted(() => getData());
               </tr>
             </thead>
             <tbody>
-              <tr v-for="store in stores" :key="store.id">
-                <td>{{ store.id }}</td>
-                <td>{{ store.Name }}</td>
-                <td>{{ store.Address }}</td>
-                <td>{{ store.Date }}</td>
-                <td>{{ store.Status }}</td>
-                <td>
-                  <button
-                    class="btn btn-success"
-                    @click="editHandler(store.id)"
-                  >
-                    Edit
-                  </button>
-                </td>
-              </tr>
+
             </tbody>
           </table>
         </div>
@@ -245,21 +218,7 @@ onMounted(() => getData());
               </tr>
             </thead>
             <tbody>
-              <tr v-for="store in stores" :key="store.id">
-                <td>{{ store.id }}</td>
-                <td>{{ store.Name }}</td>
-                <td>{{ store.Address }}</td>
-                <td>{{ store.Date }}</td>
-                <td>{{ store.Status }}</td>
-                <td>
-                  <button
-                    class="btn btn-success"
-                    @click="editHandler(store.id)"
-                  >
-                    Edit
-                  </button>
-                </td>
-              </tr>
+
             </tbody>
           </table>
         </div>

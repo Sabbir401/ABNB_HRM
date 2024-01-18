@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import axios from "axios";
 import store from "./components/storecomponent.vue";
 import { Bootstrap5Pagination } from "laravel-vue-pagination";
@@ -10,6 +10,12 @@ const isLoading = ref(true);
 const error = ref(null);
 const selectedStore = ref(null);
 const heading = ref(null);
+let search = ref('');
+
+watch(search, (Value) =>{
+
+
+});
 
 const openModal = () => {
   isModalOpened.value = true;
@@ -96,6 +102,7 @@ onMounted(() => getData());
               class="form-control"
               id="exampleInputUsername1"
               placeholder="Search..."
+              v-model="search"
             />
           </div>
         </div>

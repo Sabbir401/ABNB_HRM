@@ -12,7 +12,9 @@ class CountryController extends Controller
      */
     public function index()
     {
-        //
+        $phone = country::all();
+
+        return response()->json($phone);
     }
 
     /**

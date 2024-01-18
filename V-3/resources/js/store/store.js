@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createStore } from "vuex";
 
 const store = createStore({
@@ -11,9 +12,9 @@ const store = createStore({
         UPDATE_TOKEN:function(state, payload){
             state.token = payload
         },
-        
+
     },
-    
+
     actions:{
         // action to be performed
         setToken: function(context,payload){
@@ -23,7 +24,8 @@ const store = createStore({
         removeToken: function(aaa, bbb){
             localStorage.removeItem('token')
             aaa.commit('UPDATE_TOKEN',0)
-        }
+        },
+
     },
 
     getters:{

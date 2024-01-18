@@ -4,6 +4,8 @@ use App\Http\Controllers\API\azizAuthController;
 use App\Http\Controllers\BloodGroupController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Http\Request;
@@ -44,4 +46,6 @@ Route::resource('/store', StoreController::class);
 Route::resource('/blood', BloodGroupController::class);
 Route::resource('/religion', ReligionController::class);
 Route::resource('/company', CompanyController::class);
+Route::resource('/phone', CountryController::class);
+Route::resource('/employee', EmployeeController::class);
 

@@ -10,11 +10,11 @@ import BrandCatSubcat from "./pages/setup/BrandCatSubcat.vue";
 import SupplierPage from "./pages/setup/SupplierPage.vue";
 import store from "./store/store";
 
-import emp from "./pages/setup/employee.vue";
-import employee from "./pages/setup/employee/employeeInfo.vue";
-import personal from "./pages/setup/employee/personalInfo.vue";
-import official from "./pages/setup/employee/officialInfo.vue";
-import professional from "./pages/setup/employee/professionalInfo.vue";
+import emp from "./pages/employee/employee.vue";
+import employee from "./pages/employee/employeeInfo.vue";
+import personal from "./pages/employee/personalInfo.vue";
+import official from "./pages/employee/officialInfo.vue";
+import professional from "./pages/employee/professionalInfo.vue";
 
 const routes = [
     {
