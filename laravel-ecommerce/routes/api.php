@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\BloodGroupController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/api/test', [BloodGroupController::class, 'submitForm']);
+
+Route::controller(AuthController::class)->group(function(){
+    Route::post('login', 'login');
+    Route::post('register', 'register');
+});

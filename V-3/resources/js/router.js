@@ -10,6 +10,7 @@ import BrandCatSubcat from "./pages/setup/BrandCatSubcat.vue";
 import SupplierPage from "./pages/setup/SupplierPage.vue";
 import store from "./store/store";
 
+import empList from "./pages/employee/employeeList.vue"
 import emp from "./pages/employee/employee.vue";
 import employee from "./pages/employee/employeeInfo.vue";
 import personal from "./pages/employee/personalInfo.vue";
@@ -82,6 +83,14 @@ const routes = [
         path: "/supplier",
         name: "SupplierPage",
         component: SupplierPage,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    {
+        path: "/employeelist",
+        name: "EmpList",
+        component: empList,
         meta: {
             requireAuth: true,
         },

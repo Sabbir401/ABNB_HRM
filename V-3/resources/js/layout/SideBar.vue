@@ -85,7 +85,7 @@
                             <Router-Link class="nav-link" :to="{ name: 'StorePage' }">Store</Router-Link>
                         </li>
                         <li class="nav-item">
-                            <Router-Link class="nav-link" :to="{ name: 'Emp' }">Employee</Router-Link>
+                            <Router-Link class="nav-link" :to="{ name: 'EmpList' }">Employee</Router-Link>
                         </li>
                         <li class="nav-item">
                             <Router-Link class="nav-link" :to="{ name: 'ProductsPage' }">Products</Router-Link>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\company;
 use App\Models\employee;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,10 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employee = employee::with('company', 'blood', 'religion')->paginate(2);
+        $company = company::all();
+
+        return response()->json($employee);
     }
 
     /**

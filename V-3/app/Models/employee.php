@@ -33,7 +33,7 @@ class employee extends Model
 
     public function company()
     {
-        return $this->belongsTo(employee::class, 'Company_Id');
+        return $this->belongsTo(company::class, 'Company_Id');
     }
     public function blood()
     {
