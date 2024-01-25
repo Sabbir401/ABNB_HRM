@@ -6,6 +6,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\NomineeController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Http\Request;
@@ -48,4 +49,5 @@ Route::resource('/religion', ReligionController::class);
 Route::resource('/company', CompanyController::class);
 Route::resource('/phone', CountryController::class);
 Route::resource('/employee', EmployeeController::class);
+Route::resource('/nominee', NomineeController::class);
 

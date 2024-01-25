@@ -12,7 +12,7 @@ const home = ref("active show");
 <template>
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <router-link class="nav-link" active-class="active" to="/employee"
+        <router-link class="nav-link" active-class="active" :to="{ name: 'Employee' }"
           >Employee Information</router-link
         >
       </li>

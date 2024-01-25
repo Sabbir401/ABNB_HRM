@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('Company_Id');
+            $table->string('Employee_Id')->unique();
             $table->string('Card_No', 50)->nullable();
             $table->string('Full_Name', 100);
             $table->string('Father_Name', 100)->nullable();
             $table->string('Mother_Name', 100)->nullable();
             $table->string('Spouse_Name', 100)->nullable();
             $table->string('Marital_Status', 20)->nullable();
-            $table->date('DOB', 100);
+            $table->date('DOB', 20);
             $table->string('Place_of_Birth', 100)->nullable();
             $table->text('Present_Address')->nullable();
             $table->text('Permanent_Address')->nullable();

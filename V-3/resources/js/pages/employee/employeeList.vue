@@ -69,7 +69,7 @@ onMounted(() => getData());
           <div class="mr-auto p-2">
             <div class="row">
               <h4 class="card-title m-2">Employee List</h4>
-              <Router-Link class="nav-link" :to="{ name: 'Emp' }">
+              <Router-Link class="btn btn-success btn-icon" :to="{ name: 'Employee' }">
                 <button
                   style="float: left"
                   type="button"

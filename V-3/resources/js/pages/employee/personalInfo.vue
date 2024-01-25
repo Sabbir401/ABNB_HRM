@@ -1,7 +1,74 @@
+<script setup>
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import { useStore } from 'vuex';
+
+const store = useStore();
+
+const nominee = ref({
+    employeeId: store.getters.getEmployeeId,
+    nomineeName: "",
+    dob: "",
+    contactNo: "",
+    email: "",
+    nid: "",
+    share: "",
+  presentAddress: "",
+});
+
+const child = ref({
+    employeeId: store.getters.getEmployeeId,
+    childName: "",
+    nid: "",
+    email: "",
+    contactNo: "",
+    dob: "",
+});
+
+const phones = ref([]);
+const error = ref([]);
+
+const getData = async () => {
+  try {
+    const responsePhone = await axios.get("api/phone");
+
+    phones.value = responsePhone.data;
+  } catch (err) {
+    error.value = err.message || "Error fetching data";
+  } finally {
+  }
+};
+
+
+const resetForm = () => {
+  Object.keys(nominee).forEach((key) => {
+    nominee[key] = "";
+  });
+
+};
+
+const submitForm = async () => {
+  try {
+    const response = await axios.post("api/nominee", nominee.value);
+    if (response.data.success) {
+      alert("Successfully Inserted");
+      resetForm();
+    }
+  } catch (err) {
+    console.error("Error submitting form:", err);
+  }
+};
+
+
+onMounted(() => getData());
+</script>
+
+
+
 <template>
   <div class="mt-5">
-    <h2 class="fs-4">Nominee Information</h2>
-    <form action="">
+    <h2 class="fs-4">Nominee Information {{ employeeId }}</h2>
+    <form @submit.prevent="submitForm">
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
           <label for="exampleInputEmail1" class="">Nominee Name</label>
@@ -10,6 +77,7 @@
             class="form-control"
             id="disabledTextInput"
             aria-describedby="emailHelp"
+            v-model="nominee.nomineeName"
           />
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -19,6 +87,7 @@
             class="form-control"
             id="disabledTextInput"
             aria-describedby="emailHelp"
+            v-model="nominee.dob"
           />
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -28,6 +97,7 @@
             class="form-control"
             id="disabledTextInput"
             aria-describedby="emailHelp"
+            v-model="nominee.contactNo"
           />
         </div>
       </div>
@@ -40,6 +110,7 @@
             class="form-control"
             id="disabledTextInput"
             aria-describedby="emailHelp"
+            v-model="nominee.email"
           />
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -49,6 +120,7 @@
             class="form-control"
             id="disabledTextInput"
             aria-describedby="emailHelp"
+            v-model="nominee.nid"
           />
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -58,6 +130,7 @@
             class="form-control"
             id="disabledTextInput"
             aria-describedby="emailHelp"
+            v-model="nominee.share"
           />
         </div>
       </div>
@@ -69,6 +142,7 @@
             class="form-control"
             id="exampleFormControlTextarea1"
             rows="2"
+            v-model="nominee.presentAddress"
           ></textarea>
         </div>
       </div>
@@ -83,6 +157,7 @@
             class="form-control"
             id="disabledTextInput"
             aria-describedby="emailHelp"
+            v-model="child.childName"
           />
         </div>
 
@@ -93,6 +168,7 @@
             class="form-control"
             id="disabledTextInput"
             aria-describedby="emailHelp"
+            v-model="child.nid"
           />
         </div>
       </div>
@@ -105,6 +181,7 @@
             class="form-control"
             id="disabledTextInput"
             aria-describedby="emailHelp"
+            v-model="child.email"
           />
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -114,6 +191,7 @@
             class="form-control"
             id="disabledTextInput"
             aria-describedby="emailHelp"
+            v-model="child.contactNo"
           />
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -123,6 +201,7 @@
             class="form-control"
             id="disabledTextInput"
             aria-describedby="emailHelp"
+            v-model="child.dob"
           />
         </div>
       </div>

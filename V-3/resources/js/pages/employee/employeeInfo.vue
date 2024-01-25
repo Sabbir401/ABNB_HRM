@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import { useStore } from 'vuex';
 
 const employee = ref({
   companyId: "",
@@ -46,27 +47,32 @@ const getData = async () => {
   } catch (err) {
     error.value = err.message || "Error fetching data";
   } finally {
-    isLoading.value = false;
   }
 };
+
+const store = useStore();
 
 const resetForm = () => {
   Object.keys(employee).forEach((key) => {
     employee[key] = "";
   });
 };
+// const store = useStore();
 
 const submitForm = async () => {
   try {
     const response = await axios.post("api/employee", employee.value);
     if (response.data.success) {
       alert("Successfully Inserted");
+      store.dispatch("setEmployeeId", employee.value.employeeId);
+    //   store.commit('setEmployeeId', employee.value.employeeId);
       resetForm();
     }
   } catch (err) {
     console.error("Error submitting form:", err);
   }
 };
+
 
 onMounted(() => getData());
 </script>
@@ -76,7 +82,7 @@ onMounted(() => getData());
     <form @submit.prevent="submitForm">
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="" class="">Company Name</label>
+          <label for="" class="">Company Name  {{ store.state.employeeId }}</label>
           <select
             v-model="employee.companyId"
             name=""

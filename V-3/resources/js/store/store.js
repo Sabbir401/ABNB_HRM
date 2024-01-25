@@ -4,7 +4,8 @@ import { createStore } from "vuex";
 const store = createStore({
     state:{
         //variables
-        token: localStorage.getItem('token') || 0
+        token: localStorage.getItem('token') || 0,
+        employeeId: null,
     },
 
     mutations:{
@@ -12,6 +13,9 @@ const store = createStore({
         UPDATE_TOKEN:function(state, payload){
             state.token = payload
         },
+        SET_EMPLOYEE_ID: function (state, payload) {
+            state.employeeId = payload;
+          },
 
     },
 
@@ -25,6 +29,9 @@ const store = createStore({
             localStorage.removeItem('token')
             aaa.commit('UPDATE_TOKEN',0)
         },
+        setEmployeeId: function (context, payload) {
+            context.commit('SET_EMPLOYEE_ID', payload);
+          },
 
     },
 
@@ -32,7 +39,10 @@ const store = createStore({
         // get state variable value
         getToken: function(state){
             return state.token
-        }
+        },
+        getEmployeeId: function (state) {
+            return state.employeeId;
+          },
     }
 })
 

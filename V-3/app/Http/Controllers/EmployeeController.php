@@ -13,8 +13,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employee = employee::with('company', 'blood', 'religion')->paginate(2);
-        $company = company::all();
+        $employee = employee::with('company', 'blood', 'religion')->paginate(10);
 
         return response()->json($employee);
     }
@@ -34,6 +33,7 @@ class EmployeeController extends Controller
     {
         $store = employee::create([
             'Company_Id' => $request->input('companyId'),
+            'Employee_Id' => $request->input('employeeId'),
             'Card_No' => $request->input('cardNo'),
             'Full_Name' => $request->input('fullName'),
             'Father_Name' => $request->input('fatherName'),
@@ -56,8 +56,8 @@ class EmployeeController extends Controller
         ]);
 
         $response = [
-            'success' => true,
-            'message'  => 'Successfully inserted'
+            'success'   =>  true,
+            'message'   =>  'Successfully inserted',
         ];
 
         return response()->json($response);
