@@ -10,12 +10,17 @@ export default {
   },
   setup(props, { emit }) {
     const target = ref(null);
+
     const form = reactive({
-      id: "",
-      name: "",
-      address: "",
-      date: "",
-      status: "",
+      eid: store.state.employeeId,
+      degree: "",
+      education: "",
+      group: "",
+      instituteName: "",
+      scale: "",
+      result: "",
+      yop: "",
+      acheivement: "",
     });
 
     watch(
@@ -109,7 +114,7 @@ export default {
                   class="form-control"
                   name="status"
                   id=""
-                  v-model="form.status"
+                  v-model="form.de"
                 >
                   <option class="form-control" value="Active">SSC</option>
                   <option class="form-control" value="Inactive">HSC</option>

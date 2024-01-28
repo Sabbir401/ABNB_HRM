@@ -55,9 +55,11 @@ class EmployeeController extends Controller
             'NID' => $request->input('nid'),
         ]);
 
+        $lastId = employee::latest('id')->value('id');
         $response = [
             'success'   =>  true,
             'message'   =>  'Successfully inserted',
+            'empid' => $lastId,
         ];
 
         return response()->json($response);

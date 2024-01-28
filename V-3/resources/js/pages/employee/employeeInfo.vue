@@ -64,7 +64,7 @@ const submitForm = async () => {
     const response = await axios.post("api/employee", employee.value);
     if (response.data.success) {
       alert("Successfully Inserted");
-      store.dispatch("setEmployeeId", employee.value.employeeId);
+      store.dispatch("setEmployeeId", response.data.empid);
     //   store.commit('setEmployeeId', employee.value.employeeId);
       resetForm();
     }

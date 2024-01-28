@@ -11,6 +11,7 @@ class academic_info extends Model
     protected $fillable = [
         'EID',
         'Level_of_Education_Id',
+        'Board_Id',
         'Group',
         'Institute_Name',
         'Sacle_Id',

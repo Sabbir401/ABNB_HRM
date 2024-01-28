@@ -29,24 +29,25 @@ class NomineeController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $store = nominee::create([
-            'EID' => $request->input('employeeId'),
-            'Nominee_Name' => $request->input('nomineeName'),
-            'DOB' => $request->input('dob'),
-            'Contact_No' => $request->input('contactNo'),
-            'Email' => $request->input('email'),
-            'NID' => $request->input('nid'),
-            'Share' => $request->input('share'),
-            'Personal_Address' => $request->input('presentAddress'),
+            'EID' => $request->input('nominee.eid'),
+            'Nominee_Name' => $request->input('nominee.nomineeName'),
+            'DOB' => $request->input('nominee.dob'),
+            'Contact_No' => $request->input('nominee.contactNo'),
+            'Email' => $request->input('nominee.email'),
+            'NID' => $request->input('nominee.nid'),
+            'Share' => $request->input('nominee.share'),
+            'Personal_Address' => $request->input('nominee.presentAddress'),
         ]);
 
         $store = child::create([
-            'EID' => $request->input('employeeId'),
-            'Child_Name' => $request->input('childName'),
-            'NID' => $request->input('nid'),
-            'Email' => $request->input('email'),
-            'Contact_No' => $request->input('contactNo'),
-            'DOB' => $request->input('dob'),
+            'EID' => $request->input('child.eid'),
+            'Child_Name' => $request->input('child.childName'),
+            'NID' => $request->input('child.nid'),
+            'Email' => $request->input('child.email'),
+            'Contact_No' => $request->input('child.contactNo'),
+            'DOB' => $request->input('child.dob'),
         ]);
 
         $response = [

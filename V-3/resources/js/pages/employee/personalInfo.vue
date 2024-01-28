@@ -1,31 +1,30 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import { useStore } from 'vuex';
+import { useStore } from "vuex";
 
 const store = useStore();
 
 const nominee = ref({
-    employeeId: store.getters.getEmployeeId,
-    nomineeName: "",
-    dob: "",
-    contactNo: "",
-    email: "",
-    nid: "",
-    share: "",
+  eid: store.state.employeeId,
+  nomineeName: "",
+  dob: "",
+  contactNo: "",
+  email: "",
+  nid: "",
+  share: "",
   presentAddress: "",
 });
 
 const child = ref({
-    employeeId: store.getters.getEmployeeId,
-    childName: "",
-    nid: "",
-    email: "",
-    contactNo: "",
-    dob: "",
+  eid: store.state.employeeId,
+  childName: "",
+  nid: "",
+  email: "",
+  contactNo: "",
+  dob: "",
 });
 
-const phones = ref([]);
 const error = ref([]);
 
 const getData = async () => {
@@ -39,17 +38,19 @@ const getData = async () => {
   }
 };
 
-
 const resetForm = () => {
   Object.keys(nominee).forEach((key) => {
     nominee[key] = "";
   });
-
 };
 
 const submitForm = async () => {
   try {
-    const response = await axios.post("api/nominee", nominee.value);
+    const requestData = {
+      nominee: nominee.value,
+      child: child.value,
+    };
+    const response = await axios.post("api/nominee", requestData);
     if (response.data.success) {
       alert("Successfully Inserted");
       resetForm();
@@ -59,7 +60,6 @@ const submitForm = async () => {
   }
 };
 
-
 onMounted(() => getData());
 </script>
 
@@ -67,11 +67,11 @@ onMounted(() => getData());
 
 <template>
   <div class="mt-5">
-    <h2 class="fs-4">Nominee Information {{ employeeId }}</h2>
+    <h2 class="fs-4">Nominee Information {{ eid }}</h2>
     <form @submit.prevent="submitForm">
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="exampleInputEmail1" class="">Nominee Name</label>
+          <label for="exampleInputEmail1" class="">Nominee Name {{ store.state.employeeId }}</label>
           <input
             type="text"
             class="form-control"

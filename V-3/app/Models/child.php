@@ -11,7 +11,7 @@ class child extends Model
     protected $fillable = [
         'EID',
         'Child_Name',
-        'National_Id',
+        'NID',
         'Email',
         'Contact_No',
         'DOB',

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('EID');
             $table->unsignedBigInteger('Level_of_Education_Id');
+            $table->unsignedBigInteger('Board_Id');
             $table->string('Group',255);
             $table->string('Institute_Name',255);
             $table->unsignedBigInteger('Sacle_Id');
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->foreign('EID')->references('id')->on('employees')->onDelete('cascade');
             $table->foreign('Level_of_Education_Id')->references('id')->on('level_of_educations')->onDelete('cascade');
             $table->foreign('Sacle_Id')->references('id')->on('scales')->onDelete('cascade');
+            $table->foreign('Board_Id')->references('id')->on('boards')->onDelete('cascade');
         });
     }
 
