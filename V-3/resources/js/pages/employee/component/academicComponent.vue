@@ -1,100 +1,90 @@
-<script>
-import { ref, onMounted, reactive, watch } from "vue";
+<script setup>
+import { ref, onMounted, reactive, watch, defineProps, getCurrentInstance } from "vue";
 import { onClickOutside } from "@vueuse/core";
+import { useStore } from "vuex";
+import axios from "axios";
 
-export default {
-  props: {
-    isOpen: Boolean,
-    editStore: Object,
-    updateinfo: String,
-  },
-  setup(props, { emit }) {
-    const target = ref(null);
+const store = useStore();
+const { isOpen, editStore, updateinfo } = defineProps(["isOpen", "editStore", "updateinfo"]);
 
-    const form = reactive({
-      eid: store.state.employeeId,
-      degree: "",
-      education: "",
-      group: "",
-      instituteName: "",
-      scale: "",
-      result: "",
-      yop: "",
-      acheivement: "",
-    });
+const target = ref(null);
 
-    watch(
-      () => props.editStore,
-      (newVal) => {
-        form.id = props.editStore.id;
-        form.name = props.editStore.Name;
-        form.address = props.editStore.Address;
-        form.date = props.editStore.Date;
-        form.status = props.editStore.Status;
-      }
-    );
+const form = reactive({
+  eid: store.state.employeeId,
+  levelofEdu: "",
+  degree: "",
+  education: "",
+  group: "",
+  instituteName: "",
+  scale: "",
+  result: "",
+  yop: "",
+  achievement: "",
+});
 
-    onMounted(() => {
-      onClickOutside(target, () => emit("modal-close"));
-    });
+const instance = getCurrentInstance();
 
-    const closeModal = () => {
-      emit("modal-close");
-    };
+watch(
+  () => editStore,
+  (newVal) => {
+    form.id = newVal.id;
+  }
+);
 
-    const resetForm = () => {
-      Object.keys(form).forEach((key) => {
-        form[key] = "";
-      });
-    };
+onMounted(() => {
+  onClickOutside(target, () => instance.emit("modal-close"));
+});
 
-    const create = async () => {
-      try {
-        const response = await axios.post("/api/store", form);
-        if (response.data.success) {
-          emit("modal-close");
-          alert("Successfully Inserted");
-          resetForm();
-        }
-      } catch (error) {
-        console.error("Error creating store:", error);
-        // Handle the error, e.g., display an error message
-      }
-    };
+const closeModal = () => {
+  instance.emit("modal-close");
+};
 
-    const update = async () => {
-      try {
-        const response = await axios.put(`api/store/${form.id}`, form);
-        if (response.data.success) {
-          emit("modal-close");
-          alert("Successfully Updated");
-          resetForm();
-        }
-      } catch (error) {
-        console.error("Error updating store:", error);
-        // Handle the error, e.g., display an error message
-      }
-    };
+const resetForm = () => {
+  Object.keys(form).forEach((key) => {
+    form[key] = "";
+  });
+};
 
-    const submit = () => {
-      if (props.updateinfo === "Insert") {
-        create();
-      } else if (props.updateinfo === "Update") {
-        update();
-      } else {
-        console.error("Invalid updateinfo value:", props.updateinfo);
-      }
-    };
+const create = async () => {
+  try {
+    const response = await axios.post("/api/store", form);
+    if (response.data.success) {
+      instance.emit("modal-close");
+      alert("Successfully Inserted");
+      resetForm();
+    }
+  } catch (error) {
+    console.error("Error creating store:", error);
+    // Handle the error, e.g., display an error message
+  }
+};
 
-    return {
-      target,
-      closeModal,
-      submit,
-      form,
-    };
-  },
+const update = async () => {
+  try {
+    const response = await axios.put(`api/store/${form.id}`, form);
+    if (response.data.success) {
+      instance.emit("modal-close");
+      alert("Successfully Updated");
+      resetForm();
+    }
+  } catch (error) {
+    console.error("Error updating store:", error);
+    // Handle the error, e.g., display an error message
+  }
+};
+
+const submit = () => {
+  if (updateinfo === "Insert") {
+    create();
+  } else if (updateinfo === "Update") {
+    update();
+  } else {
+    console.error("Invalid updateinfo value:", updateinfo);
+  }
 };
 </script>
+
+
 
 <template>
   <div
@@ -109,7 +99,7 @@ export default {
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">
-                <label for="exampleInputEmail1">Degree</label>
+                <label for="exampleInputEmail1">Level of Education</label>
                 <select
                   class="form-control"
                   name="status"
@@ -123,7 +113,7 @@ export default {
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">
-                <label for="exampleInputEmail1">Board</label>
+                <label for="exampleInputEmail1">Exam/Degree Title</label>
                 <select
                   class="form-control"
                   name="status"
@@ -138,7 +128,7 @@ export default {
           </div>
 
           <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">
                 <label for="exampleInputEmail1">Institute</label>
                 <input
@@ -148,6 +138,20 @@ export default {
                   placeholder="Address"
                   v-model="form.address"
                 />
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Board</label>
+                <select
+                  class="form-control"
+                  name="status"
+                  id=""
+                  v-model="form.status"
+                >
+                  <option class="form-control" value="Active">Dhaka</option>
+                  <option class="form-control" value="Inactive">Cumilla</option>
+                </select>
               </div>
             </div>
           </div>
@@ -219,23 +223,32 @@ export default {
             <div class="col-lg-12 col-md-12 col-sm-12">
               <div class="form-group">
                 <label for="exampleInputEmail1">Acheivement</label>
-                <textarea name="" id="" cols="30" rows="3"
+                <textarea
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="3"
                   class="form-control"
                   placeholder="Address ..."
-                  v-model="form.address" ></textarea>
+                  v-model="form.address"
+                ></textarea>
               </div>
             </div>
           </div>
-
 
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
               <div class="form-group">
                 <label for="exampleInputEmail1">Remarks</label>
-                <textarea name="" id="" cols="30" rows="3"
+                <textarea
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="3"
                   class="form-control"
                   placeholder="Address ..."
-                  v-model="form.address" ></textarea>
+                  v-model="form.address"
+                ></textarea>
               </div>
             </div>
           </div>
