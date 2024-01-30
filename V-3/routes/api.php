@@ -1,14 +1,20 @@
 <?php
 
+use App\Http\Controllers\AcademicInfoController;
 use App\Http\Controllers\API\azizAuthController;
 use App\Http\Controllers\BloodGroupController;
+use App\Http\Controllers\BoardController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\DegreeController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LevelOfEducationController;
 use App\Http\Controllers\NomineeController;
 use App\Http\Controllers\ReligionController;
+use App\Http\Controllers\ScaleController;
 use App\Http\Controllers\StoreController;
+use App\Models\level_of_education;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,4 +56,11 @@ Route::resource('/company', CompanyController::class);
 Route::resource('/phone', CountryController::class);
 Route::resource('/employee', EmployeeController::class);
 Route::resource('/nominee', NomineeController::class);
+Route::resource('/education', LevelOfEducationController::class);
+Route::resource('/board', BoardController::class);
+Route::resource('/degree', DegreeController::class);
+Route::resource('/scale', ScaleController::class);
+
+Route::resource('/academic', AcademicInfoController::class);
+
 

@@ -1,25 +1,42 @@
 <script setup>
-import { ref, onMounted, reactive, watch, defineProps, getCurrentInstance } from "vue";
+import {
+  ref,
+  onMounted,
+  reactive,
+  watch,
+  defineProps,
+  getCurrentInstance,
+} from "vue";
 import { onClickOutside } from "@vueuse/core";
 import { useStore } from "vuex";
 import axios from "axios";
 
 const store = useStore();
-const { isOpen, editStore, updateinfo } = defineProps(["isOpen", "editStore", "updateinfo"]);
+const { isOpen, editStore, updateinfo } = defineProps([
+  "isOpen",
+  "editStore",
+  "updateinfo",
+]);
 
 const target = ref(null);
+const error = ref([]);
+const educations = ref([]);
+const boards = ref([]);
+const degrees = ref([]);
+const scales = ref([]);
 
 const form = reactive({
   eid: store.state.employeeId,
-  levelofEdu: "",
+  levelofEduId: "",
   degree: "",
-  education: "",
-  group: "",
-  instituteName: "",
-  scale: "",
+  institute: "",
+  boardId: "",
+  major: "",
+  scaleId: "",
   result: "",
   yop: "",
-  achievement: "",
+  acheivement: "",
+  remarks: "",
 });
 
 const instance = getCurrentInstance();
@@ -31,8 +48,24 @@ watch(
   }
 );
 
+const getData = async () => {
+  try {
+    const responseEducation = await axios.get("api/education");
+    const responseBoard = await axios.get("api/board");
+    const responseScale = await axios.get("api/scale");
+
+    console.log(responseEducation.data);
+    educations.value = responseEducation.data;
+    boards.value = responseBoard.data;
+    scales.value = responseScale.data;
+  } catch (err) {
+    error.value = err.message || "Error fetching data";
+  } finally {
+  }
+};
+
 onMounted(() => {
-  onClickOutside(target, () => instance.emit("modal-close"));
+  onClickOutside(target, () => instance.emit("modal-close")), getData();
 });
 
 const closeModal = () => {
@@ -47,7 +80,7 @@ const resetForm = () => {
 
 const create = async () => {
   try {
-    const response = await axios.post("/api/store", form);
+    const response = await axios.post("/api/academic", form);
     if (response.data.success) {
       instance.emit("modal-close");
       alert("Successfully Inserted");
@@ -104,10 +137,16 @@ const submit = () => {
                   class="form-control"
                   name="status"
                   id=""
-                  v-model="form.de"
+                  v-model="form.levelofEduId"
                 >
-                  <option class="form-control" value="Active">SSC</option>
-                  <option class="form-control" value="Inactive">HSC</option>
+                  <option selected disabled>select</option>
+                  <option
+                    v-for="edu in educations.education"
+                    :key="edu.id"
+                    :value="edu.id"
+                  >
+                    {{ edu.Name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -118,10 +157,16 @@ const submit = () => {
                   class="form-control"
                   name="status"
                   id=""
-                  v-model="form.status"
+                  v-model="form.degree"
                 >
-                  <option class="form-control" value="Active">Dhaka</option>
-                  <option class="form-control" value="Inactive">Cumilla</option>
+                  <option selected disabled>select</option>
+                  <option
+                    v-for="edu in educations.degree"
+                    :key="edu.id"
+                    :value="edu.id"
+                  >
+                    {{ edu.Name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -136,7 +181,7 @@ const submit = () => {
                   class="form-control"
                   id="exampleInputEmail1"
                   placeholder="Address"
-                  v-model="form.address"
+                  v-model="form.institute"
                 />
               </div>
             </div>
@@ -147,10 +192,16 @@ const submit = () => {
                   class="form-control"
                   name="status"
                   id=""
-                  v-model="form.status"
+                  v-model="form.boardId"
                 >
-                  <option class="form-control" value="Active">Dhaka</option>
-                  <option class="form-control" value="Inactive">Cumilla</option>
+                  <option selected disabled>select</option>
+                  <option
+                    v-for="board in boards"
+                    :key="board.id"
+                    :value="board.id"
+                  >
+                    {{ board.Name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -165,7 +216,7 @@ const submit = () => {
                   class="form-control"
                   id="exampleInputEmail1"
                   placeholder="Address"
-                  v-model="form.address"
+                  v-model="form.major"
                 />
               </div>
             </div>
@@ -176,16 +227,15 @@ const submit = () => {
                   class="form-control"
                   name="status"
                   id=""
-                  v-model="form.status"
+                  v-model="form.scaleId"
                 >
-                  <option class="form-control" value="Active">
-                    Out of 4.00
-                  </option>
-                  <option class="form-control" value="Active">
-                    Out of 5.00
-                  </option>
-                  <option class="form-control" value="Inactive">
-                    Division
+                  <option selected disabled>select</option>
+                  <option
+                    v-for="scale in scales"
+                    :key="scale.id"
+                    :value="scale.id"
+                  >
+                    {{ scale.Name }}
                   </option>
                 </select>
               </div>
@@ -201,7 +251,7 @@ const submit = () => {
                   class="form-control"
                   id="exampleInputEmail1"
                   placeholder="Address"
-                  v-model="form.address"
+                  v-model="form.result"
                 />
               </div>
             </div>
@@ -213,7 +263,7 @@ const submit = () => {
                   class="form-control"
                   id="exampleInputEmail1"
                   placeholder="Address"
-                  v-model="form.address"
+                  v-model="form.yop"
                 />
               </div>
             </div>
@@ -230,7 +280,7 @@ const submit = () => {
                   rows="3"
                   class="form-control"
                   placeholder="Address ..."
-                  v-model="form.address"
+                  v-model="form.acheivement"
                 ></textarea>
               </div>
             </div>
@@ -247,7 +297,7 @@ const submit = () => {
                   rows="3"
                   class="form-control"
                   placeholder="Address ..."
-                  v-model="form.address"
+                  v-model="form.remarks"
                 ></textarea>
               </div>
             </div>

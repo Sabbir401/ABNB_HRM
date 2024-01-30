@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\level_of_education;
 use Illuminate\Http\Request;
+use App\Models\level_of_education;
+use Illuminate\Support\Facades\DB;
 
 class LevelOfEducationController extends Controller
 {
@@ -12,7 +13,24 @@ class LevelOfEducationController extends Controller
      */
     public function index()
     {
-        //
+        $education = DB::table('level_of_educations')
+            ->select('id', 'Name')
+            ->whereNull('education_id')
+            ->orWhere('education_id', '')
+            ->orderBy('Name', 'asc')
+            ->get();
+
+        $degree = DB::table('level_of_educations')
+            ->select('id', 'Name')
+            ->whereNotNull('education_id')
+            ->orderBy('Name', 'asc')
+            ->get();
+
+        return response()->json([
+            'education' => $education,
+            'degree' => $degree,
+        ]);
+
     }
 
     /**

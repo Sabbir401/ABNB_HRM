@@ -14,10 +14,11 @@ class academic_info extends Model
         'Board_Id',
         'Group',
         'Institute_Name',
-        'Sacle_Id',
+        'Scale_Id',
         'Result',
         'Year_of_Passing',
-        'Acheivement'
+        'Acheivement',
+        'Remarks'
     ];
 
     public function employee()

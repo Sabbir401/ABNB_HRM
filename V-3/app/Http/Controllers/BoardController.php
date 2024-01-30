@@ -12,7 +12,9 @@ class BoardController extends Controller
      */
     public function index()
     {
-        //
+        $board = board::all();
+
+        return response()->json($board);
     }
 
     /**

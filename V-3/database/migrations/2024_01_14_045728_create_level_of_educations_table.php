@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('level_of_educations', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('education_id')->nullable()->default(null);
             $table->string('Name',150);
+
+            $table->foreign('education_id')->references('id')->on('level_of_educations')->onDelete('cascade');
         });
     }
 

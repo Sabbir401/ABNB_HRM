@@ -12,7 +12,9 @@ class DegreeController extends Controller
      */
     public function index()
     {
-        //
+        $degree = degree::all();
+
+        return response()->json($degree);
     }
 
     /**

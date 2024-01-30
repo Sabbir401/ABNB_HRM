@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\academic_info;
 use Illuminate\Http\Request;
+use App\Models\academic_info;
+use Illuminate\Support\Facades\DB;
 
 class AcademicInfoController extends Controller
 {
@@ -28,7 +29,21 @@ class AcademicInfoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $academic = academic_info::create([
+            'EID' => $request->input('eid'),
+            'Level_of_Education_Id' => $request->input('levelofEduId'),
+            'Board_Id' => $request->input('boardId'),
+            'Institute_Name' => $request->input('institute'),
+            'Scale_Id	' => $request->input('scaleId'),
+            'Result	' => $request->input('result'),
+            'Year_of_Passing' => $request->input('yop'),
+            'Acheivement' => $request->input('acheivement'),
+            'Remarks' => $request->input('remarks'),
+
+        ]);
+
+        return response()->json($academic);
     }
 
     /**

@@ -12,7 +12,9 @@ class ScaleController extends Controller
      */
     public function index()
     {
-        //
+        $scale = scale::all();
+
+        return response()->json($scale);
     }
 
     /**
