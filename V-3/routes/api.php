@@ -60,7 +60,6 @@ Route::resource('/education', LevelOfEducationController::class);
 Route::resource('/board', BoardController::class);
 Route::resource('/degree', DegreeController::class);
 Route::resource('/scale', ScaleController::class);
-
 Route::resource('/academic', AcademicInfoController::class);
 
 

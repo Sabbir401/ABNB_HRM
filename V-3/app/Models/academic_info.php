@@ -33,6 +33,13 @@ class academic_info extends Model
 
     public function scale()
     {
-        return $this->belongsTo(scale::class, 'Sacle_Id');
+        return $this->belongsTo(scale::class, 'Scale_Id');
     }
+
+    public function board()
+    {
+        return $this->belongsTo(board::class, 'Board_Id');
+    }
+
+
 }

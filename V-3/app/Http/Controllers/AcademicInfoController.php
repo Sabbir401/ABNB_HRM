@@ -13,7 +13,9 @@ class AcademicInfoController extends Controller
      */
     public function index()
     {
-        //
+        $academic = academic_info::with('education', 'scale', 'board', 'education.degree')->paginate(5);
+
+        return response()->json($academic);
     }
 
     /**
@@ -29,14 +31,14 @@ class AcademicInfoController extends Controller
      */
     public function store(Request $request)
     {
-
         $academic = academic_info::create([
             'EID' => $request->input('eid'),
-            'Level_of_Education_Id' => $request->input('levelofEduId'),
+            'Level_of_Education_Id' => $request->input('degreeId'),
             'Board_Id' => $request->input('boardId'),
+            'Group' => $request->input('major'),
             'Institute_Name' => $request->input('institute'),
-            'Scale_Id	' => $request->input('scaleId'),
-            'Result	' => $request->input('result'),
+            'Scale_Id' => $request->input('scaleId'),
+            'Result' => $request->input('result'),
             'Year_of_Passing' => $request->input('yop'),
             'Acheivement' => $request->input('acheivement'),
             'Remarks' => $request->input('remarks'),

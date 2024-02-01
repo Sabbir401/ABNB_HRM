@@ -10,14 +10,16 @@ class level_of_education extends Model
     use HasFactory;
     protected $fillable = [
         'Name',
+        'education_id'
     ];
 
     public function degree()
     {
-        return $this->hasMany(degree::class, 'Level_of_Education_Id');
+        return $this->belongsTo(level_of_education::class, 'education_id');
     }
     public function academic()
     {
         return $this->hasMany(academic_info::class, 'Level_of_Education_Id');
     }
+
 }

@@ -2,7 +2,6 @@
 import {
   ref,
   onMounted,
-  reactive,
   watch,
   defineProps,
   getCurrentInstance,
@@ -12,23 +11,23 @@ import { useStore } from "vuex";
 import axios from "axios";
 
 const store = useStore();
-const { isOpen, editStore, updateinfo } = defineProps([
+const { isOpen, editStore, updateinfo, EID } = defineProps([
   "isOpen",
   "editStore",
   "updateinfo",
+  "EID",
 ]);
 
 const target = ref(null);
 const error = ref([]);
 const educations = ref([]);
 const boards = ref([]);
-const degrees = ref([]);
 const scales = ref([]);
 
-const form = reactive({
-  eid: store.state.employeeId,
+const form = ref({
+  eid: EID,
   levelofEduId: "",
-  degree: "",
+  degreeId: "",
   institute: "",
   boardId: "",
   major: "",
@@ -54,7 +53,6 @@ const getData = async () => {
     const responseBoard = await axios.get("api/board");
     const responseScale = await axios.get("api/scale");
 
-    console.log(responseEducation.data);
     educations.value = responseEducation.data;
     boards.value = responseBoard.data;
     scales.value = responseScale.data;
@@ -80,7 +78,7 @@ const resetForm = () => {
 
 const create = async () => {
   try {
-    const response = await axios.post("/api/academic", form);
+    const response = await axios.post("/api/academic", form.value);
     if (response.data.success) {
       instance.emit("modal-close");
       alert("Successfully Inserted");
@@ -107,7 +105,7 @@ const update = async () => {
 };
 
 const submit = () => {
-  if (updateinfo === "Insert") {
+  if (updateinfo === "Save") {
     create();
   } else if (updateinfo === "Update") {
     update();
@@ -127,8 +125,8 @@ const submit = () => {
   >
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Academic Information</h4>
-        <form class="forms-sample" @submit.prevent="submit">
+        <h4 class="card-title">Academic Information {{ store.state.employeeId }}</h4>
+        <form class="forms-sample" @submit.prevent="create">
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">
@@ -157,7 +155,7 @@ const submit = () => {
                   class="form-control"
                   name="status"
                   id=""
-                  v-model="form.degree"
+                  v-model="form.degreeId"
                 >
                   <option selected disabled>select</option>
                   <option

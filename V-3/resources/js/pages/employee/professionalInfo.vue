@@ -4,50 +4,52 @@ import axios from "axios";
 import academic from "../employee/component/academicComponent.vue";
 import training from "../employee/component/trainingComponent.vue";
 import work from "../employee/component/workComponent.vue";
+import { useStore } from "vuex";
 
-const stores = ref([]);
+const store = useStore();
+
 const isLoading = ref(true);
 const error = ref(null);
 const selectedStore = ref(null);
 const heading = ref(null);
+const academics = ref([]);
+const eid = ref(store.state.employeeId || null);
 
 const academicModel = ref(false);
 const trainingModel = ref(false);
 const workModel = ref(false);
 
 const academicOpened = (title) => {
-    heading.value = title;
-    academicModel.value = true;
+  heading.value = title;
+  academicModel.value = true;
+  eid.value = store.state.employeeId;
 };
-
 const academicClose = () => {
-    academicModel.value = false;
+  academicModel.value = false;
 };
 
 const trainingOpened = (title) => {
-    heading.value = title;
-    trainingModel.value = true;
+  heading.value = title;
+  trainingModel.value = true;
 };
 
 const trainingClose = () => {
-    trainingModel.value = false;
+  trainingModel.value = false;
 };
 
 const workOpened = (title) => {
-    heading.value = title;
-    workModel.value = true;
+  heading.value = title;
+  workModel.value = true;
 };
 
 const workClose = () => {
-    workModel.value = false;
+  workModel.value = false;
 };
 
-
-
-const getData = async () => {
+const getData = async (page = 1) => {
   try {
-    const response = await axios.get("api/store");
-    stores.value = response.data;
+    const response = await axios.get(`api/academic?page=${page}`);
+    academics.value = response.data;
   } catch (err) {
     error.value = err.message || "Error fetching data";
   } finally {
@@ -69,7 +71,6 @@ const editHandler = async (id) => {
 const submitHandler = async () => {
   await getData();
 };
-
 onMounted(() => getData());
 </script>
 
@@ -79,6 +80,7 @@ onMounted(() => getData());
     :isOpen="academicModel"
     :editStore="selectedStore"
     :updateinfo="heading"
+    :EID="eid"
     @modal-close="academicClose"
     @submit="submitHandler"
     name="first-modal"
@@ -103,9 +105,11 @@ onMounted(() => getData());
           <table class="table table-dark">
             <thead>
               <tr>
+                <th>Level of Education</th>
                 <th>Degree</th>
                 <th>Institute</th>
-                <th>Board/University</th>
+                <th>Board</th>
+                <th>Major Group</th>
                 <th>Scale</th>
                 <th>Result</th>
                 <th>Years Of Passing</th>
@@ -115,8 +119,26 @@ onMounted(() => getData());
               </tr>
             </thead>
             <tbody>
-              <tr >
-
+              <tr v-for="academic in academics.data" :key="academic.id">
+                <td>{{ academic.education.degree ? academic.education.degree.Name : 'N/A' }}</td>
+                <td>{{ academic.education ? academic.education.Name : 'N/A' }}</td>
+                <td>{{ academic.Institute_Name }}</td>
+                <td>{{ academic.board ? academic.board.Name : 'N/A' }}</td>
+                <td>{{ academic.Group }}</td>
+                <td>{{ academic.scale ? academic.scale.Name : 'N/A' }}</td>
+                <td>{{ academic.Result }}</td>
+                <td>{{ academic.Result }}</td>
+                <td>{{ academic.Acheivement }}</td>
+                <td>{{ academic.Remarks }}</td>
+                <td>{{ academic.Institute_Name }}</td>
+                <td>
+                  <button
+                    class="btn btn-success"
+                    @click="editHandler(academic.id)"
+                  >
+                    Edit
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -124,8 +146,6 @@ onMounted(() => getData());
       </div>
     </div>
   </div>
-
-
 
   <training
     :isOpen="trainingModel"
@@ -164,16 +184,12 @@ onMounted(() => getData());
                 <th>Operation</th>
               </tr>
             </thead>
-            <tbody>
-
-            </tbody>
+            <tbody></tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
-
-
 
   <work
     :isOpen="workModel"
@@ -217,9 +233,7 @@ onMounted(() => getData());
                 <th>Operations</th>
               </tr>
             </thead>
-            <tbody>
-
-            </tbody>
+            <tbody></tbody>
           </table>
         </div>
       </div>
@@ -228,5 +242,4 @@ onMounted(() => getData());
 </template>
 
 <style scoped>
-
 </style>
