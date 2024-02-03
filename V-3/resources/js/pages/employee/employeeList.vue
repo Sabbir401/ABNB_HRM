@@ -2,6 +2,7 @@
 import { ref, onMounted, watch } from "vue";
 import axios from "axios";
 import { Bootstrap5Pagination } from "laravel-vue-pagination";
+import router from "../../router";
 
 const employees = ref([]);
 const isLoading = ref(true);
@@ -9,6 +10,8 @@ const error = ref(null);
 const empEdit = ref(null);
 const heading = ref(null);
 let search = ref("");
+
+
 
 
 
@@ -154,7 +157,7 @@ onMounted(() => getData());
                 <td>
                   <button
                     class="btn btn-success"
-                    @click="editHandler(employee.id)"
+                    @click="router.push(`/employee/${employee.id}`)"
                   >
                     Edit
                   </button>

@@ -112,6 +112,14 @@ const routes = [
                 },
             },
             {
+                path: "/employee/:id",
+                name: "Employeeid",
+                component: employee,
+                meta: {
+                    requireAuth: true,
+                },
+            },
+            {
                 path: "/personal",
                 name: "Personal",
                 component: personal,

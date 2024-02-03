@@ -27,8 +27,6 @@ onMounted(() => getData());
 
 
 <template>
-
-
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <router-link class="nav-link" active-class="active" :to="{ name: 'Employee' }"

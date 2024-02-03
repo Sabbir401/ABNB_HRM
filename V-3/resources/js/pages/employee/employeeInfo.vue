@@ -1,7 +1,13 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import axios from "axios";
-import { useStore } from 'vuex';
+import { useStore } from "vuex";
+
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+
+const empId = parseInt(route.params.id);
 
 const employee = ref({
   companyId: "",
@@ -33,6 +39,7 @@ const religions = ref([]);
 const companies = ref([]);
 const phones = ref([]);
 const error = ref([]);
+const empEdit = ref([]);
 
 const getData = async () => {
   try {
@@ -60,20 +67,35 @@ const resetForm = () => {
 };
 // const store = useStore();
 
+const editHandler = async () => {
+  try {
+    const response = await axios.get(`api/store/${empId}/edit`);
+    empEdit.value = response.data;
+  } catch (err) {
+    console.error("Error fetching store data for editing:", err);
+  }
+};
+
+watch(() => {
+  form.id = props.editStore.id;
+  form.name = props.editStore.Name;
+  form.address = props.editStore.Address;
+  form.date = props.editStore.Date;
+  form.status = props.editStore.Status;
+});
+
 const submitForm = async () => {
   try {
     const response = await axios.post("api/employee", employee.value);
     if (response.data.success) {
       alert("Successfully Inserted");
       store.dispatch("setEmployeeId", response.data.empid);
-    //   store.commit('setEmployeeId', employee.value.employeeId);
       resetForm();
     }
   } catch (err) {
     console.error("Error submitting form:", err);
   }
 };
-
 
 onMounted(() => getData());
 </script>
@@ -83,7 +105,9 @@ onMounted(() => getData());
     <form @submit.prevent="submitForm">
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="" class="">Company Name  {{ store.state.employeeId }}</label>
+          <label for="" class=""
+            >Company Name {{ store.state.employeeId }}</label
+          >
           <select
             v-model="employee.companyId"
             name=""
