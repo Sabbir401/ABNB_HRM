@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\academic_info;
-use Illuminate\Support\Facades\DB;
 
 class AcademicInfoController extends Controller
 {
@@ -13,7 +12,7 @@ class AcademicInfoController extends Controller
      */
     public function index()
     {
-        $academic = academic_info::with('education', 'scale', 'board', 'education.degree')->paginate(5);
+        $academic = academic_info::with('education', 'scale', 'board', 'education.degree')->get();
 
         return response()->json($academic);
     }
@@ -44,8 +43,12 @@ class AcademicInfoController extends Controller
             'Remarks' => $request->input('remarks'),
 
         ]);
+        $response = [
+            'success'   =>  true,
+            'message'   =>  'Successfully inserted',
+        ];
 
-        return response()->json($academic);
+        return response()->json($response);
     }
 
     /**

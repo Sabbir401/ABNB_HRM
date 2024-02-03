@@ -12,12 +12,14 @@ class work_experience extends Model
         'EID',
         'Company_Name',
         'Company_Business',
+        'Company_Address',
         'Designation',
         'Department',
         'From_Date',
         'To_Date',
         'Responsibilities',
-        'Company_Location',
+        'Last_Salary',
+        'Continuing',
     ];
 
     public function employee()

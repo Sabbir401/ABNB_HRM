@@ -19,12 +19,10 @@ return new class extends Migration
             $table->text('Topic_Covered');
             $table->date('From_Date');
             $table->date('To_Date');
-            $table->unsignedBigInteger('Country_Id');
-            $table->date('Remarks');
+            $table->text('Remarks');
             $table->timestamps();
 
             $table->foreign('EID')->references('id')->on('employees')->onDelete('cascade');
-            $table->foreign('Country_Id')->references('id')->on('countries')->onDelete('cascade');
         });
     }
 

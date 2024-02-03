@@ -67,17 +67,29 @@ class EmployeeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(employee $employee)
+    public function show(employee $id)
     {
-        //
+        $emp = employee::find($id);
+
+        if (!$emp) {
+            return response()->json(['message' => 'Store not found'], 404);
+        }
+
+        return response()->json($emp);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(employee $employee)
+    public function edit(employee $id)
     {
-        //
+        $emp = employee::find($id);
+
+        if (!$emp) {
+            return response()->json(['message' => 'Store not found'], 404);
+        }
+
+        return response()->json($emp);
     }
 
     /**

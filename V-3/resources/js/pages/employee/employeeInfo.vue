@@ -25,6 +25,7 @@ const employee = ref({
   bloodGroup: "",
   nationality: "",
   nid: "",
+  photo: "",
 });
 
 const bloods = ref([]);
@@ -333,6 +334,18 @@ onMounted(() => getData());
           />
         </div>
       </div>
+      <div class="row mb-3">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <label for="exampleInputEmail1" class="">Upload Photo</label>
+          <input
+            type="file"
+            class="form-control"
+            id="disabledTextInput"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+
       <div class="d-flex justify-content-end">
         <button type="reset" class="btn btn-danger btn-lg m-3">Reset</button>
         <button type="submit" class="btn btn-primary btn-lg m-3">Save</button>

@@ -6,11 +6,11 @@ import { Bootstrap5Pagination } from "laravel-vue-pagination";
 const employees = ref([]);
 const isLoading = ref(true);
 const error = ref(null);
-const selectedStore = ref(null);
+const empEdit = ref(null);
 const heading = ref(null);
 let search = ref("");
 
-watch(search, (Value) => {});
+
 
 const getData = async (page = 1) => {
   try {
@@ -25,8 +25,8 @@ const getData = async (page = 1) => {
 
 const editHandler = async (id) => {
   try {
-    const response = await axios.get(`api/store/${id}/edit`);
-    selectedStore.value = response.data;
+    const response = await axios.get(`api/employee/${id}/edit`);
+    empEdit.value = response.data;
     heading.value = "Update";
     openModal();
   } catch (err) {
@@ -36,21 +36,21 @@ const editHandler = async (id) => {
 
 const mapMaritalStatus = (status) => {
   const statusMap = {
-    M: 'Married',
-    U: 'Unmarried',
+    M: "Married",
+    U: "Unmarried",
   };
 
-  return statusMap[status] || 'N/A';
+  return statusMap[status] || "N/A";
 };
 
 const mapGender = (status) => {
   const statusMap = {
-    M: 'Male',
-    F: 'Female',
-    O: 'Other'
+    M: "Male",
+    F: "Female",
+    O: "Other",
   };
 
-  return statusMap[status] || 'N/A';
+  return statusMap[status] || "N/A";
 };
 
 const submitHandler = async () => {
@@ -69,7 +69,10 @@ onMounted(() => getData());
           <div class="mr-auto p-2">
             <div class="row">
               <h4 class="card-title m-2">Employee List</h4>
-              <Router-Link class="btn btn-success btn-icon" :to="{ name: 'Employee' }">
+              <Router-Link
+                class="btn btn-success btn-icon"
+                :to="{ name: 'Employee' }"
+              >
                 <button
                   style="float: left"
                   type="button"
@@ -129,7 +132,7 @@ onMounted(() => getData());
             <tbody>
               <tr v-for="employee in employees.data" :key="employee.id">
                 <td>{{ employee.id }}</td>
-                <td>{{ employee.company ? employee.company.Name: 'N/A' }}</td>
+                <td>{{ employee.company ? employee.company.Name : "N/A" }}</td>
                 <td>{{ employee.Full_Name }}</td>
                 <td>{{ employee.Father_Name }}</td>
                 <td>{{ employee.Mother_Name }}</td>
@@ -144,8 +147,8 @@ onMounted(() => getData());
                 <td>{{ mapGender(employee.Gender) }}</td>
                 <td>{{ employee.Personal_Email }}</td>
                 <td>{{ employee.Official_Email }}</td>
-                <td>{{ employee.blood ? employee.blood.Name : 'N/A' }}</td>
-                <td>{{ employee.blood ? employee.blood.Name : 'N/A' }}</td>
+                <td>{{ employee.blood ? employee.blood.Name : "N/A" }}</td>
+                <td>{{ employee.blood ? employee.blood.Name : "N/A" }}</td>
                 <td>{{ employee.Nationality }}</td>
                 <td>{{ employee.NID }}</td>
                 <td>

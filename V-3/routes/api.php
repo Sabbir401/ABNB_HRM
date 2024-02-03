@@ -14,6 +14,8 @@ use App\Http\Controllers\NomineeController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\ScaleController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\TrainingInfoController;
+use App\Http\Controllers\WorkExperienceController;
 use App\Models\level_of_education;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +62,9 @@ Route::resource('/education', LevelOfEducationController::class);
 Route::resource('/board', BoardController::class);
 Route::resource('/degree', DegreeController::class);
 Route::resource('/scale', ScaleController::class);
+
 Route::resource('/academic', AcademicInfoController::class);
+Route::resource('/training', TrainingInfoController::class);
+Route::resource('/work', WorkExperienceController::class);
 
 

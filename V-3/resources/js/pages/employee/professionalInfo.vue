@@ -12,8 +12,11 @@ const isLoading = ref(true);
 const error = ref(null);
 const selectedStore = ref(null);
 const heading = ref(null);
+const eid = store.state.employeeId;
+
 const academics = ref([]);
-const eid = ref(store.state.employeeId || null);
+const trainings = ref([]);
+const works = ref([]);
 
 const academicModel = ref(false);
 const trainingModel = ref(false);
@@ -46,10 +49,15 @@ const workClose = () => {
   workModel.value = false;
 };
 
-const getData = async (page = 1) => {
+const getData = async () => {
   try {
-    const response = await axios.get(`api/academic?page=${page}`);
-    academics.value = response.data;
+    const responseAcademic = await axios.get("api/academic");
+    const responseTraining = await axios.get("api/training");
+    const responseWork = await axios.get("api/training");
+
+    academics.value = responseAcademic.data;
+    trainings.value = responseTraining.data;
+    works.value = responseWork.data;
   } catch (err) {
     error.value = err.message || "Error fetching data";
   } finally {
@@ -119,13 +127,21 @@ onMounted(() => getData());
               </tr>
             </thead>
             <tbody>
-              <tr v-for="academic in academics.data" :key="academic.id">
-                <td>{{ academic.education.degree ? academic.education.degree.Name : 'N/A' }}</td>
-                <td>{{ academic.education ? academic.education.Name : 'N/A' }}</td>
+              <tr v-for="academic in academics" :key="academic.id">
+                <td>
+                  {{
+                    academic.education.degree
+                      ? academic.education.degree.Name
+                      : "N/A"
+                  }}
+                </td>
+                <td>
+                  {{ academic.education ? academic.education.Name : "N/A" }}
+                </td>
                 <td>{{ academic.Institute_Name }}</td>
-                <td>{{ academic.board ? academic.board.Name : 'N/A' }}</td>
+                <td>{{ academic.board ? academic.board.Name : "N/A" }}</td>
                 <td>{{ academic.Group }}</td>
-                <td>{{ academic.scale ? academic.scale.Name : 'N/A' }}</td>
+                <td>{{ academic.scale ? academic.scale.Name : "N/A" }}</td>
                 <td>{{ academic.Result }}</td>
                 <td>{{ academic.Result }}</td>
                 <td>{{ academic.Acheivement }}</td>
@@ -151,6 +167,7 @@ onMounted(() => getData());
     :isOpen="trainingModel"
     :editStore="selectedStore"
     :updateinfo="heading"
+    :EID="eid"
     @modal-close="trainingClose"
     @submit="submitHandler"
     name="first-modal"
@@ -184,7 +201,24 @@ onMounted(() => getData());
                 <th>Operation</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+              <tr v-for="training in trainings" :key="training.id">
+                <td>{{ training.Training_Title }}</td>
+                <td>{{ training.Organized_By }}</td>
+                <td>{{ training.Topic_Covered }}</td>
+                <td>{{ training.From_Date }}</td>
+                <td>{{ training.To_Date }}</td>
+                <td>{{ training.Remarks }}</td>
+                <td>
+                  <button
+                    class="btn btn-success"
+                    @click="editHandler(academic.id)"
+                  >
+                    Edit
+                  </button>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
@@ -195,6 +229,7 @@ onMounted(() => getData());
     :isOpen="workModel"
     :editStore="selectedStore"
     :updateinfo="heading"
+    :EID="eid"
     @modal-close="workClose"
     @submit="submitHandler"
     name="first-modal"
@@ -233,7 +268,27 @@ onMounted(() => getData());
                 <th>Operations</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+              <tr v-for="work in works" :key="work.id">
+                <td>{{ work.Company_Name }}</td>
+                <td>{{ work.Company_Business }}</td>
+                <td>{{ work.Company_Address }}</td>
+                <td>{{ work.Designation }}</td>
+                <td>{{ work.Department }}</td>
+                <td>{{ work.From_Date }}</td>
+                <td>{{ work.To_Date }}</td>
+                <td>{{ work.Last_Salary }}</td>
+                <td>{{ work.Continuing }}</td>
+                <td>
+                  <button
+                    class="btn btn-success"
+                    @click="editHandler(academic.id)"
+                  >
+                    Edit
+                  </button>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>

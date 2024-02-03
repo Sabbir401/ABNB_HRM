@@ -1,93 +1,112 @@
-<script>
-import { ref, onMounted, reactive, watch } from "vue";
+<script setup>
+import {
+  ref,
+  onMounted,
+  watch,
+  defineProps,
+  getCurrentInstance,
+} from "vue";
 import { onClickOutside } from "@vueuse/core";
+import { useStore } from "vuex";
+import axios from "axios";
 
-export default {
-  props: {
-    isOpen: Boolean,
-    editStore: Object,
-    updateinfo: String,
-  },
-  setup(props, { emit }) {
-    const target = ref(null);
-    const form = reactive({
-      id: "",
-      name: "",
-      address: "",
-      date: "",
-      status: "",
-    });
+const store = useStore();
+const { isOpen, editStore, updateinfo, EID } = defineProps([
+  "isOpen",
+  "editStore",
+  "updateinfo",
+  "EID",
+]);
 
-    watch(
-      () => props.editStore,
-      (newVal) => {
-        form.id = props.editStore.id;
-        form.name = props.editStore.Name;
-        form.address = props.editStore.Address;
-        form.date = props.editStore.Date;
-        form.status = props.editStore.Status;
-      }
-    );
+const target = ref(null);
+const error = ref([]);
+const scales = ref([]);
 
-    onMounted(() => {
-      onClickOutside(target, () => emit("modal-close"));
-    });
+const form = ref({
+  eid: EID,
+  companyName: "",
+  companyBusiness: "",
+  companyAddress: "",
+  fromDate: "",
+  toDate: "",
+  designation: "",
+  department: "",
+  jobRes: "",
+  lastSalary: "",
+  continuing: "",
+  remarks: "",
+});
 
-    const closeModal = () => {
-      emit("modal-close");
-    };
+const instance = getCurrentInstance();
 
-    const resetForm = () => {
-      Object.keys(form).forEach((key) => {
-        form[key] = "";
-      });
-    };
+watch(
+  () => editStore,
+  (newVal) => {
+    form.id = newVal.id;
+  }
+);
 
-    const create = async () => {
-      try {
-        const response = await axios.post("/api/store", form);
-        if (response.data.success) {
-          emit("modal-close");
-          alert("Successfully Inserted");
-          resetForm();
-        }
-      } catch (error) {
-        console.error("Error creating store:", error);
-        // Handle the error, e.g., display an error message
-      }
-    };
+const getData = async () => {
+  try {
+    const responseScale = await axios.get("api/scale");
 
-    const update = async () => {
-      try {
-        const response = await axios.put(`api/store/${form.id}`, form);
-        if (response.data.success) {
-          emit("modal-close");
-          alert("Successfully Updated");
-          resetForm();
-        }
-      } catch (error) {
-        console.error("Error updating store:", error);
-        // Handle the error, e.g., display an error message
-      }
-    };
+    scales.value = responseScale.data;
+  } catch (err) {
+    error.value = err.message || "Error fetching data";
+  } finally {
+  }
+};
 
-    const submit = () => {
-      if (props.updateinfo === "Insert") {
-        create();
-      } else if (props.updateinfo === "Update") {
-        update();
-      } else {
-        console.error("Invalid updateinfo value:", props.updateinfo);
-      }
-    };
+onMounted(() => {
+  onClickOutside(target, () => instance.emit("modal-close")), getData();
+});
 
-    return {
-      target,
-      closeModal,
-      submit,
-      form,
-    };
-  },
+const closeModal = () => {
+  instance.emit("modal-close");
+};
+
+const resetForm = () => {
+  Object.keys(form).forEach((key) => {
+    form[key] = "";
+  });
+};
+
+const create = async () => {
+  try {
+    const response = await axios.post("/api/work", form.value);
+    if (response.data.success) {
+      instance.emit("modal-close");
+      alert("Successfully Inserted");
+      resetForm();
+    }
+  } catch (error) {
+    console.error("Error creating store:", error);
+    // Handle the error, e.g., display an error message
+  }
+};
+
+const update = async () => {
+  try {
+    const response = await axios.put(`api/store/${form.id}`, form);
+    if (response.data.success) {
+      instance.emit("modal-close");
+      alert("Successfully Updated");
+      resetForm();
+    }
+  } catch (error) {
+    console.error("Error updating store:", error);
+    // Handle the error, e.g., display an error message
+  }
+};
+
+const submit = () => {
+  if (updateinfo === "Save") {
+    create();
+  } else if (updateinfo === "Update") {
+    update();
+  } else {
+    console.error("Invalid updateinfo value:", updateinfo);
+  }
 };
 </script>
 
@@ -100,7 +119,7 @@ export default {
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Work Experience</h4>
-        <form class="forms-sample" @submit.prevent="submit">
+        <form class="forms-sample" @submit.prevent="create">
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">
@@ -110,19 +129,19 @@ export default {
                   class="form-control"
                   id="exampleInputEmail1"
                   placeholder=""
-                  v-model="form.address"
+                  v-model="form.companyName"
                 />
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">
-                <label for="exampleInputEmail1">Organized By</label>
+                <label for="exampleInputEmail1">Company Business</label>
                 <input
                   type="text"
                   class="form-control"
                   id="exampleInputEmail1"
                   placeholder="Address"
-                  v-model="form.address"
+                  v-model="form.companyBusiness"
                 />
               </div>
             </div>
@@ -139,7 +158,7 @@ export default {
                   rows="3"
                   class="form-control"
                   placeholder="Address ..."
-                  v-model="form.address"
+                  v-model="form.companyAddress"
                 ></textarea>
               </div>
             </div>
@@ -154,7 +173,7 @@ export default {
                   class="form-control"
                   id="exampleInputEmail1"
                   placeholder="Address"
-                  v-model="form.address"
+                  v-model="form.fromDate"
                 />
               </div>
             </div>
@@ -166,7 +185,7 @@ export default {
                   class="form-control"
                   id="exampleInputEmail1"
                   placeholder="Address"
-                  v-model="form.address"
+                  v-model="form.toDate"
                 />
               </div>
             </div>
@@ -181,19 +200,19 @@ export default {
                   class="form-control"
                   id="exampleInputEmail1"
                   placeholder=""
-                  v-model="form.address"
+                  v-model="form.designation"
                 />
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">
-                <label for="exampleInputEmail1">Job Nature</label>
+                <label for="exampleInputEmail1">Department</label>
                 <input
                   type="text"
                   class="form-control"
                   id="exampleInputEmail1"
                   placeholder="Address"
-                  v-model="form.address"
+                  v-model="form.department"
                 />
               </div>
             </div>
@@ -209,7 +228,7 @@ export default {
                   cols="30"
                   class="form-control"
                   placeholder="Address ..."
-                  v-model="form.address"
+                  v-model="form.jobRes"
                 ></textarea>
               </div>
             </div>
@@ -224,7 +243,7 @@ export default {
                   class="form-control"
                   id="exampleInputEmail1"
                   placeholder=""
-                  v-model="form.address"
+                  v-model="form.lastSalary"
                 />
               </div>
             </div>
@@ -236,20 +255,8 @@ export default {
                   class="form-control"
                   id="exampleInputEmail1"
                   placeholder="Address"
-                  v-model="form.address"
+                  v-model="form.continuing"
                 />
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Remarks</label>
-                <textarea name="" id="" cols="30" rows="3"
-                  class="form-control"
-                  placeholder="Address ..."
-                  v-model="form.address" ></textarea>
               </div>
             </div>
           </div>

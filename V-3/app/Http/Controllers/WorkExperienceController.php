@@ -12,7 +12,9 @@ class WorkExperienceController extends Controller
      */
     public function index()
     {
-        //
+        $work = work_experience::all();
+
+        return response()->json($work);
     }
 
     /**
@@ -28,7 +30,25 @@ class WorkExperienceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $traning = work_experience::create([
+            'EID' => $request->input('eid'),
+            'Company_Name' => $request->input('companyName'),
+            'Company_Business' => $request->input('companyBusiness'),
+            'Company_Address' => $request->input('companyAddress'),
+            'Designation' => $request->input('designation'),
+            'Department' => $request->input('department'),
+            'From_Date' => $request->input('fromDate'),
+            'To_Date' => $request->input('toDate'),
+            'Responsibilities' => $request->input('jobRes'),
+            'Last_Salary' => $request->input('lastSalary'),
+            'Continuing' => $request->input('continuing'),
+        ]);
+        $response = [
+            'success'   =>  true,
+            'message'   =>  'Successfully inserted',
+        ];
+
+        return response()->json($response);
     }
 
     /**

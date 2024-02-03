@@ -12,7 +12,9 @@ class TrainingInfoController extends Controller
      */
     public function index()
     {
-        //
+        $training = training_info::all();
+
+        return response()->json($training);
     }
 
     /**
@@ -28,7 +30,22 @@ class TrainingInfoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $traning = training_info::create([
+            'EID' => $request->input('eid'),
+            'Training_Title' => $request->input('traningTitle'),
+            'Organized_By' => $request->input('organizedBy'),
+            'Topic_Covered' => $request->input('topicCovered'),
+            'From_Date' => $request->input('fromDate'),
+            'To_Date' => $request->input('toDate'),
+            'Remarks' => $request->input('remarks'),
+
+        ]);
+        $response = [
+            'success'   =>  true,
+            'message'   =>  'Successfully inserted',
+        ];
+
+        return response()->json($response);
     }
 
     /**
