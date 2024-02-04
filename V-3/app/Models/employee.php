@@ -57,6 +57,10 @@ class employee extends Model
     {
         return $this->hasMany(work_experience::class, 'EID');
     }
+    public function official()
+    {
+        return $this->hasMany(nominee::class, 'EID');
+    }
     public function nominee()
     {
         return $this->hasMany(nominee::class, 'EID');

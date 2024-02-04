@@ -2,18 +2,22 @@
 
 use App\Http\Controllers\AcademicInfoController;
 use App\Http\Controllers\API\azizAuthController;
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\BloodGroupController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DegreeController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployeeTypeController;
 use App\Http\Controllers\LevelOfEducationController;
 use App\Http\Controllers\NomineeController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\ScaleController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\TerritoryController;
 use App\Http\Controllers\TrainingInfoController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Models\level_of_education;
@@ -66,5 +70,10 @@ Route::resource('/scale', ScaleController::class);
 Route::resource('/academic', AcademicInfoController::class);
 Route::resource('/training', TrainingInfoController::class);
 Route::resource('/work', WorkExperienceController::class);
+
+Route::resource('/department', DepartmentController::class);
+Route::resource('/empType', EmployeeTypeController::class);
+Route::resource('/area', AreaController::class);
+Route::resource('/territory', TerritoryController::class);
 
 

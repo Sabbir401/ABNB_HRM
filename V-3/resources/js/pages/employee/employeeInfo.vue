@@ -8,6 +8,7 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 
 const empId = parseInt(route.params.id);
+console.log(empId);
 
 const employee = ref({
   companyId: "",
@@ -69,20 +70,12 @@ const resetForm = () => {
 
 const editHandler = async () => {
   try {
-    const response = await axios.get(`api/store/${empId}/edit`);
+    const response = await axios.get(`api/employee/${empId}/edit`);
     empEdit.value = response.data;
   } catch (err) {
     console.error("Error fetching store data for editing:", err);
   }
 };
-
-watch(() => {
-  form.id = props.editStore.id;
-  form.name = props.editStore.Name;
-  form.address = props.editStore.Address;
-  form.date = props.editStore.Date;
-  form.status = props.editStore.Status;
-});
 
 const submitForm = async () => {
   try {
@@ -97,7 +90,15 @@ const submitForm = async () => {
   }
 };
 
-onMounted(() => getData());
+const chooseMount = async () => {
+  if (empId) {
+    editHandler();
+  } else {
+    getData();
+  }
+};
+
+onMounted(() => chooseMount());
 </script>
 
 <template>
@@ -106,7 +107,7 @@ onMounted(() => getData());
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
           <label for="" class=""
-            >Company Name {{ store.state.employeeId }}</label
+            >Company Name</label
           >
           <select
             v-model="employee.companyId"
