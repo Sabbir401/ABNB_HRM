@@ -96,7 +96,7 @@ const routes = [
         },
     },
     {
-        path: "/emp",
+        path: "/emp/:id",
         name: "Emp",
         component: emp,
         meta: {
@@ -112,7 +112,7 @@ const routes = [
                 },
             },
             {
-                path: "/employee/:id",
+                path: "/employee/:id?",
                 name: "Employeeid",
                 component: employee,
                 meta: {
@@ -136,7 +136,7 @@ const routes = [
                 },
             },
             {
-                path: "/professional",
+                path: "/professional/:id",
                 name: "Professional",
                 component: professional,
                 meta: {

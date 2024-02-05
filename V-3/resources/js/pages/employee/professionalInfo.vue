@@ -1,10 +1,12 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
 import axios from "axios";
 import academic from "../employee/component/academicComponent.vue";
 import training from "../employee/component/trainingComponent.vue";
 import work from "../employee/component/workComponent.vue";
 import { useStore } from "vuex";
+const route = useRoute();
 
 const store = useStore();
 
@@ -13,6 +15,7 @@ const error = ref(null);
 const selectedStore = ref(null);
 const heading = ref(null);
 const eid = store.state.employeeId;
+const empId =  parseInt(route.params.id);
 
 const academics = ref([]);
 const trainings = ref([]);
@@ -25,7 +28,6 @@ const workModel = ref(false);
 const academicOpened = (title) => {
   heading.value = title;
   academicModel.value = true;
-  eid.value = store.state.employeeId;
 };
 const academicClose = () => {
   academicModel.value = false;
@@ -51,9 +53,9 @@ const workClose = () => {
 
 const getData = async () => {
   try {
-    const responseAcademic = await axios.get("api/academic");
-    const responseTraining = await axios.get("api/training");
-    const responseWork = await axios.get("api/training");
+    const responseAcademic = await axios.get(`/api/academic/${empId}`);
+    // const responseTraining = await axios.get("api/training");
+    // const responseWork = await axios.get("api/training");
 
     academics.value = responseAcademic.data;
     trainings.value = responseTraining.data;

@@ -157,7 +157,7 @@ onMounted(() => getData());
                 <td>
                   <button
                     class="btn btn-success"
-                    @click="router.push(`/employee/${employee.id}`)"
+                    @click="router.push(`/emp/${employee.id}`)"
                   >
                     Edit
                   </button>

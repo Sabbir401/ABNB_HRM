@@ -54,9 +54,13 @@ class AcademicInfoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(academic_info $academic_info)
+    public function show($id)
     {
-        //
+        $academic = academic_info::with('education', 'scale', 'board', 'education.degree')
+        ->where('EID',$id)
+        ->get();
+
+        return response()->json($academic);
     }
 
     /**
