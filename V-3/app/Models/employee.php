@@ -59,11 +59,11 @@ class employee extends Model
     }
     public function official()
     {
-        return $this->hasMany(nominee::class, 'EID');
+        return $this->hasOne(nominee::class, 'EID');
     }
     public function nominee()
     {
-        return $this->hasMany(nominee::class, 'EID');
+        return $this->hasOne(nominee::class, 'EID');
     }
     public function child()
     {

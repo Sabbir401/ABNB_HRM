@@ -14,6 +14,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeTypeController;
 use App\Http\Controllers\LevelOfEducationController;
 use App\Http\Controllers\NomineeController;
+use App\Http\Controllers\OfficialController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\ScaleController;
 use App\Http\Controllers\StoreController;
@@ -75,5 +76,6 @@ Route::resource('/department', DepartmentController::class);
 Route::resource('/empType', EmployeeTypeController::class);
 Route::resource('/area', AreaController::class);
 Route::resource('/territory', TerritoryController::class);
+Route::resource('/official', OfficialController::class);
 
 

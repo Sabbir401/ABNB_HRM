@@ -70,7 +70,7 @@ const resetForm = () => {
 
 const editHandler = async () => {
   try {
-    const response = await axios.get(`api/employee/${empId}/edit`);
+    const response = await axios.get(`/api/employee/${empId}/edit`);
     empEdit.value = response.data;
   } catch (err) {
     console.error("Error fetching store data for editing:", err);
@@ -81,9 +81,9 @@ const submitForm = async () => {
   try {
     const response = await axios.post("api/employee", employee.value);
     if (response.data.success) {
-      alert("Successfully Inserted");
       store.dispatch("setEmployeeId", response.data.empid);
       resetForm();
+      alert("Successfully Inserted");
     }
   } catch (err) {
     console.error("Error submitting form:", err);

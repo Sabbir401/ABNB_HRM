@@ -23,13 +23,16 @@ return new class extends Migration
             $table->date('DOJ');
             $table->string('Provation_period',20);
             $table->date('DOC');
+            $table->unsignedBigInteger('Job_Location_Id');
             $table->string('Shift',20);
+            $table->timestamps();
 
             $table->foreign('EID')->references('id')->on('employees')->onDelete('cascade');
             $table->foreign('Department_Id')->references('id')->on('departments')->onDelete('cascade');
             $table->foreign('Employee_type_Id')->references('id')->on('employee_types')->onDelete('cascade');
             $table->foreign('Area_Id')->references('id')->on('areas')->onDelete('cascade');
             $table->foreign('Territory_Id')->references('id')->on('territories')->onDelete('cascade');
+            $table->foreign('Job_Location_Id')->references('id')->on('countries')->onDelete('cascade');
             $table->foreign('Supervisor_Id')->references('id')->on('employees')->onDelete('cascade');
         });
     }

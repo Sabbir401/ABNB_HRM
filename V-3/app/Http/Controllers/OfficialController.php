@@ -28,7 +28,27 @@ class OfficialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store = official::create([
+            'EID' => $request->input('eid'),
+            'Department_Id' => $request->input('departmentId'),
+            'Employee_Grade' => $request->input('employeeGrade'),
+            'Area_Id' => $request->input('areaId'),
+            'Territory_Id' => $request->input('territoryId'),
+            'Employee_type_Id' => $request->input('employeeType'),
+            'Supervisor_Id' => $request->input('supervisorId'),
+            'DOJ' => $request->input('doj'),
+            'Provation_period' => $request->input('provationPeriod'),
+            'DOC' => $request->input('doc'),
+            'Job_Location_Id' => $request->input('jobLocation'),
+            'Shift' => $request->input('shift'),
+        ]);
+
+        $response = [
+            'success'   =>  true,
+            'message'   =>  'Successfully inserted',
+        ];
+
+        return response()->json($response);
     }
 
     /**

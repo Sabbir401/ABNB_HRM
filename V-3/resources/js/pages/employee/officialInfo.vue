@@ -6,23 +6,25 @@ import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
+const store = useStore();
 
 const empId = parseInt(route.params.id);
 console.log(empId);
 
 const official = ref({
+  eid: store.state.employeeId,
   departmentId: "",
   designationId: "",
   employeeGrade: "",
   areaId: "",
   territoryId: "",
+  employeeType: "",
   supervisorId: "",
   doj: "",
   provationPeriod: "",
   doc: "",
   jobLocation: "",
   shift: "",
-  channel: "",
 });
 
 const departments = ref([]);
@@ -30,6 +32,7 @@ const areas = ref([]);
 const territories = ref([]);
 const emptypes = ref([]);
 const supervisor = ref([]);
+const countries = ref([]);
 
 const error = ref([]);
 const empEdit = ref([]);
@@ -41,20 +44,20 @@ const getData = async () => {
     const responseArea = await axios.get("api/area");
     const responseTerritory = await axios.get("api/territory");
     const responseSuper = await axios.get("api/employee");
+    const responseCountry = await axios.get("api/phone");
 
     departments.value = responseDepartment.data;
     emptypes.value = responseEmpType.data;
     areas.value = responseArea.data;
     territories.value = responseTerritory.data;
     supervisor.value = responseSuper.data;
-
+    countries.value = responseCountry.data;
   } catch (err) {
     error.value = err.message || "Error fetching data";
   } finally {
   }
 };
 
-const store = useStore();
 
 const resetForm = () => {
   Object.keys(employee).forEach((key) => {
@@ -74,10 +77,9 @@ const editHandler = async () => {
 
 const submitForm = async () => {
   try {
-    const response = await axios.post("api/employee", employee.value);
+    const response = await axios.post("api/official", official.value);
     if (response.data.success) {
       alert("Successfully Inserted");
-      store.dispatch("setEmployeeId", response.data.empid);
       resetForm();
     }
   } catch (err) {
@@ -102,7 +104,12 @@ onMounted(() => chooseMount());
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
           <label for="" class="">Department</label>
-          <select class="form-control" name="status" id="">
+          <select
+            class="form-control"
+            name="status"
+            id=""
+            v-model="official.departmentId"
+          >
             <option selected disabled>select</option>
             <option
               v-for="dept in departments.department"
@@ -115,7 +122,12 @@ onMounted(() => chooseMount());
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <label for="" class="">Designation</label>
-          <select class="form-control" name="status" id="">
+          <select
+            class="form-control"
+            name="status"
+            id=""
+            v-model="official.designationId"
+          >
             <option selected disabled>select</option>
             <option
               v-for="des in departments.designation"
@@ -128,7 +140,12 @@ onMounted(() => chooseMount());
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <label for="" class="">Employee Grade</label>
-          <select name="" id="" class="form-control">
+          <select
+            name=""
+            id=""
+            class="form-control"
+            v-model="official.employeeGrade"
+          >
             <option selected disabled value="">select</option>
             <option value="1">Grade 1</option>
             <option value="2">Grade 2</option>
@@ -143,7 +160,12 @@ onMounted(() => chooseMount());
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
           <label for="" class="">Area</label>
-          <select class="form-control" name="status" id="">
+          <select
+            class="form-control"
+            name="status"
+            id=""
+            v-model="official.areaId"
+          >
             <option selected disabled>select</option>
             <option v-for="area in areas" :key="area.id" :value="area.id">
               {{ area.Name }}
@@ -152,7 +174,12 @@ onMounted(() => chooseMount());
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <label for="" class="">Territory</label>
-          <select class="form-control" name="status" id="">
+          <select
+            class="form-control"
+            name="status"
+            id=""
+            v-model="official.territoryId"
+          >
             <option selected disabled>select</option>
             <option v-for="ter in territories" :key="ter.id" :value="ter.id">
               {{ ter.Name }}
@@ -161,7 +188,12 @@ onMounted(() => chooseMount());
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <label for="" class="">Employee Type</label>
-          <select class="form-control" name="status" id="">
+          <select
+            class="form-control"
+            name="status"
+            id=""
+            v-model="official.employeeType"
+          >
             <option selected disabled>select</option>
             <option v-for="typ in emptypes" :key="typ.id" :value="typ.id">
               {{ typ.Name }}
@@ -173,7 +205,12 @@ onMounted(() => chooseMount());
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
           <label for="" class="">Supervisor</label>
-          <select class="form-control" name="status" id="">
+          <select
+            class="form-control"
+            name="status"
+            id=""
+            v-model="official.supervisorId"
+          >
             <option selected disabled>select</option>
             <option
               v-for="des in supervisor.data"
@@ -191,6 +228,7 @@ onMounted(() => chooseMount());
             class="form-control"
             id="disabledTextInput"
             aria-describedby="emailHelp"
+            v-model="official.doj"
           />
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -200,6 +238,7 @@ onMounted(() => chooseMount());
             class="form-control"
             id="disabledTextInput"
             aria-describedby="emailHelp"
+            v-model="official.doc"
           />
         </div>
       </div>
@@ -212,23 +251,33 @@ onMounted(() => chooseMount());
             class="form-control"
             id="disabledTextInput"
             aria-describedby="emailHelp"
+            v-model="official.provationPeriod"
           />
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <label for="" class="">Job Location</label>
-          <select name="" id="" class="form-control">
-            <option value="">-select-</option>
-            <option value="">Dhaka</option>
-            <option value="">Sylhet</option>
-            <option value="">CHandpur</option>
+          <select
+            class="form-control"
+            name="status"
+            id=""
+            v-model="official.jobLocation"
+          >
+            <option selected disabled>select</option>
+            <option
+              v-for="country in countries"
+              :key="country.id"
+              :value="country.id"
+            >
+              {{ country.Name }}
+            </option>
           </select>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <label for="exampleInputEmail1" class="">Shift</label>
-          <select name="" id="" class="form-control">
-            <option value="">-select-</option>
-            <option value="">Day</option>
-            <option value="">Night</option>
+          <select name="" id="" class="form-control" v-model="official.shift">
+            <option selected disabled>select</option>
+            <option value="D">Day</option>
+            <option value="N">Night</option>
           </select>
         </div>
       </div>

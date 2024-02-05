@@ -19,6 +19,7 @@ class official extends Model
         'DOJ',
         'Provation_period',
         'DOC',
+        'Job_Location_Id',
         'Shift',
     ];
 

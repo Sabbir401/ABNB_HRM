@@ -82,16 +82,25 @@ class EmployeeController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-    {
-        dd($id);
-        $emp = employee::find($id);
+{
+    $employee = employee::with([
+        'company',
+        'blood',
+        'religion',
+        'academic',
+        'training',
+        'experience',
+        'official',
+        'nominee',
+        'child',
+    ])->find($id);
 
-        if (!$emp) {
-            return response()->json(['message' => 'Store not found'], 404);
-        }
-
-        return response()->json($emp);
+    if (!$employee) {
+        return response()->json(['message' => 'Employee not found'], 404);
     }
+
+    return response()->json($employee);
+}
 
     /**
      * Update the specified resource in storage.
