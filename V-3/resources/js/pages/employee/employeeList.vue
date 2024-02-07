@@ -156,16 +156,16 @@ onMounted(() => getData());
                 <td>{{ employee.NID }}</td>
                 <td>
                   <button
-                    class="btn btn-primary mr-2"
+                    class="btn btn-primary mr-2 p-1"
                     @click="router.push(`/empdetails/${employee.id}`)"
                   >
-                    Details
+                    <i class="mdi mdi-account m-auto"></i>
                   </button>
                   <button
-                    class="btn btn-success"
+                    class="btn btn-success p-1"
                     @click="router.push(`/emp/${employee.id}`)"
                   >
-                    Edit
+                  <i class="mdi mdi-pencil m-auto"></i>
                   </button>
                 </td>
               </tr>

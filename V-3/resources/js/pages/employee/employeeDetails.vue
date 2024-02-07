@@ -58,7 +58,7 @@ onMounted(() => getData());
       </div>
 
       <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <div class="card mb-4">
             <div class="card-body text-center">
               <img
@@ -102,10 +102,10 @@ onMounted(() => getData());
             </div>
           </div>
         </div>
-        <div class="col-lg-8">
-          <h3 class="text-dark">Personal Information</h3>
+        <div class="col-lg-9">
           <div class="card mb-4">
             <div class="card-body">
+                <h3 class="text-center mb-4 text-success">Personal Information</h3>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Full Name</p>
@@ -254,317 +254,351 @@ onMounted(() => getData());
             </div>
           </div>
 
-          <h3 class="text-dark">Official Information</h3>
-          <div class="card mb-4">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Department</p>
-                </div>
-                <div class="col-sm-9">
-                  <p
-                    class="text-muted mb-0"
-                    v-for="dept in emp.official"
-                    :key="dept.id"
-                  >
-                    {{ dept.department.Name }}
-                  </p>
-                </div>
-              </div>
-              <hr />
-
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Designation</p>
-                </div>
-                <div class="col-sm-9">
-                  <p
-                    class="text-muted mb-0"
-                    v-for="desig in emp.official"
-                    :key="desig.id"
-                  >
-                    {{ desig.designation.Name }}
-                  </p>
-                </div>
-              </div>
-              <hr />
-
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Employee Grade</p>
-                </div>
-                <div class="col-sm-9">
-                    <p
-                    class="text-muted mb-0"
-                    v-for="grade in emp.official"
-                    :key="grade.id"
-                  >Grade:
-                    {{ grade.Employee_Grade }}
-                  </p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Employee Type</p>
-                </div>
-                <div class="col-sm-9">
-                    <p
-                    class="text-muted mb-0"
-                    v-for="typ in emp.official"
-                    :key="typ.id"
-                  >
-                    {{ typ.employee_type.Name }}
-                  </p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Area</p>
-                </div>
-                <div class="col-sm-9">
-                    <p
-                    class="text-muted mb-0"
-                    v-for="area in emp.official"
-                    :key="area.id"
-                  >
-                    {{ area.area.Name }}
-                  </p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Territory</p>
-                </div>
-                <div class="col-sm-9">
-                    <p
-                    class="text-muted mb-0"
-                    v-for="ter in emp.official"
-                    :key="ter.id"
-                  >
-                    {{ ter.territory.Name }}
-                  </p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Supervisor</p>
-                </div>
-                <div class="col-sm-9">
-                    <p
-                    class="text-muted mb-0"
-                    v-for="sup in emp.official"
-                    :key="sup.id"
-                  >
-                    {{ sup.supervisor.Full_Name }}
-                  </p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Date of Joining</p>
-                </div>
-                <div class="col-sm-9">
-                    <p
-                    class="text-muted mb-0"
-                    v-for="date in emp.official"
-                    :key="date.id"
-                  >
-                    {{ date.DOC }}
-                  </p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Provation Period</p>
-                </div>
-                <div class="col-sm-9">
-                    <p
-                    class="text-muted mb-0"
-                    v-for="pp in emp.official"
-                    :key="pp.id"
-                  >
-                    {{ pp.Provation_period }}
-                  </p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Job Location</p>
-                </div>
-                <div class="col-sm-9">
-                    <p
-                    class="text-muted mb-0"
-                    v-for="jl in emp.official"
-                    :key="jl.id"
-                  >
-                    {{ jl.country.Name }}
-                  </p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Shift</p>
-                </div>
-                <div class="col-sm-9">
-                    <p
-                    class="text-muted mb-0"
-                    v-for="i in emp.official"
-                    :key="i.id"
-                  >
-                    {{ mapShift(i.Shift) }}
-                  </p>
-                </div>
-              </div>
-
-            </div>
-          </div>
           <div class="row">
             <div class="col-md-6">
               <div class="card mb-4 mb-md-0">
+                <h3 class="text-center mt-4 text-success">Official Information</h3>
                 <div class="card-body">
-                  <p class="mb-4">
-                    <span class="text-primary font-italic me-1">assigment</span>
-                    Project Status
-                  </p>
-                  <p class="mb-1" style="font-size: 0.77rem">Web Design</p>
-                  <div class="progress rounded" style="height: 5px">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 80%"
-                      aria-valuenow="80"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Department</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="dept in emp.official"
+                        :key="dept.id"
+                      >
+                        {{ dept.department.Name }}
+                      </p>
+                    </div>
                   </div>
-                  <p class="mt-4 mb-1" style="font-size: 0.77rem">
-                    Website Markup
-                  </p>
-                  <div class="progress rounded" style="height: 5px">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 72%"
-                      aria-valuenow="72"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Designation</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="desig in emp.official"
+                        :key="desig.id"
+                      >
+                        {{ desig.designation.Name }}
+                      </p>
+                    </div>
                   </div>
-                  <p class="mt-4 mb-1" style="font-size: 0.77rem">One Page</p>
-                  <div class="progress rounded" style="height: 5px">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 89%"
-                      aria-valuenow="89"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Employee Grade</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="grade in emp.official"
+                        :key="grade.id"
+                      >
+                        Grade:
+                        {{ grade.Employee_Grade }}
+                      </p>
+                    </div>
                   </div>
-                  <p class="mt-4 mb-1" style="font-size: 0.77rem">
-                    Mobile Template
-                  </p>
-                  <div class="progress rounded" style="height: 5px">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 55%"
-                      aria-valuenow="55"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Employee Type</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="typ in emp.official"
+                        :key="typ.id"
+                      >
+                        {{ typ.employee_type.Name }}
+                      </p>
+                    </div>
                   </div>
-                  <p class="mt-4 mb-1" style="font-size: 0.77rem">
-                    Backend API
-                  </p>
-                  <div class="progress rounded mb-2" style="height: 5px">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 66%"
-                      aria-valuenow="66"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Area</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="area in emp.official"
+                        :key="area.id"
+                      >
+                        {{ area.area.Name }}
+                      </p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Territory</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="ter in emp.official"
+                        :key="ter.id"
+                      >
+                        {{ ter.territory.Name }}
+                      </p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Supervisor</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="sup in emp.official"
+                        :key="sup.id"
+                      >
+                        {{ sup.supervisor.Full_Name }}
+                      </p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Date of Joining</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="date in emp.official"
+                        :key="date.id"
+                      >
+                        {{ date.DOC }}
+                      </p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Provation Period</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="pp in emp.official"
+                        :key="pp.id"
+                      >
+                        {{ pp.Provation_period }}
+                      </p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Job Location</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="jl in emp.official"
+                        :key="jl.id"
+                      >
+                        {{ jl.country.Name }}
+                      </p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Shift</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="i in emp.official"
+                        :key="i.id"
+                      >
+                        {{ mapShift(i.Shift) }}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="card mb-4 mb-md-0">
+                <h3 class="text-center mt-4 text-success">Official Information</h3>
                 <div class="card-body">
-                  <p class="mb-4">
-                    <span class="text-primary font-italic me-1">assigment</span>
-                    Project Status
-                  </p>
-                  <p class="mb-1" style="font-size: 0.77rem">Web Design</p>
-                  <div class="progress rounded" style="height: 5px">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 80%"
-                      aria-valuenow="80"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Department</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="dept in emp.official"
+                        :key="dept.id"
+                      >
+                        {{ dept.department.Name }}
+                      </p>
+                    </div>
                   </div>
-                  <p class="mt-4 mb-1" style="font-size: 0.77rem">
-                    Website Markup
-                  </p>
-                  <div class="progress rounded" style="height: 5px">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 72%"
-                      aria-valuenow="72"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Designation</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="desig in emp.official"
+                        :key="desig.id"
+                      >
+                        {{ desig.designation.Name }}
+                      </p>
+                    </div>
                   </div>
-                  <p class="mt-4 mb-1" style="font-size: 0.77rem">One Page</p>
-                  <div class="progress rounded" style="height: 5px">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 89%"
-                      aria-valuenow="89"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Employee Grade</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="grade in emp.official"
+                        :key="grade.id"
+                      >
+                        Grade:
+                        {{ grade.Employee_Grade }}
+                      </p>
+                    </div>
                   </div>
-                  <p class="mt-4 mb-1" style="font-size: 0.77rem">
-                    Mobile Template
-                  </p>
-                  <div class="progress rounded" style="height: 5px">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 55%"
-                      aria-valuenow="55"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Employee Type</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="typ in emp.official"
+                        :key="typ.id"
+                      >
+                        {{ typ.employee_type.Name }}
+                      </p>
+                    </div>
                   </div>
-                  <p class="mt-4 mb-1" style="font-size: 0.77rem">
-                    Backend API
-                  </p>
-                  <div class="progress rounded mb-2" style="height: 5px">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 66%"
-                      aria-valuenow="66"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Area</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="area in emp.official"
+                        :key="area.id"
+                      >
+                        {{ area.area.Name }}
+                      </p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Territory</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="ter in emp.official"
+                        :key="ter.id"
+                      >
+                        {{ ter.territory.Name }}
+                      </p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Supervisor</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="sup in emp.official"
+                        :key="sup.id"
+                      >
+                        {{ sup.supervisor.Full_Name }}
+                      </p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Date of Joining</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="date in emp.official"
+                        :key="date.id"
+                      >
+                        {{ date.DOC }}
+                      </p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Provation Period</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="pp in emp.official"
+                        :key="pp.id"
+                      >
+                        {{ pp.Provation_period }}
+                      </p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Job Location</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="jl in emp.official"
+                        :key="jl.id"
+                      >
+                        {{ jl.country.Name }}
+                      </p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <p class="mb-0">Shift</p>
+                    </div>
+                    <div class="col-sm-8">
+                      <p
+                        class="text-muted mb-0"
+                        v-for="i in emp.official"
+                        :key="i.id"
+                      >
+                        {{ mapShift(i.Shift) }}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
