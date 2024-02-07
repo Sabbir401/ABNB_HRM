@@ -13,8 +13,8 @@ class country extends Model
         'Phone_Code',
     ];
 
-    public function training()
+    public function country()
     {
-        return $this->hasOne(training_info::class, 'Country_Id');
+        return $this->hasOne(country::class, 'Job_Location_Id');
     }
 }

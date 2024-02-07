@@ -10,6 +10,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DegreeController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeTypeController;
 use App\Http\Controllers\LevelOfEducationController;
@@ -73,6 +74,7 @@ Route::resource('/training', TrainingInfoController::class);
 Route::resource('/work', WorkExperienceController::class);
 
 Route::resource('/department', DepartmentController::class);
+Route::resource('/designation', DesignationController::class);
 Route::resource('/empType', EmployeeTypeController::class);
 Route::resource('/area', AreaController::class);
 Route::resource('/territory', TerritoryController::class);

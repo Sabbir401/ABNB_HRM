@@ -11,7 +11,6 @@ class department extends Model
 
     protected $fillable = [
         'Name',
-        'parent_id',
     ];
 
     public function department()
@@ -19,8 +18,8 @@ class department extends Model
         return $this->hasOne(official::class, 'Department_Id');
     }
 
-    public function parentDesignation()
+    public function designation()
     {
-        return $this->belongsTo(department::class, 'parent_id');
+        return $this->hasOne(designation::class, 'Designation_Id');
     }
 }

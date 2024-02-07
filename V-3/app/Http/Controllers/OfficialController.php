@@ -31,6 +31,7 @@ class OfficialController extends Controller
         $store = official::create([
             'EID' => $request->input('eid'),
             'Department_Id' => $request->input('departmentId'),
+            'Designation_Id' => $request->input('designationId'),
             'Employee_Grade' => $request->input('employeeGrade'),
             'Area_Id' => $request->input('areaId'),
             'Territory_Id' => $request->input('territoryId'),

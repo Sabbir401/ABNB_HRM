@@ -39,7 +39,10 @@ onMounted(() => getData());
         >
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" active-class="active" to="/personal"
+        <router-link
+          class="nav-link"
+          active-class="active"
+          :to="{ name: 'Personalid', params: { id: empId } }"
           >Personal Information</router-link
         >
       </li>
@@ -47,12 +50,15 @@ onMounted(() => getData());
         <router-link
           class="nav-link"
           active-class="active"
-          :to="{ name: 'Professional', params: { id: empId } }"
-          >Professional Information {{ empId }}</router-link
+          :to="{ name: 'Professionalid', params: { id: empId } }"
+          >Professional Information</router-link
         >
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" active-class="active" to="/official"
+        <router-link
+          class="nav-link"
+          active-class="active"
+          :to="{ name: 'Officialid', params: { id: empId } }"
           >Official Information</router-link
         >
       </li>
@@ -62,11 +68,8 @@ onMounted(() => getData());
   <div v-else>
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <router-link
-          class="nav-link"
-          active-class="active"
-          :to="{ name: 'Employeeid', params: { id: empId } }"
-          >Employee Information {{ empId }}</router-link
+        <router-link class="nav-link" active-class="active" to="/employee"
+          >Employee Information</router-link
         >
       </li>
       <li class="nav-item">
@@ -75,11 +78,8 @@ onMounted(() => getData());
         >
       </li>
       <li class="nav-item">
-        <router-link
-          class="nav-link"
-          active-class="active"
-          :to="{ name: 'Professional', params: { id: empId } }"
-          >Professional Information {{ empId }}</router-link
+        <router-link class="nav-link" active-class="active" to="/professional"
+          >Professional Information</router-link
         >
       </li>
       <li class="nav-item">

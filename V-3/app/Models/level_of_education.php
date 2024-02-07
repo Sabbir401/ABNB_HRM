@@ -19,7 +19,7 @@ class level_of_education extends Model
     }
     public function academic()
     {
-        return $this->hasMany(academic_info::class, 'Level_of_Education_Id');
+        return $this->hasOne(academic_info::class, 'Level_of_Education_Id');
     }
 
 }

@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\department;
+use App\Models\designation;
 use Illuminate\Http\Request;
 
-class DepartmentController extends Controller
+class DesignationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $department = department::all();
+        $designation = designation::all();
 
-        return response()->json($department);
+        return response()->json($designation);
     }
 
     /**
@@ -36,7 +36,7 @@ class DepartmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(department $department)
+    public function show(designation $designation)
     {
         //
     }
@@ -44,7 +44,7 @@ class DepartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(department $department)
+    public function edit(designation $designation)
     {
         //
     }
@@ -52,7 +52,7 @@ class DepartmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, department $department)
+    public function update(Request $request, designation $designation)
     {
         //
     }
@@ -60,7 +60,7 @@ class DepartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(department $department)
+    public function destroy(designation $designation)
     {
         //
     }

@@ -93,6 +93,17 @@ class EmployeeController extends Controller
         'official',
         'nominee',
         'child',
+        'academic.scale',
+        'academic.board',
+        'academic.education',
+        'academic.education.degree',
+        'official.designation',
+        'official.department',
+        'official.area',
+        'official.employeeType',
+        'official.territory',
+        'official.supervisor',
+        'official.country',
     ])->find($id);
 
     if (!$employee) {

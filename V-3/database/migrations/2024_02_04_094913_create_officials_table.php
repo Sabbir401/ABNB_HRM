@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('EID');
             $table->unsignedBigInteger('Department_Id');
+            $table->unsignedBigInteger('Designation_Id');
             $table->string('Employee_Grade',20);
             $table->unsignedBigInteger('Employee_type_Id');
             $table->unsignedBigInteger('Area_Id');
@@ -29,6 +30,7 @@ return new class extends Migration
 
             $table->foreign('EID')->references('id')->on('employees')->onDelete('cascade');
             $table->foreign('Department_Id')->references('id')->on('departments')->onDelete('cascade');
+            $table->foreign('Designation_Id')->references('id')->on('designations')->onDelete('cascade');
             $table->foreign('Employee_type_Id')->references('id')->on('employee_types')->onDelete('cascade');
             $table->foreign('Area_Id')->references('id')->on('areas')->onDelete('cascade');
             $table->foreign('Territory_Id')->references('id')->on('territories')->onDelete('cascade');

@@ -11,6 +11,7 @@ class official extends Model
     protected $fillable = [
         'EID',
         'Department_Id',
+        'Designation_Id',
         'Employee_Grade',
         'Employee_type_Id',
         'Area_Id',
@@ -29,12 +30,17 @@ class official extends Model
     }
     public function area()
     {
-        return $this->hasOne(official::class, 'Area_Id');
+        return $this->belongsTo(area::class, 'Area_Id');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(department::class, 'Department_Id');
     }
 
     public function designation()
     {
-        return $this->belongsTo(department::class, 'Department_Id');
+        return $this->belongsTo(designation::class, 'Designation_Id');
     }
 
     public function employeeType()
@@ -50,5 +56,9 @@ class official extends Model
     public function supervisor()
     {
         return $this->belongsTo(employee::class, 'Supervisor_Id');
+    }
+    public function country()
+    {
+        return $this->belongsTo(country::class, 'Job_Location_Id');
     }
 }

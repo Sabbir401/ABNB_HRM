@@ -11,6 +11,7 @@ import SupplierPage from "./pages/setup/SupplierPage.vue";
 import store from "./store/store";
 
 import empList from "./pages/employee/employeeList.vue"
+import empDetails from "./pages/employee/employeeDetails.vue"
 import emp from "./pages/employee/employee.vue";
 import employee from "./pages/employee/employeeInfo.vue";
 import personal from "./pages/employee/personalInfo.vue";
@@ -96,6 +97,14 @@ const routes = [
         },
     },
     {
+        path: "/empdetails/:id",
+        name: "EmpDetails",
+        component: empDetails,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    {
         path: "/emp/:id",
         name: "Emp",
         component: emp,
@@ -112,7 +121,7 @@ const routes = [
                 },
             },
             {
-                path: "/employee/:id?",
+                path: "/employee/:id",
                 name: "Employeeid",
                 component: employee,
                 meta: {
@@ -120,8 +129,16 @@ const routes = [
                 },
             },
             {
-                path: "/personal",
+                path: "/personal/",
                 name: "Personal",
+                component: personal,
+                meta: {
+                    requireAuth: true,
+                },
+            },
+            {
+                path: "/personal/:id",
+                name: "Personalid",
                 component: personal,
                 meta: {
                     requireAuth: true,
@@ -136,8 +153,24 @@ const routes = [
                 },
             },
             {
-                path: "/professional/:id",
+                path: "/official/:id",
+                name: "Officialid",
+                component: official,
+                meta: {
+                    requireAuth: true,
+                },
+            },
+            {
+                path: "/professional",
                 name: "Professional",
+                component: professional,
+                meta: {
+                    requireAuth: true,
+                },
+            },
+            {
+                path: "/professional/:id",
+                name: "Professionalid",
                 component: professional,
                 meta: {
                     requireAuth: true,

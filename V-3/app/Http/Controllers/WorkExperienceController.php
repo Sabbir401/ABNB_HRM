@@ -54,9 +54,11 @@ class WorkExperienceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(work_experience $work_experience)
+    public function show($id)
     {
-        //
+        $work = work_experience::where('EID',$id)->get();;
+
+        return response()->json($work);
     }
 
     /**

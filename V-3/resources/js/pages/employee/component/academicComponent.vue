@@ -125,7 +125,7 @@ const submit = () => {
   >
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Academic Information {{ store.state.employeeId }}</h4>
+        <h4 class="card-title">Academic Information</h4>
         <form class="forms-sample" @submit.prevent="create">
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">

@@ -51,9 +51,11 @@ class TrainingInfoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(training_info $training_info)
+    public function show($id)
     {
-        //
+        $training = training_info::where('EID',$id)->get();;
+
+        return response()->json($training);
     }
 
     /**

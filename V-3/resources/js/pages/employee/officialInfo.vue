@@ -28,6 +28,7 @@ const official = ref({
 });
 
 const departments = ref([]);
+const designations = ref([]);
 const areas = ref([]);
 const territories = ref([]);
 const emptypes = ref([]);
@@ -40,6 +41,7 @@ const empEdit = ref([]);
 const getData = async () => {
   try {
     const responseDepartment = await axios.get("api/department");
+    const responseDesignation = await axios.get("api/designation");
     const responseEmpType = await axios.get("api/empType");
     const responseArea = await axios.get("api/area");
     const responseTerritory = await axios.get("api/territory");
@@ -47,6 +49,7 @@ const getData = async () => {
     const responseCountry = await axios.get("api/phone");
 
     departments.value = responseDepartment.data;
+    designations.value = responseDesignation.data;
     emptypes.value = responseEmpType.data;
     areas.value = responseArea.data;
     territories.value = responseTerritory.data;
@@ -112,7 +115,7 @@ onMounted(() => chooseMount());
           >
             <option selected disabled>select</option>
             <option
-              v-for="dept in departments.department"
+              v-for="dept in departments"
               :key="dept.id"
               :value="dept.id"
             >
@@ -130,7 +133,7 @@ onMounted(() => chooseMount());
           >
             <option selected disabled>select</option>
             <option
-              v-for="des in departments.designation"
+              v-for="des in designations"
               :key="des.id"
               :value="des.id"
             >

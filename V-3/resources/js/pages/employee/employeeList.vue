@@ -151,10 +151,16 @@ onMounted(() => getData());
                 <td>{{ employee.Personal_Email }}</td>
                 <td>{{ employee.Official_Email }}</td>
                 <td>{{ employee.blood ? employee.blood.Name : "N/A" }}</td>
-                <td>{{ employee.blood ? employee.blood.Name : "N/A" }}</td>
+                <td>{{ employee.religion ? employee.religion.Name : "N/A" }}</td>
                 <td>{{ employee.Nationality }}</td>
                 <td>{{ employee.NID }}</td>
                 <td>
+                  <button
+                    class="btn btn-primary mr-2"
+                    @click="router.push(`/empdetails/${employee.id}`)"
+                  >
+                    Details
+                  </button>
                   <button
                     class="btn btn-success"
                     @click="router.push(`/emp/${employee.id}`)"
