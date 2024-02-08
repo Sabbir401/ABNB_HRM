@@ -18,6 +18,8 @@ import personal from "./pages/employee/personalInfo.vue";
 import official from "./pages/employee/officialInfo.vue";
 import professional from "./pages/employee/professionalInfo.vue";
 
+
+
 const routes = [
     {
         path: "/",

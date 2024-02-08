@@ -91,10 +91,10 @@
                             <Router-Link class="nav-link" :to="{ name: 'ProductsPage' }">Products</Router-Link>
                         </li>
                         <li class="nav-item">
-                            <Router-Link class="nav-link" :to="{ name: 'BrandCatSubcat' }">Brand-Category</Router-Link>
+                            <Router-Link class="nav-link" :to="{ name: 'Register' }">Brand-Category</Router-Link>
                         </li>
                         <li class="nav-item">
-                            <Router-Link class="nav-link" :to="{ name: 'SupplierPage' }">Supplier</Router-Link>
+                            <Router-Link class="nav-link" to="/register">Login</Router-Link>
                         </li>
                     </ul>
                 </div>
@@ -195,7 +195,7 @@
                         <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
                         <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
                         <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                        <li class="nav-item"> <Router-Link class="nav-link" :to="{ name: 'Register' }">Register</Router-Link></li>
+                        <li class="nav-item"> <Router-Link class="nav-link" to="/register">Register</Router-Link></li>
 
                     </ul>
                 </div>

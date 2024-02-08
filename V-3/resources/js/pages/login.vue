@@ -34,72 +34,65 @@ export default {
 };
 </script>
 <template>
-  <!-- https://bbbootstrap.com/snippets/animated-login-and-sign-up-form-59406852 -->
-  <div class="row">
-    <div class="col-md-6 mx-auto p-0">
-      <div class="card">
-        {{ form }}
-        {{ err }}
-        <div class="login-box">
-          <div class="login-snip">
-            <input
-              id="tab-1"
-              type="radio"
-              name="tab"
-              class="sign-in"
-              checked
-            /><label for="tab-1" class="tab">Login</label>
-            <input id="tab-2" type="radio" name="tab" class="sign-up" /><label
-              for="tab-2"
-              class="tab"
-              ></label
-            >
-            <div class="login-space">
-              <form @submit.prevent="login">
-                <div class="login">
-                  <div class="group">
-                    <label for="user" class="label">Username</label>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="row w-100 m-0">
+          <div
+            class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg"
+          >
+            <div class="card col-lg-4 mx-auto">
+              <div class="card-body px-5 py-5">
+                <h3 class="card-title text-left mb-3">Login</h3>
+                <form @submit.prevent="login">
+                  <div class="form-group">
+                    <label>Username or email *</label>
                     <input
-                      id="user"
                       type="text"
-                      class="input"
-                      placeholder="Enter your username"
+                      class="form-control p_input"
                       v-model="form.email"
                     />
                   </div>
-                  <div class="group">
-                    <label for="pass" class="label">Password</label>
+                  <div class="form-group">
+                    <label>Password *</label>
                     <input
-                      id="pass"
                       type="password"
-                      class="input"
-                      data-type="password"
-                      placeholder="Enter your password"
+                      class="form-control p_input"
                       v-model="form.password"
                     />
                   </div>
-                  <div class="group">
-                    <input id="check" type="checkbox" class="check" checked />
-                    <label for="check"
-                      ><span class="icon"></span> Keep me Signed in</label
+                  <div
+                    class="form-group d-flex align-items-center justify-content-between"
+                  >
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" />
+                        Remember me
+                      </label>
+                    </div>
+                    <a href="#" class="forgot-pass">Forgot password</a>
+                  </div>
+                  <div class="text-center">
+                    <button
+                      type="submit"
+                      class="btn btn-primary btn-block enter-btn"
                     >
+                      Login
+                    </button>
                   </div>
-                  <div class="group">
-                    <input type="submit" class="button" value="Sign In" />
-                  </div>
-                  <div class="hr"></div>
-                  <div class="foot">
-                    <a href="#">Forgot Password?</a>
-                  </div>
-                </div>
-              </form>
+                  <p class="sign-up">
+                    Don't have an Account?<a href="#"> Sign Up</a>
+                  </p>
+                </form>
+              </div>
             </div>
           </div>
+          <!-- content-wrapper ends -->
         </div>
+        <!-- row ends -->
       </div>
+      <!-- page-body-wrapper ends -->
     </div>
-  </div>
-</template>
+  </template>
 
 <style scoped>
 body {

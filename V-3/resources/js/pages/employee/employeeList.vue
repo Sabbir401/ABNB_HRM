@@ -69,19 +69,18 @@ onMounted(() => getData());
     <div class="card">
       <div class="card-body">
         <div class="d-flex">
-          <div class="mr-auto p-2">
+          <div class="mr-auto p-1">
             <div class="row">
               <h4 class="card-title m-2">Employee List</h4>
               <Router-Link
-                class="btn btn-success btn-icon"
                 :to="{ name: 'Employee' }"
               >
                 <button
                   style="float: left"
                   type="button"
-                  class="btn btn-success btn-icon"
+                  class="btn btn-success btn-icon p-1"
                 >
-                  <i class="mdi mdi-plus"></i>
+                  <i class="mdi mdi-plus m-auto"></i>
                 </button>
               </Router-Link>
             </div>
@@ -163,7 +162,7 @@ onMounted(() => getData());
                   </button>
                   <button
                     class="btn btn-success p-1"
-                    @click="router.push(`/emp/${employee.id}`)"
+                    @click="router.push(`/employee/${employee.id}`)"
                   >
                   <i class="mdi mdi-pencil m-auto"></i>
                   </button>

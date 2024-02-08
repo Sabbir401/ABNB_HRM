@@ -8,7 +8,6 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 
 const empId = parseInt(route.params.id);
-console.log(empId);
 
 const employee = ref({
   companyId: "",
@@ -41,6 +40,14 @@ const companies = ref([]);
 const phones = ref([]);
 const error = ref([]);
 const empEdit = ref([]);
+
+watch(empEdit, (newEmpData, old) => {
+  employee.companyId = newEmpData.companyId;
+  employee.employeeId = empEdit.employeeId;
+  // Similarly, update other fields as needed
+});
+
+
 
 const getData = async () => {
   try {
