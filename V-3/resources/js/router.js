@@ -24,12 +24,12 @@ const routes = [
     {
         path: "/",
         name: "Home",
-        component: Home,
+        component: () => import('./pages/home.vue'),
     },
     {
         path: "/login",
         name: "Login",
-        component: Login,
+        component: () => import('./pages/login.vue'),
         meta: {
             requireAuth: false,
         },
@@ -37,7 +37,7 @@ const routes = [
     {
         path: "/register",
         name: "Register",
-        component: Register,
+        component: () => import('./pages/register.vue'),
         meta: {
             requireAuth: false,
         },

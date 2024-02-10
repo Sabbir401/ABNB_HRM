@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, watch } from "vue";
 import axios from "axios";
-import store from "./components/storecomponent.vue";
+import store from "./components/StoreComponent.vue";
 import { Bootstrap5Pagination } from "laravel-vue-pagination";
 
 const isModalOpened = ref(false);

@@ -41,25 +41,90 @@ const phones = ref([]);
 const error = ref([]);
 const empEdit = ref([]);
 
-watch(empEdit, (newEmpData, old) => {
-  employee.companyId = newEmpData.companyId;
-  employee.employeeId = empEdit.employeeId;
-  // Similarly, update other fields as needed
+watch(empEdit, (newEmpData) => {
+  if (newEmpData) {
+    // Update top-level properties directly
+    employee.value.companyId = newEmpData.company.Name;
+    employee.value.employeeId = newEmpData.Employee_Id;
+    employee.value.cardNo = newEmpData.Card_No;
+    employee.value.fullName = newEmpData.Full_Name;
+    employee.value.fatherName = newEmpData.Father_Name;
+    employee.value.motherName = newEmpData.Mother_Name;
+    employee.value.spouseName = newEmpData.Spouse_Name;
+    employee.value.maritalStatus = newEmpData.Marital_Status;
+    employee.value.dob = newEmpData.DOB;
+    employee.value.pob = newEmpData.Place_of_Birth;
+    employee.value.presentAddress = newEmpData.Present_Address;
+    employee.value.permanentAddress = newEmpData.Permanent_Address;
+    employee.value.officialContact = newEmpData.Contact_No;
+    employee.value.emergencyContact = newEmpData.Emergency_Contact;
+    employee.value.gender = newEmpData.Gender;
+    employee.value.personalEmail = newEmpData.Personal_Email;
+    employee.value.officialEmail = newEmpData.Official_Email;
+    employee.value.religion = newEmpData.Religion_Id;
+    employee.value.bloodGroup = newEmpData.Blood_Group_Id;
+    employee.value.nationality = newEmpData.Nationality;
+    employee.value.nid = newEmpData.NID;
+
+    // Handle nested objects (if necessary)
+    // For example, if there are nested objects like company, blood, religion, etc.
+    if (newEmpData.company) {
+      employee.value.companyId = newEmpData.company.id;
+      // Similarly, update other nested properties
+    }
+    if (newEmpData.blood) {
+      employee.value.bloodGroup = newEmpData.blood.id;
+      // Similarly, update other nested properties
+    }
+    if (newEmpData.religion) {
+      employee.value.religion = newEmpData.religion.id;
+      // Similarly, update other nested properties
+    }
+
+    // Handle arrays if necessary (e.g., academic, training, experience)
+    // You'll need to decide how to handle array data in your application
+    // For example, you might want to loop through the arrays and update accordingly
+    // Note: I'm assuming these are arrays in your response data based on your example
+    if (newEmpData.academic) {
+      newEmpData.academic.forEach((academic) => {
+        // Handle academic array data here
+        // For example, you might want to push them into an academic array in employee
+      });
+    }
+    if (newEmpData.training) {
+      newEmpData.training.forEach((training) => {
+        // Handle training array data here
+        // For example, you might want to push them into a training array in employee
+      });
+    }
+    if (newEmpData.experience) {
+      newEmpData.experience.forEach((experience) => {
+        // Handle experience array data here
+        // For example, you might want to push them into an experience array in employee
+      });
+    }
+    // Similarly, handle other arrays if necessary
+
+    // Handle other nested objects and arrays as needed
+  }
 });
-
-
 
 const getData = async () => {
   try {
-    const responseBlood = await axios.get("api/blood");
-    const responseReligion = await axios.get("api/religion");
-    const responseCompany = await axios.get("api/company");
-    const responsePhone = await axios.get("api/phone");
+    const responseBlood = await axios.get("/api/blood");
+    const responseReligion = await axios.get("/api/religion");
+    const responseCompany = await axios.get("/api/company");
+    const responsePhone = await axios.get("/api/phone");
 
     bloods.value = responseBlood.data;
     religions.value = responseReligion.data;
     companies.value = responseCompany.data;
     phones.value = responsePhone.data;
+
+    if (empId) {
+      editHandler();
+    }
+
   } catch (err) {
     error.value = err.message || "Error fetching data";
   } finally {
@@ -73,6 +138,7 @@ const resetForm = () => {
     employee[key] = "";
   });
 };
+
 // const store = useStore();
 
 const editHandler = async () => {
@@ -86,7 +152,7 @@ const editHandler = async () => {
 
 const submitForm = async () => {
   try {
-    const response = await axios.post("api/employee", employee.value);
+    const response = await axios.post("/api/employee", employee.value);
     if (response.data.success) {
       store.dispatch("setEmployeeId", response.data.empid);
       resetForm();
@@ -97,15 +163,14 @@ const submitForm = async () => {
   }
 };
 
-const chooseMount = async () => {
-  if (empId) {
-    editHandler();
-  } else {
-    getData();
-  }
-};
+// const chooseMount = async () => {
+//   getData();
+//   if (empId) {
+//     editHandler();
+//   }
+// };
 
-onMounted(() => chooseMount());
+onMounted(() => getData());
 </script>
 
 <template>
@@ -113,9 +178,7 @@ onMounted(() => chooseMount());
     <form @submit.prevent="submitForm">
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="" class=""
-            >Company Name</label
-          >
+          <label for="" class="">Company Name</label>
           <select
             v-model="employee.companyId"
             name=""

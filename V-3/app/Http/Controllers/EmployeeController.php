@@ -22,7 +22,6 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -82,36 +81,36 @@ class EmployeeController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-{
-    $employee = employee::with([
-        'company',
-        'blood',
-        'religion',
-        'academic',
-        'training',
-        'experience',
-        'official',
-        'nominee',
-        'child',
-        'academic.scale',
-        'academic.board',
-        'academic.education',
-        'academic.education.degree',
-        'official.designation',
-        'official.department',
-        'official.area',
-        'official.employeeType',
-        'official.territory',
-        'official.supervisor',
-        'official.country',
-    ])->find($id);
+    {
+        $employee = employee::with([
+            'company',
+            'blood',
+            'religion',
+            'academic',
+            'training',
+            'experience',
+            'official',
+            'nominee',
+            'child',
+            'academic.scale',
+            'academic.board',
+            'academic.education',
+            'academic.education.degree',
+            'official.designation',
+            'official.department',
+            'official.area',
+            'official.employeeType',
+            'official.territory',
+            'official.supervisor',
+            'official.country',
+        ])->find($id);
 
-    if (!$employee) {
-        return response()->json(['message' => 'Employee not found'], 404);
+        if (!$employee) {
+            return response()->json(['message' => 'Employee not found'], 404);
+        }
+
+        return response()->json($employee);
     }
-
-    return response()->json($employee);
-}
 
     /**
      * Update the specified resource in storage.

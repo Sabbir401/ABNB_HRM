@@ -16,7 +16,7 @@ console.log(isNaN(empId));
 
 const getData = async () => {
   try {
-    const responseEmp = await axios.get(`api/employee/${eid}`);
+    const responseEmp = await axios.get(`/api/employee/${eid}`);
     employee.value = responseEmp.data;
   } catch (err) {
     error.value = err.message || "Error fetching data";
