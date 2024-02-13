@@ -115,9 +115,39 @@ class EmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, employee $employee)
+    public function update(Request $request, $id)
     {
-        //
+        $employee = employee::find($id);
+        $employee->update([
+            'Company_Id' => $request->input('companyId'),
+            'Employee_Id' => $request->input('employeeId'),
+            'Card_No' => $request->input('cardNo'),
+            'Full_Name' => $request->input('fullName'),
+            'Father_Name' => $request->input('fatherName'),
+            'Mother_Name' => $request->input('motherName'),
+            'Spouse_Name' => $request->input('spouseName'),
+            'Marital_Status' => $request->input('maritalStatus'),
+            'DOB' => $request->input('dob'),
+            'Place_of_Birth' => $request->input('pob'),
+            'Present_Address' => $request->input('presentAddress'),
+            'Permanent_Address' => $request->input('permanentAddress'),
+            'Contact_No' => $request->input('officialContact'),
+            'Emergency_Contact' => $request->input('emergencyContact'),
+            'Gender' => $request->input('gender'),
+            'Personal_Email' => $request->input('personalEmail'),
+            'Official_Email' => $request->input('officialEmail'),
+            'Blood_Group_Id' => $request->input('bloodGroup'),
+            'Religion_Id' => $request->input('religion'),
+            'Nationality' => $request->input('nationality'),
+            'NID' => $request->input('nid'),
+        ]);
+
+        $response = [
+            'success' => true,
+            'message'  => 'Updated Successfully'
+        ];
+
+        return response()->json($response);
     }
 
     /**

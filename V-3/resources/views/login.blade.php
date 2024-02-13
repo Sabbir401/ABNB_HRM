@@ -23,7 +23,6 @@
     <link rel="shortcut icon" href="https://admin.artisanbn.com/storage/company/artisan-logo.png" />
   </head>
   <body>
-    hkljkljkljklj
   <div id="app"></div>
             @vite('resources/js/app.js')
 

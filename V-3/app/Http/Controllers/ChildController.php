@@ -42,9 +42,15 @@ class ChildController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(child $child)
+    public function edit($id)
     {
-        //
+        $child = child::find($id);
+
+        if (!$child) {
+            return response()->json(['message' => 'Child not found'], 404);
+        }
+
+        return response()->json($child);
     }
 
     /**

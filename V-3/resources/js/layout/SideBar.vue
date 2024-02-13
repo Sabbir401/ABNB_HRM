@@ -18,7 +18,7 @@
                         </div>
                         <div class="profile-name">
                             <h5 class="mb-0 font-weight-normal">Sabbir Ahmed</h5>
-                            <span>Executive IT</span>
+                            <span>Jr. Executive IT</span>
                         </div>
                     </div>
                     <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>

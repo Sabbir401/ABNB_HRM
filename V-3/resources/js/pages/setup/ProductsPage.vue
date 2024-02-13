@@ -1,83 +1,108 @@
 <template>
-    <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Products table</h4>
-                    <p class="card-description"> Add class <code>.table-dark</code>
-                    </p>
-                    <div class="table-responsive">
-                      <table class="table table-dark">
-                        <thead>
-                          <tr>
-                            <th> # </th>
-                            <th> Code </th>
-                            <th> Name </th>
-                            <th> Address </th>
-                            <th> Date </th>
-                            <th> Status </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td> 1 </td>
-                            <td> IS240001 </td>
-                            <td> Herman Beck </td>
-                            <td> $ 77.99 </td>
-                            <td> May 15, 2015 </td>
-                            <td> Active </td>
-                          </tr>
-                          <tr>
-                            <td> 2 </td>
-                            <td> IS240002 </td>
-                            <td> Messsy Adam </td>
-                            <td> $245.30 </td>
-                            <td> July 1, 2015 </td>
-                            <td> Active </td>
-                          </tr>
-                          <tr>
-                            <td> 3 </td>
-                            <td> IS240003 </td>
-                            <td> John Richards </td>
-                            <td> $138.00 </td>
-                            <td> Apr 12, 2015 </td>
-                            <td> Active </td>
-                          </tr>
-                          <tr>
-                            <td> 4 </td>
-                            <td> IS240004 </td>
-                            <td> Peter Meggik </td>
-                            <td> $ 77.99 </td>
-                            <td> May 15, 2015 </td>
-                            <td> Active </td>
-                          </tr>
-                          <tr>
-                            <td> 5 </td>
-                            <td> IS240005 </td>
-                            <td> Edward </td>
-                            <td> $ 160.25 </td>
-                            <td> May 03, 2015 </td>
-                            <td> Active </td>
-                          </tr>
-                          <tr>
-                            <td> 6 </td>
-                            <td> IS240006 </td>
-                            <td> John Doe </td>
-                            <td> $ 123.21 </td>
-                            <td> April 05, 2015 </td>
-                            <td> Active </td>
-                          </tr>
-                          <tr>
-                            <td> 7 </td>
-                            <td> IS240007 </td>
-                            <td> Henry Tom </td>
-                            <td> $ 150.00 </td>
-                            <td> June 16, 2015 </td>
-                            <td> Active </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-6 border">
+      <div class="card mb-3 mt-3">
+        <div class="card-body text-center">
+          <img
+            src="../../assets/images/profile/profile.jpg"
+            width="40%"
+            alt=""
+          />
+          <h5 class="pt-3">Sabbir</h5>
+          <p>Jr. Executive IT</p>
+        </div>
+      </div>
+      <div class="card pi mb-3">
+        <div class="card-body p-2">
+          <h4 class="text-center">Personal Information</h4>
+          <table border="1" width="100%">
+            <tr>
+              <th>Name</th>
+              <td>Kazi Sabbir Ahmed</td>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <td>Kazi Sabbir Ahmed</td>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <td>Kazi Sabbir Ahmed</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="card pi mb-3">
+        <div class="card-body p-2">
+          <h4 class="text-center">Personal Information</h4>
+          <table border="1" width="100%">
+            <tr>
+              <th>Name</th>
+              <td>Kazi Sabbir Ahmed</td>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <td>Kazi Sabbir Ahmed</td>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <td>Kazi Sabbir Ahmed</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8 col-md-8 col-sm-6">
+      <div class="card">
+        <div class="card-body p-2">
+          <table border="1" width="100%">
+            <tr>
+              <th class="p-2 text-center" colspan="4">Employee Information</th>
+            </tr>
+            <tr>
+              <th class="p-2">Full Name</th>
+              <td class="p-2">Sabbir</td>
+              <th class="p-2">Father's Name</th>
+              <td class="p-2">Benzir</td>
+            </tr>
+            <tr>
+              <th class="p-2">Full Name</th>
+              <td class="p-2">Sabbir</td>
+              <th class="p-2">Father's Name</th>
+              <td class="p-2">Benzir</td>
+            </tr>
+            <tr>
+              <th class="p-2">Full Name</th>
+              <td class="p-2">Sabbir</td>
+              <th class="p-2">Father's Name</th>
+              <td class="p-2">Benzir</td>
+            </tr>
+            <tr>
+              <th class="p-2">Full Name</th>
+              <td class="p-2">Sabbir</td>
+              <th class="p-2">Father's Name</th>
+              <td class="p-2">Benzir</td>
+            </tr>
+            <tr>
+              <th class="p-2">Full Name</th>
+              <td class="p-2">Sabbir</td>
+              <th class="p-2">Father's Name</th>
+              <td class="p-2">Benzir</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
+
+<style scoped>
+.pi table tr th {
+  padding: 8px;
+  width: 40%;
+}
+.pi table tr td {
+  padding: 8px;
+  width: 60%;
+}
+</style>

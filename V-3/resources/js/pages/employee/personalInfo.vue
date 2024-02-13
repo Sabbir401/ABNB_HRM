@@ -1,9 +1,12 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import axios from "axios";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 
+const route = useRoute();
 const store = useStore();
+const empId = parseInt(route.params.id);
 
 const nominee = ref({
   eid: store.state.employeeId,
@@ -26,12 +29,32 @@ const child = ref({
 });
 
 const error = ref([]);
+const empEdit = ref([]);
+
+watch(empEdit, (newEmpData) => {
+  if (newEmpData) {
+    nominee.value.nomineeName = newEmpData.nomineeName;
+    nominee.value.dob = newEmpData.dob;
+    nominee.value.contactNo = newEmpData.contactNo;
+    nominee.value.email = newEmpData.email;
+    nominee.value.nid = newEmpData.nid;
+    nominee.value.share = newEmpData.share;
+    nominee.value.presentAddress = newEmpData.presentAddress;
+
+    child.value.childName = newEmpData.childName;
+    child.value.nid = newEmpData.nid;
+    child.value.email = newEmpData.email;
+    child.value.contactNo = newEmpData.contactNo;
+    child.value.dob = newEmpData.dob;
+  }
+});
 
 const getData = async () => {
   try {
-    const responsePhone = await axios.get("api/phone");
+    if (empId) {
+      editHandler();
+    }
 
-    phones.value = responsePhone.data;
   } catch (err) {
     error.value = err.message || "Error fetching data";
   } finally {
@@ -42,6 +65,20 @@ const resetForm = () => {
   Object.keys(nominee).forEach((key) => {
     nominee[key] = "";
   });
+};
+
+const editHandler = async () => {
+  try {
+    const responseNominee = await axios.get(`/api/nominee/${empId}/edit`);
+    const responseChild = await axios.get(`/api/child/${empId}/edit`);
+    const requestData = {
+      nominee: responseNominee.data,
+      child: responseChild.data,
+    };
+    empEdit.value = responseNominee.data;
+  } catch (err) {
+    console.error("Error fetching store data for editing:", err);
+  }
 };
 
 const submitForm = async () => {
@@ -67,11 +104,11 @@ onMounted(() => getData());
 
 <template>
   <div class="mt-5">
-    <h2 class="fs-4">Nominee Information {{ eid }}</h2>
+    <h2 class="fs-4">Nominee Information </h2>
     <form @submit.prevent="submitForm">
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="exampleInputEmail1" class="">Nominee Name {{ store.state.employeeId }}</label>
+          <label for="exampleInputEmail1" class="">Nominee Name</label>
           <input
             type="text"
             class="form-control"

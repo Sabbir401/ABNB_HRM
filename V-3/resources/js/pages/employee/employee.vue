@@ -1,25 +1,45 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { useRoute, RouterView, useRouter } from "vue-router";
+import { useRoute, RouterView } from "vue-router";
 import { useStore } from "vuex";
 
 const store = useStore();
 const route = useRoute();
-const router = useRouter();
-
-const eid = store.state.employeeId;
-const error = ref(null);
-const employee = ref(null);
 const empId = parseInt(route.params.id);
 
-console.log(isNaN(empId));
+const error = ref(null);
+const bloods = ref([]);
+const religions = ref([]);
+const companies = ref([]);
+const phones = ref([]);
+const empEdit = ref([]);
 
 const getData = async () => {
   try {
-    const responseEmp = await axios.get(`/api/employee/${eid}`);
-    employee.value = responseEmp.data;
+    const responseBlood = await axios.get("/api/blood");
+    const responseReligion = await axios.get("/api/religion");
+    const responseCompany = await axios.get("/api/company");
+    const responsePhone = await axios.get("/api/phone");
+
+    bloods.value = responseBlood.data;
+    religions.value = responseReligion.data;
+    companies.value = responseCompany.data;
+    phones.value = responsePhone.data;
+
+    if (empId) {
+      editHandler();
+    }
   } catch (err) {
     error.value = err.message || "Error fetching data";
+  }
+};
+
+const editHandler = async () => {
+  try {
+    const response = await axios.get(`/api/employee/${empId}/edit`);
+    empEdit.value = response.data;
+  } catch (err) {
+    console.error("Error fetching store data for editing:", err);
   }
 };
 
@@ -34,7 +54,11 @@ onMounted(() => getData());
         <router-link
           class="nav-link"
           active-class="active"
-          :to="{ name: 'Employeeid', params: { id: empId } }"
+          :to="{
+            name: 'Employeeid',
+            params: { id: empId },
+            query: { response: empEdit },
+          }"
           >Employee Information</router-link
         >
       </li>

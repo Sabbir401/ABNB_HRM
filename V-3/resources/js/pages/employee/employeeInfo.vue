@@ -39,9 +39,12 @@ const religions = ref([]);
 const companies = ref([]);
 const phones = ref([]);
 const error = ref([]);
-const empEdit = ref([]);
+// const empEdit = ref([]);
 
-watch(empEdit, (newEmpData) => {
+const res = ref(route.query.response);
+console.log(res);
+
+watch(res, (newEmpData) => {
   if (newEmpData) {
     // Update top-level properties directly
     employee.value.companyId = newEmpData.company.Name;
@@ -66,46 +69,25 @@ watch(empEdit, (newEmpData) => {
     employee.value.nationality = newEmpData.Nationality;
     employee.value.nid = newEmpData.NID;
 
-    // Handle nested objects (if necessary)
-    // For example, if there are nested objects like company, blood, religion, etc.
     if (newEmpData.company) {
       employee.value.companyId = newEmpData.company.id;
-      // Similarly, update other nested properties
     }
     if (newEmpData.blood) {
       employee.value.bloodGroup = newEmpData.blood.id;
-      // Similarly, update other nested properties
     }
     if (newEmpData.religion) {
       employee.value.religion = newEmpData.religion.id;
-      // Similarly, update other nested properties
     }
 
-    // Handle arrays if necessary (e.g., academic, training, experience)
-    // You'll need to decide how to handle array data in your application
-    // For example, you might want to loop through the arrays and update accordingly
-    // Note: I'm assuming these are arrays in your response data based on your example
     if (newEmpData.academic) {
-      newEmpData.academic.forEach((academic) => {
-        // Handle academic array data here
-        // For example, you might want to push them into an academic array in employee
-      });
+      newEmpData.academic.forEach((academic) => {});
     }
     if (newEmpData.training) {
-      newEmpData.training.forEach((training) => {
-        // Handle training array data here
-        // For example, you might want to push them into a training array in employee
-      });
+      newEmpData.training.forEach((training) => {});
     }
     if (newEmpData.experience) {
-      newEmpData.experience.forEach((experience) => {
-        // Handle experience array data here
-        // For example, you might want to push them into an experience array in employee
-      });
+      newEmpData.experience.forEach((experience) => {});
     }
-    // Similarly, handle other arrays if necessary
-
-    // Handle other nested objects and arrays as needed
   }
 });
 
@@ -124,7 +106,6 @@ const getData = async () => {
     if (empId) {
       editHandler();
     }
-
   } catch (err) {
     error.value = err.message || "Error fetching data";
   } finally {
@@ -141,16 +122,16 @@ const resetForm = () => {
 
 // const store = useStore();
 
-const editHandler = async () => {
-  try {
-    const response = await axios.get(`/api/employee/${empId}/edit`);
-    empEdit.value = response.data;
-  } catch (err) {
-    console.error("Error fetching store data for editing:", err);
-  }
-};
+// const editHandler = async () => {
+//   try {
+//     const response = await axios.get(`/api/employee/${empId}/edit`);
+//     empEdit.value = response.data;
+//   } catch (err) {
+//     console.error("Error fetching store data for editing:", err);
+//   }
+// };
 
-const submitForm = async () => {
+const create = async () => {
   try {
     const response = await axios.post("/api/employee", employee.value);
     if (response.data.success) {
@@ -163,12 +144,25 @@ const submitForm = async () => {
   }
 };
 
-// const chooseMount = async () => {
-//   getData();
-//   if (empId) {
-//     editHandler();
-//   }
-// };
+const update = async () => {
+  try {
+    const response = await axios.put(`/api/employee/${empId}`, employee.value);
+    if (response.data.success) {
+      alert("Successfully Updated");
+      resetForm();
+    }
+  } catch (error) {
+    console.error("Error updating store:", error);
+  }
+};
+
+const submitForm = () => {
+  if (!empId) {
+    create();
+  } else {
+    update();
+  }
+};
 
 onMounted(() => getData());
 </script>

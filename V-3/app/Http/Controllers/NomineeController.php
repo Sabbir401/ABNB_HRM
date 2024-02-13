@@ -69,9 +69,15 @@ class NomineeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(nominee $nominee)
+    public function edit($id)
     {
-        //
+        $nominee = nominee::find($id);
+
+        if (!$nominee) {
+            return response()->json(['message' => 'Nominee not found'], 404);
+        }
+
+        return response()->json($nominee);
     }
 
     /**
