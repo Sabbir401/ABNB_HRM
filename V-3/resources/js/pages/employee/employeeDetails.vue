@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted, watch } from "vue";
 import axios from "axios";
-import { useStore } from "vuex";
 
 import { useRoute } from "vue-router";
 
@@ -34,6 +33,16 @@ const mapGender = (status) => {
   return statusMap[status] || "N/A";
 };
 
+const mapStatus = (status) => {
+  const statusMap = {
+    M: "Married",
+    U: "Unmarried",
+    S: "Single",
+  };
+
+  return statusMap[status] || "N/A";
+};
+
 const mapShift = (status) => {
   const statusMap = {
     D: "Day",
@@ -47,567 +56,151 @@ onMounted(() => getData());
 </script>
 
 <template>
-  <section style="background-color: #eee">
-    <div class="container py-5">
-      <div class="row">
-        <div class="col">
-          <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-            <h3 class="text-dark">Employee Information (EID: {{ emp.id }})</h3>
-          </nav>
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-6 border">
+      <div class="card mb-3 mt-3">
+        <div class="card-body text-center">
+          <img
+            src="../../assets/images/profile/profile.jpg"
+            width="40%"
+            alt=""
+          />
+          <h5 class="pt-3">{{ emp.Full_Name }}</h5>
+          <p class="m-0" v-for="desig in emp.official" :key="desig.id">
+            {{ desig.designation.Name }}
+          </p>
+          <p class="text-muted mb-0">{{ emp.Present_Address }}</p>
+          <p class="text-muted mb-0">{{ emp.Contact_No }}</p>
+          <p class="text-muted mb-0">{{ emp.Official_Email }}</p>
         </div>
       </div>
-
-      <div class="row">
-        <div class="col-lg-3">
-          <div class="card mb-4">
-            <div class="card-body text-center">
-              <img
-                src="../../assets/images/profile/profile.jpg"
-                alt="avatar"
-                class="rounded-circle img-fluid"
-                style="width: 150px"
-              />
-              <h5 class="my-2">{{ emp.Full_Name }}</h5>
-              <p class="te" v-for="desig in emp.official" :key="desig.id">
-                {{ desig.designation.Name }}
-              </p>
-              <p class="text-muted mb-2">{{ emp.Present_Address }}</p>
-              <p class="text-muted mb-2">{{ emp.Contact_No }}</p>
-              <p class="text-muted mb-2">{{ emp.Official_Email }}</p>
-              <div class="d-flex justify-content-center mb-2">
-                <button type="button" class="btn btn-primary mr-1">
-                  Follow
-                </button>
-                <button type="button" class="btn btn-outline-primary ms-1">
-                  Message
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="card mb-4 mb-lg-0">
-            <div class="card-body p-0">
-              <ul class="list-group list-group-flush rounded-3">
-                <li
-                  class="list-group-item d-flex align-items-center p-3 text-dark"
-                >
-                  Hello
-                </li>
-                <li class="list-group-item d-flex align-items-center p-3"></li>
-                <li class="list-group-item d-flex align-items-center p-3"></li>
-                <li class="list-group-item d-flex align-items-center p-3"></li>
-                <li
-                  class="list-group-item d-flex justify-content-between align-items-center p-3"
-                ></li>
-              </ul>
-            </div>
-          </div>
+      <div class="card pi mb-3">
+        <div class="card-body p-2">
+          <h4 class="text-center">Nominee Information</h4>
+          <table border="1" width="100%" v-for="nom in emp.nominee" :key="nom.id">
+            <tr>
+              <th>Full Name</th>
+              <td>{{ nom.Nominee_Name }}</td>
+            </tr>
+            <tr>
+              <th>Date of Birth</th>
+              <td>{{ nom.DOB }}</td>
+            </tr>
+            <tr>
+              <th>Contact No</th>
+              <td>{{ nom.Contact_No }}</td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td>{{ nom.Email }}</td>
+            </tr>
+            <tr>
+              <th>National ID</th>
+              <td>{{ nom.NID }}</td>
+            </tr>
+            <tr>
+              <th>Share</th>
+              <td>{{ nom.Share }}</td>
+            </tr>
+            <tr>
+              <th>Present Address</th>
+              <td>{{ nom.Personal_Address }}</td>
+            </tr>
+          </table>
         </div>
-        <div class="col-lg-9">
-          <div class="card mb-4">
-            <div class="card-body">
-                <h3 class="text-center mb-4 text-success">Personal Information</h3>
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Full Name</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ emp.Full_Name }}</p>
-                </div>
-              </div>
-              <hr />
-
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Father's Name</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ emp.Father_Name }}</p>
-                </div>
-              </div>
-              <hr />
-
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Mother's Name</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ emp.Mother_Name }}</p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Spouse Name</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ emp.Spouse_Name }}</p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Date of Birth</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ emp.DOB }}</p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Gender</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ mapGender(emp.Gender) }}</p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Place of Birth</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ emp.Place_of_Birth }}</p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Present Address</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ emp.Present_Address }}</p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Permanent Address</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ emp.Permanent_Address }}</p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Emergency Contact</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ emp.Emergency_Contact }}</p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Personal Email</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ emp.Personal_Email }}</p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Blood Group</p>
-                </div>
-                <div class="col-sm-9" v-if="emp && emp.blood">
-                  <p class="text-muted mb-0">{{ emp.blood.Name }}</p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Personal Email</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ emp.Personal_Email }}</p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Religion</p>
-                </div>
-                <div class="col-sm-9" v-if="emp && emp.religion">
-                  <p class="text-muted mb-0">{{ emp.religion.Name }}</p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Nationality</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ emp.Nationality }}</p>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">NID</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ emp.NID }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <div class="card mb-4 mb-md-0">
-                <h3 class="text-center mt-4 text-success">Official Information</h3>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Department</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="dept in emp.official"
-                        :key="dept.id"
-                      >
-                        {{ dept.department.Name }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Designation</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="desig in emp.official"
-                        :key="desig.id"
-                      >
-                        {{ desig.designation.Name }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Employee Grade</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="grade in emp.official"
-                        :key="grade.id"
-                      >
-                        Grade:
-                        {{ grade.Employee_Grade }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Employee Type</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="typ in emp.official"
-                        :key="typ.id"
-                      >
-                        {{ typ.employee_type.Name }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Area</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="area in emp.official"
-                        :key="area.id"
-                      >
-                        {{ area.area.Name }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Territory</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="ter in emp.official"
-                        :key="ter.id"
-                      >
-                        {{ ter.territory.Name }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Supervisor</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="sup in emp.official"
-                        :key="sup.id"
-                      >
-                        {{ sup.supervisor.Full_Name }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Date of Joining</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="date in emp.official"
-                        :key="date.id"
-                      >
-                        {{ date.DOC }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Provation Period</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="pp in emp.official"
-                        :key="pp.id"
-                      >
-                        {{ pp.Provation_period }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Job Location</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="jl in emp.official"
-                        :key="jl.id"
-                      >
-                        {{ jl.country.Name }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Shift</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="i in emp.official"
-                        :key="i.id"
-                      >
-                        {{ mapShift(i.Shift) }}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="card mb-4 mb-md-0">
-                <h3 class="text-center mt-4 text-success">Official Information</h3>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Department</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="dept in emp.official"
-                        :key="dept.id"
-                      >
-                        {{ dept.department.Name }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Designation</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="desig in emp.official"
-                        :key="desig.id"
-                      >
-                        {{ desig.designation.Name }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Employee Grade</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="grade in emp.official"
-                        :key="grade.id"
-                      >
-                        Grade:
-                        {{ grade.Employee_Grade }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Employee Type</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="typ in emp.official"
-                        :key="typ.id"
-                      >
-                        {{ typ.employee_type.Name }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Area</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="area in emp.official"
-                        :key="area.id"
-                      >
-                        {{ area.area.Name }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Territory</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="ter in emp.official"
-                        :key="ter.id"
-                      >
-                        {{ ter.territory.Name }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Supervisor</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="sup in emp.official"
-                        :key="sup.id"
-                      >
-                        {{ sup.supervisor.Full_Name }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Date of Joining</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="date in emp.official"
-                        :key="date.id"
-                      >
-                        {{ date.DOC }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Provation Period</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="pp in emp.official"
-                        :key="pp.id"
-                      >
-                        {{ pp.Provation_period }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Job Location</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="jl in emp.official"
-                        :key="jl.id"
-                      >
-                        {{ jl.country.Name }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <p class="mb-0">Shift</p>
-                    </div>
-                    <div class="col-sm-8">
-                      <p
-                        class="text-muted mb-0"
-                        v-for="i in emp.official"
-                        :key="i.id"
-                      >
-                        {{ mapShift(i.Shift) }}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      </div>
+      <div class="card pi mb-3">
+        <div class="card-body p-2">
+          <h4 class="text-center">Personal Information</h4>
+          <table border="1" width="100%">
+            <tr>
+              <th>Name</th>
+              <td>Kazi Sabbir Ahmed</td>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <td>Kazi Sabbir Ahmed</td>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <td>Kazi Sabbir Ahmed</td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
-  </section>
+
+    <div class="col-lg-8 col-md-8 col-sm-6">
+      <div class="card">
+        <div class="card-body p-2">
+          <table border="1" width="100%">
+            <tr>
+              <th class="p-2 text-center" colspan="4">Employee Information</th>
+            </tr>
+            <tr>
+              <th class="p-2">Full Name</th>
+              <td class="p-2">{{ emp.Full_Name }}</td>
+              <th class="p-2">Father's Name</th>
+              <td class="p-2">{{ emp.Father_Name }}</td>
+            </tr>
+            <tr>
+              <th class="p-2">Mother's Name</th>
+              <td class="p-2">{{ emp.Mother_Name }}</td>
+              <th class="p-2">Spouse Name</th>
+              <td class="p-2">{{ emp.Spouse_Name }}</td>
+            </tr>
+            <tr>
+              <th class="p-2">Marital Status</th>
+              <td class="p-2">{{ mapStatus(emp.Marital_Status) }}</td>
+              <th class="p-2">Date of Birth</th>
+              <td class="p-2">{{ emp.DOB }}</td>
+            </tr>
+            <tr>
+              <th class="p-2">Plaece of Birth</th>
+              <td class="p-2">{{ emp.Place_of_Birth }}</td>
+              <th class="p-2">Emergency Contact</th>
+              <td class="p-2">{{ emp.Emergency_Contact }}</td>
+            </tr>
+            <tr>
+              <th class="p-2">Present Address</th>
+              <td class="p-2">{{ emp.Present_Address }}</td>
+              <th class="p-2">Permanent Address</th>
+              <td class="p-2">{{ emp.Permanent_Address }}</td>
+            </tr>
+            <tr v-if="emp && emp.religion">
+              <th class="p-2">Religion</th>
+              <td class="p-2">{{ emp.religion.Name }}</td>
+              <th class="p-2">Gender</th>
+              <td class="p-2">{{ mapGender(emp.Gender) }}</td>
+            </tr>
+            <tr v-if="emp && emp.blood">
+              <th class="p-2">Blood Group</th>
+              <td class="p-2">{{ emp.blood.Name }}</td>
+              <th class="p-2">Nationality</th>
+              <td class="p-2">{{ emp.Nationality }}</td>
+            </tr>
+            <tr>
+              <th class="p-2">NID</th>
+              <td class="p-2">{{ emp.NID }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
+<style scoped>
+.pi table tr th {
+  padding: 8px;
+  width: 40%;
+}
+.pi table tr td {
+  padding: 8px;
+  width: 60%;
+}
 
+*{
+    font-size: 14px;
+}
+</style>

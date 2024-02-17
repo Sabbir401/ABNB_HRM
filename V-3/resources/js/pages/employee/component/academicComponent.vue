@@ -23,10 +23,11 @@ const error = ref([]);
 const educations = ref([]);
 const boards = ref([]);
 const scales = ref([]);
+const degree = ref([]);
 
 const form = ref({
   eid: EID,
-  levelofEduId: "",
+  levelofEduId: null,
   degreeId: "",
   institute: "",
   boardId: "",
@@ -69,6 +70,19 @@ onMounted(() => {
 const closeModal = () => {
   instance.emit("modal-close");
 };
+
+
+const getDegree = async (id) => {
+  try {
+    const response = await axios.get(`/api/education/${id}`);
+    degree.value = response.data;
+  } catch (error) {
+    console.error("Error updating store:", error);
+    // Handle the error, e.g., display an error message
+  }
+};
+
+
 
 const resetForm = () => {
   Object.keys(form).forEach((key) => {
@@ -136,6 +150,7 @@ const submit = () => {
                   name="status"
                   id=""
                   v-model="form.levelofEduId"
+                  @change="getDegree(form.levelofEduId)"
                 >
                   <option selected disabled>select</option>
                   <option
@@ -159,11 +174,11 @@ const submit = () => {
                 >
                   <option selected disabled>select</option>
                   <option
-                    v-for="edu in educations.degree"
-                    :key="edu.id"
-                    :value="edu.id"
+                    v-for="deg in degree"
+                    :key="deg.id"
+                    :value="deg.id"
                   >
-                    {{ edu.Name }}
+                    {{ deg.Name }}
                   </option>
                 </select>
               </div>

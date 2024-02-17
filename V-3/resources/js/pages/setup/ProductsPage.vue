@@ -1,3 +1,51 @@
+<script setup>
+import { ref, onMounted, watch } from "vue";
+import axios from "axios";
+import { useStore } from "vuex";
+
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+
+const empId = parseInt(route.params.id);
+console.log(empId);
+
+const emp = ref([]);
+const error = ref([]);
+
+const getData = async () => {
+  try {
+    const response = await axios.get(`/api/employee/${empId}/edit`);
+
+    emp.value = response.data;
+  } catch (err) {
+    error.value = err.message || "Error fetching data";
+  } finally {
+  }
+};
+
+const mapGender = (status) => {
+  const statusMap = {
+    M: "Male",
+    F: "Female",
+    O: "Other",
+  };
+
+  return statusMap[status] || "N/A";
+};
+
+const mapShift = (status) => {
+  const statusMap = {
+    D: "Day",
+    N: "Night",
+  };
+
+  return statusMap[status] || "N/A";
+};
+
+onMounted(() => getData());
+</script>
+
 <template>
   <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-6 border">
@@ -8,8 +56,10 @@
             width="40%"
             alt=""
           />
-          <h5 class="pt-3">Sabbir</h5>
-          <p>Jr. Executive IT</p>
+          <h5 class="pt-3">{{ emp.Full_Name }}</h5>
+          <p class="te" v-for="desig in emp.official" :key="desig.id">
+            {{ desig.designation.Name }}
+          </p>
         </div>
       </div>
       <div class="card pi mb-3">

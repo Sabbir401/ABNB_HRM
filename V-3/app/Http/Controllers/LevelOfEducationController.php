@@ -17,13 +17,11 @@ class LevelOfEducationController extends Controller
             ->select('id', 'Name')
             ->whereNull('education_id')
             ->orWhere('education_id', '')
-            ->orderBy('Name', 'asc')
             ->get();
 
         $degree = DB::table('level_of_educations')
             ->select('id', 'Name')
             ->whereNotNull('education_id')
-            ->orderBy('Name', 'asc')
             ->get();
 
         return response()->json([
@@ -52,9 +50,14 @@ class LevelOfEducationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(level_of_education $level_of_education)
+    public function show($id)
     {
-        //
+        $degree = DB::table('level_of_educations')
+            ->select('id', 'Name')
+            ->where('education_id', $id)
+            ->get();
+
+        return response()->json($degree);
     }
 
     /**
