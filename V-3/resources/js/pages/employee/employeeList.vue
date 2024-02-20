@@ -162,7 +162,7 @@ onMounted(() => getData());
                   </button>
                   <button
                     class="btn btn-success p-1"
-                    @click="router.push(`/emp/${employee.id}`)"
+                    @click="router.push(`/employee/${employee.id}`)"
                   >
                   <i class="mdi mdi-pencil m-auto"></i>
                   </button>

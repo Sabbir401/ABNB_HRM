@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('Institute_Name',255);
             $table->unsignedBigInteger('Scale_Id');
             $table->string('Result',100);
-            $table->decimal('Year_of_Passing');
+            $table->string('Year_of_Passing');
             $table->text('Acheivement');
             $table->text('Remarks');
             $table->timestamps();

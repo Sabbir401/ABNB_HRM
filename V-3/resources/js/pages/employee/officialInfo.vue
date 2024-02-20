@@ -62,11 +62,20 @@ const getData = async () => {
 };
 
 
+// const resetForm = () => {
+//   Object.keys(employee).forEach((key) => {
+//     employee[key] = "";
+//   });
+// };
+
 const resetForm = () => {
-  Object.keys(employee).forEach((key) => {
-    employee[key] = "";
+  Object.keys(employee.value).forEach((key) => {
+    if (typeof employee.value[key] === "string") {
+      employee.value[key] = "";
+    }
   });
 };
+
 // const store = useStore();
 
 const editHandler = async () => {

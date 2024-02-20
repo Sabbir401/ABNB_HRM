@@ -61,9 +61,17 @@ const getData = async () => {
   }
 };
 
+// const resetForm = () => {
+//   Object.keys(nominee).forEach((key) => {
+//     nominee[key] = "";
+//   });
+// };
+
 const resetForm = () => {
-  Object.keys(nominee).forEach((key) => {
-    nominee[key] = "";
+  Object.keys(employee.value).forEach((key) => {
+    if (typeof employee.value[key] === "string") {
+      employee.value[key] = "";
+    }
   });
 };
 

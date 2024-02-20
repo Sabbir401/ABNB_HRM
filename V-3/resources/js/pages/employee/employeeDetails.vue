@@ -33,6 +33,7 @@ const mapGender = (status) => {
   return statusMap[status] || "N/A";
 };
 
+
 const mapStatus = (status) => {
   const statusMap = {
     M: "Married",
@@ -111,19 +112,27 @@ onMounted(() => getData());
       </div>
       <div class="card pi mb-3">
         <div class="card-body p-2">
-          <h4 class="text-center">Personal Information</h4>
-          <table border="1" width="100%">
+          <h4 class="text-center">Child Information</h4>
+          <table border="1" width="100%" v-for="ch in emp.child" :key="ch.id">
             <tr>
-              <th>Name</th>
-              <td>Kazi Sabbir Ahmed</td>
+              <th>Child Name</th>
+              <td>{{ ch.Child_Name }}</td>
             </tr>
             <tr>
-              <th>Name</th>
-              <td>Kazi Sabbir Ahmed</td>
+              <th>NID No</th>
+              <td>{{ ch.NID }}</td>
             </tr>
             <tr>
-              <th>Name</th>
-              <td>Kazi Sabbir Ahmed</td>
+              <th>Date of Birth</th>
+              <td>{{ ch.DOB }}</td>
+            </tr>
+            <tr>
+              <th>Contact No</th>
+              <td>{{ ch.Contact_No }}</td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td>{{ ch.Email }}</td>
             </tr>
           </table>
         </div>
@@ -131,7 +140,7 @@ onMounted(() => getData());
     </div>
 
     <div class="col-lg-8 col-md-8 col-sm-6">
-      <div class="card">
+      <div class="card mb-3">
         <div class="card-body p-2">
           <table border="1" width="100%">
             <tr>
@@ -183,6 +192,138 @@ onMounted(() => getData());
               <th class="p-2">NID</th>
               <td class="p-2">{{ emp.NID }}</td>
             </tr>
+          </table>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body p-2">
+          <table border="1" width="100%" v-for="off in emp.official" :key="off.id">
+            <tr>
+              <th class="p-2 text-center" colspan="4">Official Information</th>
+            </tr>
+            <tr>
+              <th class="p-2">Department</th>
+              <td class="p-2">{{ off.department.Name }}</td>
+              <th class="p-2">Designation</th>
+              <td class="p-2">{{ off.designation.Name }}</td>
+            </tr>
+            <tr>
+              <th class="p-2">Employee Grade</th>
+              <td class="p-2">{{ off.Employee_Grade }}</td>
+              <th class="p-2">Employee Type</th>
+              <td class="p-2">{{ off.employee_type.Name }}</td>
+            </tr>
+            <tr>
+              <th class="p-2">Supervisor</th>
+              <td class="p-2">{{ off.supervisor.Full_Name }}</td>
+              <th class="p-2">Provation Period</th>
+              <td class="p-2">{{ off.Provation_period }}</td>
+            </tr>
+            <tr>
+              <th class="p-2">Date of joining</th>
+              <td class="p-2">{{ off.DOJ }}</td>
+              <th class="p-2">Date of continuing</th>
+              <td class="p-2">{{ off.DOC }}</td>
+            </tr>
+            <tr>
+              <th class="p-2">Job Location</th>
+              <td class="p-2">{{ off.country.Name }}</td>
+              <th class="p-2">Shift</th>
+              <td class="p-2">{{ mapShift(emp.Shift) }}</td>
+            </tr>
+
+          </table>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body p-2">
+          <table border="1" width="100%" v-for="work in emp.experience" :key="work.id">
+            <tr>
+              <th class="p-2 text-center" colspan="4">Work Experience</th>
+            </tr>
+            <tr>
+              <th class="p-2">Company Name</th>
+              <td class="p-2">{{ work.Company_Name }}</td>
+              <th class="p-2">Company Business</th>
+              <td class="p-2">{{ work.Company_Business }}</td>
+            </tr>
+            <tr>
+              <th class="p-2">Company Address</th>
+              <td class="p-2">{{ work.Company_Address }}</td>
+              <th class="p-2">Job Responsibility</th>
+              <td class="p-2">{{ work.Responsibilities }}</td>
+            </tr>
+            <tr>
+              <th class="p-2">Designation</th>
+              <td class="p-2">{{ work.Designation }}</td>
+              <th class="p-2">Department</th>
+              <td class="p-2">{{ emp.DOB }}</td>
+            </tr>
+            <tr>
+              <th class="p-2">From Date</th>
+              <td class="p-2">{{ mapStatus(emp.Marital_Status) }}</td>
+              <th class="p-2">To Date</th>
+              <td class="p-2">{{ emp.DOB }}</td>
+            </tr>
+            <tr>
+              <th class="p-2">Last Salary</th>
+              <td class="p-2">{{ emp.Place_of_Birth }}</td>
+              <th class="p-2">Continuing</th>
+              <td class="p-2">{{ emp.Emergency_Contact }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body p-2">
+          <table border="1" width="100%" v-for="train in emp.training" :key="train.id">
+            <tr>
+              <th class="p-2 text-center" colspan="4">Training Information</th>
+            </tr>
+            <tr>
+              <th class="p-2">Training Title</th>
+              <td class="p-2">{{ train.Training_Title }}</td>
+              <th class="p-2">Organized By</th>
+              <td class="p-2">{{ train.Organized_By }}</td>
+            </tr>
+            <tr>
+              <th class="p-2">From Date</th>
+              <td class="p-2">{{ train.From_Date }}</td>
+              <th class="p-2">To Date</th>
+              <td class="p-2">{{ train.To_Date }}</td>
+            </tr>
+            <tr>
+              <th class="p-2">Topic Covered</th>
+              <td class="p-2">{{ train.Topic_Covered }}</td>
+            </tr>
+
+          </table>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body p-2">
+          <table border="1" width="100%">
+            <tr>
+              <th class="p-2 text-center" colspan="4">Academic Information</th>
+            </tr>
+            <tr>
+              <th class="p-2">Degree</th>
+              <th class="p-2">Institude</th>
+              <th class="p-2">Board</th>
+              <th class="p-2">Result</th>
+              <th class="p-2">Year of Passing</th>
+              <th class="p-2">Acheivement</th>
+            </tr>
+            <tr v-for="aca in emp.academic" :key="aca.id">
+                <td>{{ aca.education.Name }}</td>
+                <td>{{ aca.Institute_Name }}</td>
+                <td>{{ aca.board.Name }}</td>
+                <td>{{ aca.Result }} {{ aca.scale.Name }}</td>
+                <td>{{ aca.Year_of_Passing }}</td>
+                <td>{{ aca.Acheivement }}</td>
+            </tr>
+
+
           </table>
         </div>
       </div>
