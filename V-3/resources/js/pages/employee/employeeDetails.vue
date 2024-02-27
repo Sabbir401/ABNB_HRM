@@ -304,7 +304,7 @@ onMounted(() => getData());
         <div class="card-body p-2">
           <table border="1" width="100%">
             <tr>
-              <th class="p-2 text-center" colspan="4">Academic Information</th>
+              <th class="p-2 text-center" colspan="6">Academic Information</th>
             </tr>
             <tr>
               <th class="p-2">Degree</th>

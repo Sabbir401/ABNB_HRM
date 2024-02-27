@@ -1,22 +1,22 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "./pages/home.vue";
-import Login from "./pages/login.vue";
-import Register from "./pages/register.vue";
-import Dashboard from "./pages/dashboard.vue";
-import StorePage from "./pages/setup/StorePage.vue";
-import CustomerPage from "./pages/setup/CustomerPage.vue";
-import ProductsPage from "./pages/setup/ProductsPage.vue";
+// import Home from "./pages/home.vue";
+// import Login from "./pages/login.vue";
+// import Register from "./pages/register.vue";
+// import Dashboard from "./pages/dashboard.vue";
+// import StorePage from "./pages/setup/StorePage.vue";
+// import CustomerPage from "./pages/setup/CustomerPage.vue";
+// import ProductsPage from "./pages/setup/ProductsPage.vue";
 import BrandCatSubcat from "./pages/setup/BrandCatSubcat.vue";
 import SupplierPage from "./pages/setup/SupplierPage.vue";
 import store from "./store/store";
 
-import empList from "./pages/employee/employeeList.vue"
-import empDetails from "./pages/employee/employeeDetails.vue"
-import emp from "./pages/employee/employee.vue";
-import employee from "./pages/employee/employeeInfo.vue";
-import personal from "./pages/employee/personalInfo.vue";
-import official from "./pages/employee/officialInfo.vue";
-import professional from "./pages/employee/professionalInfo.vue";
+// import empList from "./pages/employee/employeeList.vue"
+// import empDetails from "./pages/employee/employeeDetails.vue"
+// import emp from "./pages/employee/employee.vue";
+// import employee from "./pages/employee/employeeInfo.vue";
+// import personal from "./pages/employee/personalInfo.vue";
+// import official from "./pages/employee/officialInfo.vue";
+// import professional from "./pages/employee/professionalInfo.vue";
 
 
 
@@ -45,7 +45,7 @@ const routes = [
     {
         path: "/dashboard",
         name: "Dashboard",
-        component: Dashboard,
+        component: () => import('./pages/dashboard.vue'),
         meta: {
             requireAuth: true,
         },
@@ -53,7 +53,7 @@ const routes = [
     {
         path: "/store",
         name: "StorePage",
-        component: StorePage,
+        component: () => import('./pages/setup/StorePage.vue'),
         meta: {
             requireAuth: true,
         },
@@ -61,7 +61,7 @@ const routes = [
     {
         path: "/customer",
         name: "CustomerPage",
-        component: CustomerPage,
+        component: () => import('./pages/setup/CustomerPage.vue'),
         meta: {
             requireAuth: true,
         },
@@ -69,7 +69,7 @@ const routes = [
     {
         path: "/products",
         name: "ProductsPage",
-        component: ProductsPage,
+        component: () => import('./pages/setup/ProductsPage.vue'),
         meta: {
             requireAuth: true,
         },
@@ -93,7 +93,7 @@ const routes = [
     {
         path: "/employeelist",
         name: "EmpList",
-        component: empList,
+        component: () => import('./pages/employee/employeeList.vue'),
         meta: {
             requireAuth: true,
         },
@@ -101,7 +101,7 @@ const routes = [
     {
         path: "/empdetails/:id",
         name: "EmpDetails",
-        component: empDetails,
+        component: () => import('./pages/employee/employeeDetails.vue'),
         meta: {
             requireAuth: true,
         },
@@ -109,7 +109,7 @@ const routes = [
     {
         path: "/emp/:id",
         name: "Emp",
-        component: emp,
+        component: () => import('./pages/employee/employee.vue'),
         meta: {
             requireAuth: true,
         },
@@ -117,7 +117,7 @@ const routes = [
             {
                 path: "/employee",
                 name: "Employee",
-                component: employee,
+                component: () => import('./pages/employee/employeeInfo.vue'),
                 meta: {
                     requireAuth: true,
                 },
@@ -125,7 +125,7 @@ const routes = [
             {
                 path: "/employee/:id",
                 name: "Employeeid",
-                component: employee,
+                component: () => import('./pages/employee/employeeInfo.vue'),
                 meta: {
                     requireAuth: true,
                 },
@@ -133,7 +133,7 @@ const routes = [
             {
                 path: "/personal/",
                 name: "Personal",
-                component: personal,
+                component: () => import('./pages/employee/personalInfo.vue'),
                 meta: {
                     requireAuth: true,
                 },
@@ -141,7 +141,7 @@ const routes = [
             {
                 path: "/personal/:id",
                 name: "Personalid",
-                component: personal,
+                component: () => import('./pages/employee/personalInfo.vue'),
                 meta: {
                     requireAuth: true,
                 },
@@ -149,7 +149,7 @@ const routes = [
             {
                 path: "/official",
                 name: "Official",
-                component: official,
+                component: () => import('./pages/employee/officialInfo.vue'),
                 meta: {
                     requireAuth: true,
                 },
@@ -157,7 +157,7 @@ const routes = [
             {
                 path: "/official/:id",
                 name: "Officialid",
-                component: official,
+                component: () => import('./pages/employee/officialInfo.vue'),
                 meta: {
                     requireAuth: true,
                 },
@@ -165,7 +165,7 @@ const routes = [
             {
                 path: "/professional",
                 name: "Professional",
-                component: professional,
+                component: () => import('./pages/employee/professionalInfo.vue'),
                 meta: {
                     requireAuth: true,
                 },
@@ -173,7 +173,7 @@ const routes = [
             {
                 path: "/professional/:id",
                 name: "Professionalid",
-                component: professional,
+                component: () => import('./pages/employee/professionalInfo.vue'),
                 meta: {
                     requireAuth: true,
                 },

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\child;
 use App\Models\nominee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NomineeController extends Controller
 {
@@ -71,13 +72,26 @@ class NomineeController extends Controller
      */
     public function edit($id)
     {
-        $nominee = nominee::find($id);
+
+        $nominee = DB::table('nominees')
+            ->select('*')
+            ->where('EID',$id)
+            ->get();
+
+        $child = DB::table('children')
+            ->select('*')
+            ->where('EID',$id)
+            ->get();
+
 
         if (!$nominee) {
             return response()->json(['message' => 'Nominee not found'], 404);
         }
 
-        return response()->json($nominee);
+        return response()->json([
+            'nominee' => $nominee,
+            'child' => $child,
+        ]);
     }
 
     /**

@@ -43,7 +43,6 @@ const empEdit = ref([]);
 
 watch(empEdit, (newEmpData) => {
   if (newEmpData) {
-    // Update top-level properties directly
     employee.value.companyId = newEmpData.company.Name;
     employee.value.employeeId = newEmpData.Employee_Id;
     employee.value.cardNo = newEmpData.Card_No;
@@ -66,46 +65,30 @@ watch(empEdit, (newEmpData) => {
     employee.value.nationality = newEmpData.Nationality;
     employee.value.nid = newEmpData.NID;
 
-    // Handle nested objects (if necessary)
-    // For example, if there are nested objects like company, blood, religion, etc.
     if (newEmpData.company) {
       employee.value.companyId = newEmpData.company.id;
-      // Similarly, update other nested properties
     }
     if (newEmpData.blood) {
       employee.value.bloodGroup = newEmpData.blood.id;
-      // Similarly, update other nested properties
     }
     if (newEmpData.religion) {
       employee.value.religion = newEmpData.religion.id;
-      // Similarly, update other nested properties
     }
 
-    // Handle arrays if necessary (e.g., academic, training, experience)
-    // You'll need to decide how to handle array data in your application
-    // For example, you might want to loop through the arrays and update accordingly
-    // Note: I'm assuming these are arrays in your response data based on your example
     if (newEmpData.academic) {
       newEmpData.academic.forEach((academic) => {
-        // Handle academic array data here
-        // For example, you might want to push them into an academic array in employee
       });
     }
     if (newEmpData.training) {
       newEmpData.training.forEach((training) => {
-        // Handle training array data here
-        // For example, you might want to push them into a training array in employee
+
       });
     }
     if (newEmpData.experience) {
       newEmpData.experience.forEach((experience) => {
-        // Handle experience array data here
-        // For example, you might want to push them into an experience array in employee
       });
     }
-    // Similarly, handle other arrays if necessary
 
-    // Handle other nested objects and arrays as needed
   }
 });
 
@@ -172,7 +155,7 @@ const submitForm = async () => {
 
 const update = async () => {
   try {
-    const response = await axios.patch(`api/employee/${empId}`, employee.value);
+    const response = await axios.put(`/api/employee/${empId}`, employee.value);
     if (response.data.success) {
       alert("Successfully Updated");
       resetForm();
