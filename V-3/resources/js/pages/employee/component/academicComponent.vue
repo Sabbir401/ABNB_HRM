@@ -41,18 +41,25 @@ const form = ref({
 
 const instance = getCurrentInstance();
 
-watch(
-  () => editStore,
-  (newVal) => {
-    form.id = newVal.id;
-  }
-);
+watch(editStore, (newValue) => {
+  form.eid = newValue.eid;
+  form.levelofEduId = newValue.levelofEduId;
+  form.degreeId = newValue.degreeId;
+  form.institute = newValue.institute;
+  form.boardId = newValue.boardId;
+  form.major = newValue.major;
+  form.scaleId = newValue.scaleId;
+  form.result = newValue.result;
+  form.yop = newValue.yop;
+  form.acheivement = newValue.acheivement;
+  form.remarks = newValue.remarks;
+});
 
 const getData = async () => {
   try {
-    const responseEducation = await axios.get("api/education");
-    const responseBoard = await axios.get("api/board");
-    const responseScale = await axios.get("api/scale");
+    const responseEducation = await axios.get("/api/education");
+    const responseBoard = await axios.get("/api/board");
+    const responseScale = await axios.get("/api/scale");
 
     educations.value = responseEducation.data;
     boards.value = responseBoard.data;
@@ -106,7 +113,7 @@ const create = async () => {
 
 const update = async () => {
   try {
-    const response = await axios.put(`api/store/${form.id}`, form);
+    const response = await axios.put(`/api/store/${form.id}`, form);
     if (response.data.success) {
       instance.emit("modal-close");
       alert("Successfully Updated");
@@ -140,7 +147,7 @@ const submit = () => {
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Academic Information</h4>
-        <form class="forms-sample" @submit.prevent="create">
+        <form class="forms-sample" @submit.prevent="submit">
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">

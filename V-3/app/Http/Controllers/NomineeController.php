@@ -97,16 +97,49 @@ class NomineeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, nominee $nominee)
+    public function update(Request $request, $id)
     {
-        //
+        $nominee = Nominee::where('EID', $id)->first();
+        $child = child::where('EID', $id)->first();
+
+    if ($nominee) {
+        $nominee->update([
+            'Nominee_Name' => $request->input('nominee.nomineeName'),
+            'DOB' => $request->input('nominee.dob'),
+            'Contact_No' => $request->input('nominee.contactNo'),
+            'Email' => $request->input('nominee.email'),
+            'NID' => $request->input('nominee.nid'),
+            'Share' => $request->input('nominee.share'),
+            'Personal_Address' => $request->input('nominee.presentAddress'),
+        ]);
+
+        $child->update([
+            'Child_Name' => $request->input('child.childName'),
+            'NID' => $request->input('child.nid'),
+            'Email' => $request->input('child.email'),
+            'Contact_No' => $request->input('child.contactNo'),
+            'DOB' => $request->input('child.dob'),
+        ]);
+
+        $response = [
+            'success' => true,
+            'message' => 'Updated Successfully'
+        ];
+    } else {
+        $response = [
+            'success' => false,
+            'message' => 'Nominee not found'
+        ];
+    }
+
+    return response()->json($response);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(nominee $nominee)
-    {
-        //
-    }
+    // public function destroy(nominee $nominee)
+    // {
+    //     //
+    // }
 }

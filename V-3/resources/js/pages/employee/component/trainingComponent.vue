@@ -43,7 +43,7 @@ watch(
 
 const getData = async () => {
   try {
-    const responseScale = await axios.get("api/scale");
+    const responseScale = await axios.get("/api/scale");
 
     scales.value = responseScale.data;
   } catch (err) {
@@ -82,7 +82,7 @@ const create = async () => {
 
 const update = async () => {
   try {
-    const response = await axios.put(`api/store/${form.id}`, form);
+    const response = await axios.put(`/api/store/${form.id}`, form);
     if (response.data.success) {
       instance.emit("modal-close");
       alert("Successfully Updated");

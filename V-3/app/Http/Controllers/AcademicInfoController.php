@@ -66,9 +66,11 @@ class AcademicInfoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(academic_info $academic_info)
+    public function edit($id)
     {
-        //
+        $academic = academic_info::with('education', 'scale', 'board', 'education.degree')->find($id);
+
+        return response()->json($academic);
     }
 
     /**

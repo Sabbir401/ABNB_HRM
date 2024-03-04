@@ -14,7 +14,7 @@ const isLoading = ref(true);
 const error = ref(null);
 const selectedStore = ref(null);
 const heading = ref(null);
-const eid = store.state.employeeId;
+const eid = store.state.employeeId || parseInt(route.params.id);
 const empId =  parseInt(route.params.id);
 
 const academics = ref([]);
@@ -67,12 +67,12 @@ const getData = async () => {
   }
 };
 
-const editHandler = async (id) => {
+const editAcademmic = async (id) => {
   try {
-    const response = await axios.get(`api/store/${id}/edit`);
+    const response = await axios.get(`/api/academic/${id}/edit`);
     selectedStore.value = response.data;
-    heading.value = "Update";
-    openModal();
+    // heading.value = "Update";
+    academicOpened("Update");
   } catch (err) {
     console.error("Error fetching store data for editing:", err);
   }
@@ -152,7 +152,7 @@ onMounted(() => getData());
                 <td>
                   <button
                     class="btn btn-success"
-                    @click="editHandler(academic.id)"
+                    @click="editAcademmic(academic.id)"
                   >
                     Edit
                   </button>

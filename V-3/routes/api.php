@@ -56,7 +56,7 @@ Route::resource('/brand', BrandController::class);
 
 // Route::get('/store/{id}/edit', [StoreController::class, 'edit'])->name('store.edit');
 
-// Route::post('/store/{id}/update', [StoreController::class, 'update'])->name('store.update');
+Route::put('/nominee/{id}', [NomineeController::class, 'update']);
 
 Route::resource('/store', StoreController::class);
 Route::resource('/blood', BloodGroupController::class);
