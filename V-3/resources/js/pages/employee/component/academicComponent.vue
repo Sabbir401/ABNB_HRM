@@ -1,6 +1,6 @@
 <script setup>
 import {
-  ref,
+  ref,reactive,
   onMounted,
   watch,
   defineProps,
@@ -24,8 +24,9 @@ const educations = ref([]);
 const boards = ref([]);
 const scales = ref([]);
 const degree = ref([]);
+const abc = reactive([]);
 
-const form = ref({
+const form = reactive({
   eid: EID,
   levelofEduId: null,
   degreeId: "",
@@ -41,19 +42,6 @@ const form = ref({
 
 const instance = getCurrentInstance();
 
-watch(editStore, (newValue) => {
-  form.eid = newValue.eid;
-  form.levelofEduId = newValue.levelofEduId;
-  form.degreeId = newValue.degreeId;
-  form.institute = newValue.institute;
-  form.boardId = newValue.boardId;
-  form.major = newValue.major;
-  form.scaleId = newValue.scaleId;
-  form.result = newValue.result;
-  form.yop = newValue.yop;
-  form.acheivement = newValue.acheivement;
-  form.remarks = newValue.remarks;
-});
 
 const getData = async () => {
   try {
@@ -146,7 +134,7 @@ const submit = () => {
   >
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Academic Information</h4>
+        <h4 class="card-title">Academic Information {{ editStore }}</h4>
         <form class="forms-sample" @submit.prevent="submit">
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">

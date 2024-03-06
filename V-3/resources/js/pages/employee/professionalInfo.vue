@@ -71,7 +71,6 @@ const editAcademmic = async (id) => {
   try {
     const response = await axios.get(`/api/academic/${id}/edit`);
     selectedStore.value = response.data;
-    // heading.value = "Update";
     academicOpened("Update");
   } catch (err) {
     console.error("Error fetching store data for editing:", err);
