@@ -61,9 +61,11 @@ class TrainingInfoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(training_info $training_info)
+    public function edit($id)
     {
-        //
+        $training = training_info::find($id);
+
+        return response()->json($training);
     }
 
     /**

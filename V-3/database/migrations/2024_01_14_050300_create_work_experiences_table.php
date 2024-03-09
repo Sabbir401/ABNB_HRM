@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('EID');
             $table->string('Company_Name',255);
-            $table->string('Company_Business',255);
+            $table->string('Company_Business',255)->nullable();
             $table->text('Company_Address');
             $table->string('Designation',100);
             $table->string('Department',100);

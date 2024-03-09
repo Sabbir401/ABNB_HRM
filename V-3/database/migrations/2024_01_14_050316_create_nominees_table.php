@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('Nominee_Name',50);
             $table->date('DOB');
             $table->string('Contact_No',20);
-            $table->string('Email',50);
-            $table->string('NID',25);
-            $table->string('Share',25);
-            $table->text('Personal_Address');
+            $table->string('Email',50)->nullable();
+            $table->string('NID',25)->nullable();
+            $table->string('Share',25)->nullable();
+            $table->text('Personal_Address')->nullable();
             $table->timestamps();
 
             $table->foreign('EID')->references('id')->on('employees')->onDelete('cascade');

@@ -21,8 +21,8 @@ return new class extends Migration
             $table->unsignedBigInteger('Scale_Id');
             $table->string('Result',100);
             $table->string('Year_of_Passing');
-            $table->text('Acheivement');
-            $table->text('Remarks');
+            $table->text('Acheivement')->nullable();
+            $table->text('Remarks')->nullable();
             $table->timestamps();
 
             $table->foreign('EID')->references('id')->on('employees')->onDelete('cascade');

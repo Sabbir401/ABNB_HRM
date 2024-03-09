@@ -34,18 +34,22 @@ const form = ref({
 
 const instance = getCurrentInstance();
 
-watch(
-  () => editStore,
-  (newVal) => {
-    form.id = newVal.id;
-  }
-);
+
 
 const getData = async () => {
   try {
     const responseScale = await axios.get("/api/scale");
-
     scales.value = responseScale.data;
+    if(editStore){
+        form.value = {
+            traningTitle: editStore.Training_Title,
+            organizedBy: editStore.Organized_By,
+            topicCovered: editStore.Topic_Covered,
+            fromDate: editStore.From_Date,
+            toDate: editStore.To_Date,
+            remarks: editStore.Remarks,
+        }
+    }
   } catch (err) {
     error.value = err.message || "Error fetching data";
   } finally {
@@ -113,8 +117,8 @@ const submit = () => {
   >
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Training Information</h4>
-        <form class="forms-sample" @submit.prevent="create">
+        <h4 class="card-title">Training Information {{ editStore }}</h4>
+        <form class="forms-sample" @submit.prevent="submit">
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">

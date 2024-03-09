@@ -1,6 +1,7 @@
 <script setup>
 import {
-  ref,reactive,
+  ref,
+  reactive,
   onMounted,
   watch,
   defineProps,
@@ -26,7 +27,7 @@ const scales = ref([]);
 const degree = ref([]);
 const abc = reactive([]);
 
-const form = reactive({
+const form = ref({
   eid: EID,
   levelofEduId: null,
   degreeId: "",
@@ -42,6 +43,25 @@ const form = reactive({
 
 const instance = getCurrentInstance();
 
+const showdata = async () => {
+  try {
+    form.value = {
+      levelofEduId: "",
+      degreeId: "",
+      institute: "",
+      boardId: "",
+      major: "",
+      scaleId: "",
+      result: "",
+      yop: "",
+      acheivement: "",
+      remarks: "",
+    };
+  } catch (err) {
+    error.value = err.message || "Error fetching data";
+  } finally {
+  }
+};
 
 const getData = async () => {
   try {
@@ -52,6 +72,21 @@ const getData = async () => {
     educations.value = responseEducation.data;
     boards.value = responseBoard.data;
     scales.value = responseScale.data;
+    if (editStore) {
+        console.log("abcd");
+      form.value = {
+        levelofEduId: editStore.education.education_id,
+        degreeId: editStore.education.id,
+        institute: editStore.Institute_Name,
+        boardId: editStore.Board_Id,
+        major: editStore.Group,
+        scaleId: editStore.Scale_Id,
+        result: editStore.Result,
+        yop: editStore.Year_of_Passing,
+        acheivement: editStore.Acheivement,
+        remarks: editStore.Remarks,
+      };
+    }
   } catch (err) {
     error.value = err.message || "Error fetching data";
   } finally {
@@ -66,7 +101,6 @@ const closeModal = () => {
   instance.emit("modal-close");
 };
 
-
 const getDegree = async (id) => {
   try {
     const response = await axios.get(`/api/education/${id}`);
@@ -76,8 +110,6 @@ const getDegree = async (id) => {
     // Handle the error, e.g., display an error message
   }
 };
-
-
 
 const resetForm = () => {
   Object.keys(form).forEach((key) => {
@@ -112,6 +144,25 @@ const update = async () => {
     // Handle the error, e.g., display an error message
   }
 };
+
+// watch(
+//   () => editStore,
+//   (newValue) => {
+//     if (newValue) {
+//       form.levelofEduId = newValue.levelofEduId;
+//       form.degreeId = newValue.degreeId;
+//       form.institute = newValue.institute;
+//       form.boardId = newValue.boardId;
+//       form.major = newValue.major;
+//       form.scaleId = newValue.scaleId;
+//       form.result = newValue.result;
+//       form.yop = newValue.yop;
+//       form.acheivement = newValue.acheivement;
+//       form.remarks = newValue.remarks;
+//     }
+//   },
+//   { immediate: true }
+// );
 
 const submit = () => {
   if (updateinfo === "Save") {
@@ -168,11 +219,7 @@ const submit = () => {
                   v-model="form.degreeId"
                 >
                   <option selected disabled>select</option>
-                  <option
-                    v-for="deg in degree"
-                    :key="deg.id"
-                    :value="deg.id"
-                  >
+                  <option v-for="deg in degree" :key="deg.id" :value="deg.id">
                     {{ deg.Name }}
                   </option>
                 </select>

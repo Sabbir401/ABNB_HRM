@@ -16,10 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('EID');
             $table->string('Training_Title',255);
             $table->string('Organized_By',255);
-            $table->text('Topic_Covered');
+            $table->text('Topic_Covered')->nullable();
             $table->date('From_Date');
             $table->date('To_Date');
-            $table->text('Remarks');
+            $table->text('Remarks')->nullable();
             $table->timestamps();
 
             $table->foreign('EID')->references('id')->on('employees')->onDelete('cascade');

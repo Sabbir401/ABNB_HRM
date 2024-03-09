@@ -77,6 +77,16 @@ const editAcademmic = async (id) => {
   }
 };
 
+const editTraining = async (id) => {
+  try {
+    const response = await axios.get(`/api/training/${id}/edit`);
+    selectedStore.value = response.data;
+    trainingOpened("Update");
+  } catch (err) {
+    console.error("Error fetching store data for editing:", err);
+  }
+};
+
 const submitHandler = async () => {
   await getData();
 };
@@ -213,7 +223,7 @@ onMounted(() => getData());
                 <td>
                   <button
                     class="btn btn-success"
-                    @click="editHandler(academic.id)"
+                    @click="editTraining(training.id)"
                   >
                     Edit
                   </button>
