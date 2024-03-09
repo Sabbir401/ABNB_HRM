@@ -44,6 +44,7 @@ const form = ref({
 const instance = getCurrentInstance();
 
 const showdata = async () => {
+    console.log("aaa");
   try {
     form.value = {
       levelofEduId: "",
@@ -54,7 +55,7 @@ const showdata = async () => {
       scaleId: "",
       result: "",
       yop: "",
-      acheivement: "",
+      acheivement: editStore.value,
       remarks: "",
     };
   } catch (err) {
@@ -72,7 +73,8 @@ const getData = async () => {
     educations.value = responseEducation.data;
     boards.value = responseBoard.data;
     scales.value = responseScale.data;
-    if (editStore) {
+    console.log(responseBoard);
+    if (responseBoard) {
         console.log("abcd");
       form.value = {
         levelofEduId: editStore.education.education_id,
