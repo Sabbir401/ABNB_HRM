@@ -43,26 +43,7 @@ const form = ref({
 
 const instance = getCurrentInstance();
 
-const showdata = async () => {
-    console.log("aaa");
-  try {
-    form.value = {
-      levelofEduId: "",
-      degreeId: "",
-      institute: "",
-      boardId: "",
-      major: "",
-      scaleId: "",
-      result: "",
-      yop: "",
-      acheivement: editStore.value,
-      remarks: "",
-    };
-  } catch (err) {
-    error.value = err.message || "Error fetching data";
-  } finally {
-  }
-};
+
 
 const getData = async () => {
   try {
