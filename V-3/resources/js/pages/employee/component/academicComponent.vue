@@ -75,7 +75,6 @@ const getData = async () => {
     scales.value = responseScale.data;
     console.log(responseBoard);
     if (responseBoard) {
-        console.log("abcd");
       form.value = {
         levelofEduId: editStore.education.education_id,
         degreeId: editStore.education.id,
