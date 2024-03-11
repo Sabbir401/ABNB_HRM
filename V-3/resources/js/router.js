@@ -180,7 +180,14 @@ const routes = [
             },
         ],
     },
-
+    {
+        path: "/leave",
+        name: "Leave",
+        component: () => import('./pages/employee/leave.vue'),
+        meta: {
+            requireAuth: true,
+        },
+    },
 ];
 
 const router = createRouter({
