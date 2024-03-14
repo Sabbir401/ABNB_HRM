@@ -165,6 +165,20 @@ onMounted(() => chooseMount());
             <option value="4">Grade 4</option>
             <option value="5">Grade 5</option>
             <option value="6">Grade 6</option>
+            <option value="1">Grade 7</option>
+            <option value="2">Grade 8</option>
+            <option value="3">Grade 9</option>
+            <option value="4">Grade 10</option>
+            <option value="5">Grade 11</option>
+            <option value="6">Grade 12</option>
+            <option value="1">Grade 13</option>
+            <option value="2">Grade 14</option>
+            <option value="3">Grade 15</option>
+            <option value="4">Grade 16</option>
+            <option value="5">Grade 17</option>
+            <option value="6">Grade 18</option>
+            <option value="6">Grade 19</option>
+            <option value="6">Grade 20</option>
           </select>
         </div>
       </div>
