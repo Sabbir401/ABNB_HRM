@@ -133,24 +133,24 @@ const update = async () => {
   }
 };
 
-// watch(
-//   () => editStore,
-//   (newValue) => {
-//     if (newValue) {
-//       form.levelofEduId = newValue.levelofEduId;
-//       form.degreeId = newValue.degreeId;
-//       form.institute = newValue.institute;
-//       form.boardId = newValue.boardId;
-//       form.major = newValue.major;
-//       form.scaleId = newValue.scaleId;
-//       form.result = newValue.result;
-//       form.yop = newValue.yop;
-//       form.acheivement = newValue.acheivement;
-//       form.remarks = newValue.remarks;
-//     }
-//   },
-//   { immediate: true }
-// );
+watch(
+  () => editStore,
+  (newValue) => {
+    if (newValue) {
+      form.levelofEduId = newValue.levelofEduId;
+      form.degreeId = newValue.degreeId;
+      form.institute = newValue.institute;
+      form.boardId = newValue.boardId;
+      form.major = newValue.major;
+      form.scaleId = newValue.scaleId;
+      form.result = newValue.result;
+      form.yop = newValue.yop;
+      form.acheivement = newValue.acheivement;
+      form.remarks = newValue.remarks;
+    }
+  },
+  { immediate: true }
+);
 
 const submit = () => {
   if (updateinfo === "Save") {

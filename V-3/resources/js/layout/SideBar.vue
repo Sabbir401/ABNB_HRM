@@ -88,6 +88,9 @@
                             <Router-Link class="nav-link" :to="{ name: 'EmpList' }">Employee</Router-Link>
                         </li>
                         <li class="nav-item">
+                            <Router-Link class="nav-link" :to="{ name: 'Attendence' }">Attendence</Router-Link>
+                        </li>
+                        <li class="nav-item">
                             <Router-Link class="nav-link" :to="{ name: 'Leave' }">Leave</Router-Link>
                         </li>
                         <li class="nav-item">

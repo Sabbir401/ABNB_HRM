@@ -188,6 +188,14 @@ const routes = [
             requireAuth: true,
         },
     },
+    {
+        path: "/attendence",
+        name: "Attendence",
+        component: () => import('./pages/employee/attendence.vue'),
+        meta: {
+            requireAuth: true,
+        },
+    },
 ];
 
 const router = createRouter({

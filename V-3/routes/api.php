@@ -54,7 +54,7 @@ Route::resource('/brand', BrandController::class);
 
 // Route::get('/store', [StoreController::class, 'show'])->name('store.index');
 
-// Route::get('/store/{id}/edit', [StoreController::class, 'edit'])->name('store.edit');
+Route::get('/emp/{id}', [EmployeeController::class, 'find']);
 
 Route::put('/nominee/{id}', [NomineeController::class, 'update']);
 
@@ -81,5 +81,7 @@ Route::resource('/empType', EmployeeTypeController::class);
 Route::resource('/area', AreaController::class);
 Route::resource('/territory', TerritoryController::class);
 Route::resource('/official', OfficialController::class);
+
+
 
 

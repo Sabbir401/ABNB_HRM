@@ -17,6 +17,7 @@ class EmployeeController extends Controller
         return response()->json($employee);
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
@@ -104,6 +105,39 @@ class EmployeeController extends Controller
             'official.supervisor',
             'official.country',
         ])->find($id);
+
+        if (!$employee) {
+            return response()->json(['message' => 'Employee not found'], 404);
+        }
+
+        return response()->json($employee);
+    }
+
+    public function find($id)
+    {
+        $employee = employee::with([
+            'company',
+            'blood',
+            'religion',
+            'academic',
+            'training',
+            'experience',
+            'official',
+            'nominee',
+            'child',
+            'academic.scale',
+            'academic.board',
+            'academic.education',
+            'academic.education.degree',
+            'official.designation',
+            'official.department',
+            'official.area',
+            'official.employeeType',
+            'official.territory',
+            'official.supervisor',
+            'official.country',
+        ])->where('Department_Id',$id)
+        ->get();;
 
         if (!$employee) {
             return response()->json(['message' => 'Employee not found'], 404);

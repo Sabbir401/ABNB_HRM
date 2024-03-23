@@ -41,7 +41,6 @@ class AcademicInfoController extends Controller
             'Year_of_Passing' => $request->input('yop'),
             'Acheivement' => $request->input('acheivement'),
             'Remarks' => $request->input('remarks'),
-
         ]);
         $response = [
             'success'   =>  true,
