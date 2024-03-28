@@ -18,14 +18,14 @@ return new class extends Migration
             $table->unsignedBigInteger('Designation_Id');
             $table->string('Employee_Grade',20);
             $table->unsignedBigInteger('Employee_type_Id');
-            $table->unsignedBigInteger('Area_Id');
-            $table->unsignedBigInteger('Territory_Id');
-            $table->unsignedBigInteger('Supervisor_Id');
-            $table->date('DOJ');
-            $table->string('Provation_period',20);
-            $table->date('DOC');
-            $table->unsignedBigInteger('Job_Location_Id');
-            $table->string('Shift',20);
+            $table->unsignedBigInteger('Area_Id')->nullable();
+            $table->unsignedBigInteger('Territory_Id')->nullable();
+            $table->unsignedBigInteger('Supervisor_Id')->nullable();
+            $table->date('DOJ')->nullable();
+            $table->string('Provation_period',20)->nullable();
+            $table->date('DOC')->nullable();
+            $table->unsignedBigInteger('Job_Location_Id')->nullable();
+            $table->string('Shift',20)->nullable();
             $table->timestamps();
 
             $table->foreign('EID')->references('id')->on('employees')->onDelete('cascade');
