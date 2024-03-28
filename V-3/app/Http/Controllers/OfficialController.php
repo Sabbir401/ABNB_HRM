@@ -63,9 +63,25 @@ class OfficialController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(official $official)
+    public function edit($id)
     {
-        //
+        $official = official::with([
+            'employee',
+            'area',
+            'department',
+            'designation',
+            'employeeType',
+            'territory',
+            'supervisor',
+            'country'
+
+        ])->find($id);
+
+        if (!$official) {
+            return response()->json(['message' => 'Employee not found'], 404);
+        }
+
+        return response()->json($official);
     }
 
     /**

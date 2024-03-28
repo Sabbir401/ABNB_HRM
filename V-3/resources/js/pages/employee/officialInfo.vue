@@ -9,7 +9,6 @@ const route = useRoute();
 const store = useStore();
 
 const empId = parseInt(route.params.id);
-console.log(empId);
 
 const official = ref({
   eid: store.state.employeeId,
@@ -55,11 +54,29 @@ const getData = async () => {
     territories.value = responseTerritory.data;
     supervisor.value = responseSuper.data;
     countries.value = responseCountry.data;
+
+    if (empId) {
+      editHandler();
+    }
   } catch (err) {
     error.value = err.message || "Error fetching data";
   } finally {
   }
 };
+
+
+watch(empEdit, (newEmpData) => {
+  if (newEmpData) {
+    official.value.departmentId = newEmpData.department.Name;
+    official.value.doj = newEmpData.DOJ;
+    official.value.doc= newEmpData.DOC;
+    official.value.provationPeriod = newEmpData.Provation_period;
+
+    // if (newEmpData.department) {
+    //   official.value.departmentId = newEmpData.department.id;
+    // }
+  }
+});
 
 
 // const resetForm = () => {
@@ -80,7 +97,7 @@ const resetForm = () => {
 
 const editHandler = async () => {
   try {
-    const response = await axios.get(`api/employee/${empId}/edit`);
+    const response = await axios.get(`/api/official/${empId}/edit`);
     empEdit.value = response.data;
   } catch (err) {
     console.error("Error fetching store data for editing:", err);
@@ -99,15 +116,8 @@ const submitForm = async () => {
   }
 };
 
-const chooseMount = async () => {
-  if (empId) {
-    editHandler();
-  } else {
-    getData();
-  }
-};
 
-onMounted(() => chooseMount());
+onMounted(() => getData());
 </script>
 
 <template>
@@ -165,20 +175,20 @@ onMounted(() => chooseMount());
             <option value="4">Grade 4</option>
             <option value="5">Grade 5</option>
             <option value="6">Grade 6</option>
-            <option value="1">Grade 7</option>
-            <option value="2">Grade 8</option>
-            <option value="3">Grade 9</option>
-            <option value="4">Grade 10</option>
-            <option value="5">Grade 11</option>
-            <option value="6">Grade 12</option>
-            <option value="1">Grade 13</option>
-            <option value="2">Grade 14</option>
-            <option value="3">Grade 15</option>
-            <option value="4">Grade 16</option>
-            <option value="5">Grade 17</option>
-            <option value="6">Grade 18</option>
-            <option value="6">Grade 19</option>
-            <option value="6">Grade 20</option>
+            <option value="7">Grade 7</option>
+            <option value="8">Grade 8</option>
+            <option value="9">Grade 9</option>
+            <option value="10">Grade 10</option>
+            <option value="11">Grade 11</option>
+            <option value="12">Grade 12</option>
+            <option value="13">Grade 13</option>
+            <option value="14">Grade 14</option>
+            <option value="15">Grade 15</option>
+            <option value="16">Grade 16</option>
+            <option value="17">Grade 17</option>
+            <option value="18">Grade 18</option>
+            <option value="19">Grade 19</option>
+            <option value="20">Grade 20</option>
           </select>
         </div>
       </div>
