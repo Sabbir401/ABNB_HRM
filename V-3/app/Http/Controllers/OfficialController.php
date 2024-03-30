@@ -35,7 +35,7 @@ class OfficialController extends Controller
             'Employee_Grade' => $request->input('employeeGrade'),
             'Area_Id' => $request->input('areaId'),
             'Territory_Id' => $request->input('territoryId'),
-            'Employee_type_Id' => $request->input('employeeType'),
+            'Employee_type_Id' => $request->input('empType'),
             'Supervisor_Id' => $request->input('supervisorId'),
             'DOJ' => $request->input('doj'),
             'Provation_period' => $request->input('provationPeriod'),

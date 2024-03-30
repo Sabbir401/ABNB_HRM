@@ -37,15 +37,28 @@ const countries = ref([]);
 const error = ref([]);
 const empEdit = ref([]);
 
+watch(empEdit, (newEmpData) => {
+  if (newEmpData) {
+    official.value.departmentId = newEmpData.department.Name;
+    official.value.doj = newEmpData.DOJ;
+    official.value.doc= newEmpData.DOC;
+    official.value.provationPeriod = newEmpData.Provation_period;
+
+    // if (newEmpData.department) {
+    //   official.value.departmentId = newEmpData.department.id;
+    // }
+  }
+});
+
 const getData = async () => {
   try {
-    const responseDepartment = await axios.get("api/department");
-    const responseDesignation = await axios.get("api/designation");
-    const responseEmpType = await axios.get("api/empType");
-    const responseArea = await axios.get("api/area");
-    const responseTerritory = await axios.get("api/territory");
-    const responseSuper = await axios.get("api/employee");
-    const responseCountry = await axios.get("api/phone");
+    const responseDepartment = await axios.get("/api/department");
+    const responseDesignation = await axios.get("/api/designation");
+    const responseEmpType = await axios.get("/api/empType");
+    const responseArea = await axios.get("/api/area");
+    const responseTerritory = await axios.get("/api/territory");
+    const responseSuper = await axios.get("/api/employee");
+    const responseCountry = await axios.get("/api/phone");
 
     departments.value = responseDepartment.data;
     designations.value = responseDesignation.data;
@@ -68,22 +81,42 @@ const getData = async () => {
 watch(empEdit, (newEmpData) => {
   if (newEmpData) {
     official.value.departmentId = newEmpData.department.Name;
+    official.value.designationId = newEmpData.designation.Name;
+    official.value.employeeGrade = newEmpData.Employee_Grade;
+    official.value.areaId = newEmpData.area.Name;
+    official.value.territoryId = newEmpData.territory.Name;
+    official.value.employeeType = newEmpData.empType.Name;
+    official.value.departmentId = newEmpData.department.Name;
     official.value.doj = newEmpData.DOJ;
     official.value.doc= newEmpData.DOC;
     official.value.provationPeriod = newEmpData.Provation_period;
 
-    // if (newEmpData.department) {
-    //   official.value.departmentId = newEmpData.department.id;
-    // }
+    if (newEmpData.department) {
+      official.value.departmentId = newEmpData.department.id;
+    }
+    if (newEmpData.designation) {
+      official.value.designationId = newEmpData.designation.id;
+    }
+    if (newEmpData.area) {
+      official.value.areaId = newEmpData.area.id;
+    }
+    if (newEmpData.territory) {
+      official.value.territoryId = newEmpData.territory.id;
+    }
+    if (newEmpData.employeeType) {
+      official.value.territoryId = newEmpData.employeeType.id;
+    }
   }
 });
 
+const mapShift = (status) => {
+  const statusMap = {
+    D: "Day",
+    N: "Night",
+  };
 
-// const resetForm = () => {
-//   Object.keys(employee).forEach((key) => {
-//     employee[key] = "";
-//   });
-// };
+  return statusMap[status] || "N/A";
+};
 
 const resetForm = () => {
   Object.keys(employee.value).forEach((key) => {
