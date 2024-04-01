@@ -35,7 +35,7 @@ class OfficialController extends Controller
             'Employee_Grade' => $request->input('employeeGrade'),
             'Area_Id' => $request->input('areaId'),
             'Territory_Id' => $request->input('territoryId'),
-            'Employee_type_Id' => $request->input('empType'),
+            'Employee_type_Id' => $request->input('employeeTypeId'),
             'Supervisor_Id' => $request->input('supervisorId'),
             'DOJ' => $request->input('doj'),
             'Provation_period' => $request->input('provationPeriod'),
@@ -87,9 +87,30 @@ class OfficialController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, official $official)
+    public function update(Request $request, $id)
     {
-        //
+        $official = official::find($id);
+        $official->update([
+            'Department_Id' => $request->input('departmentId'),
+            'Designation_Id' => $request->input('designationId'),
+            'Employee_Grade' => $request->input('employeeGrade'),
+            'Area_Id' => $request->input('areaId'),
+            'Territory_Id' => $request->input('territoryId'),
+            'Employee_type_Id' => $request->input('employeeTypeId'),
+            'Supervisor_Id' => $request->input('supervisorId'),
+            'DOJ' => $request->input('doj'),
+            'Provation_period' => $request->input('provationPeriod'),
+            'DOC' => $request->input('doc'),
+            'Job_Location_Id' => $request->input('jobLocation'),
+            'Shift' => $request->input('shift'),
+        ]);
+
+        $response = [
+            'success' => true,
+            'message'  => 'Updated Successfully'
+        ];
+
+        return response()->json($response);
     }
 
     /**

@@ -17,7 +17,7 @@ const official = ref({
   employeeGrade: "",
   areaId: "",
   territoryId: "",
-  employeeType: "",
+  employeeTypeId: "",
   supervisorId: "",
   doj: "",
   provationPeriod: "",
@@ -37,18 +37,7 @@ const countries = ref([]);
 const error = ref([]);
 const empEdit = ref([]);
 
-watch(empEdit, (newEmpData) => {
-  if (newEmpData) {
-    official.value.departmentId = newEmpData.department.Name;
-    official.value.doj = newEmpData.DOJ;
-    official.value.doc= newEmpData.DOC;
-    official.value.provationPeriod = newEmpData.Provation_period;
 
-    // if (newEmpData.department) {
-    //   official.value.departmentId = newEmpData.department.id;
-    // }
-  }
-});
 
 const getData = async () => {
   try {
@@ -85,11 +74,13 @@ watch(empEdit, (newEmpData) => {
     official.value.employeeGrade = newEmpData.Employee_Grade;
     official.value.areaId = newEmpData.area.Name;
     official.value.territoryId = newEmpData.territory.Name;
-    official.value.employeeType = newEmpData.empType.Name;
-    official.value.departmentId = newEmpData.department.Name;
+    official.value.employeeTypeId = newEmpData.Employee_type_Id;
+    official.value.supervisorId = newEmpData.supervisor.Full_Name;
+    official.value.jobLocation = newEmpData.country.Name;
     official.value.doj = newEmpData.DOJ;
     official.value.doc= newEmpData.DOC;
     official.value.provationPeriod = newEmpData.Provation_period;
+    official.value.shift = newEmpData.Shift;
 
     if (newEmpData.department) {
       official.value.departmentId = newEmpData.department.id;
@@ -104,19 +95,18 @@ watch(empEdit, (newEmpData) => {
       official.value.territoryId = newEmpData.territory.id;
     }
     if (newEmpData.employeeType) {
-      official.value.territoryId = newEmpData.employeeType.id;
+      official.value.employeeTypeId = newEmpData.employeeType.id;
+    }
+    if (newEmpData.supervisor) {
+      official.value.supervisorId = newEmpData.supervisor.id;
+    }
+    if (newEmpData.country) {
+      official.value.jobLocation = newEmpData.country.id;
     }
   }
 });
 
-const mapShift = (status) => {
-  const statusMap = {
-    D: "Day",
-    N: "Night",
-  };
 
-  return statusMap[status] || "N/A";
-};
 
 const resetForm = () => {
   Object.keys(employee.value).forEach((key) => {
@@ -139,7 +129,7 @@ const editHandler = async () => {
 
 const submitForm = async () => {
   try {
-    const response = await axios.post("api/official", official.value);
+    const response = await axios.post("/api/official", official.value);
     if (response.data.success) {
       alert("Successfully Inserted");
       resetForm();
@@ -149,13 +139,34 @@ const submitForm = async () => {
   }
 };
 
+const update = async () => {
+  try {
+    const response = await axios.put(`/api/official/${empId}`, official.value);
+    if (response.data.success) {
+      alert("Successfully Updated");
+      resetForm();
+    }
+  } catch (error) {
+    console.error("Error updating store:", error);
+    // Handle the error, e.g., display an error message
+  }
+};
+
+const submit = () => {
+  if (empId) {
+    update();
+  } else {
+    submitForm();
+  }
+};
+
 
 onMounted(() => getData());
 </script>
 
 <template>
   <div class="mt-5">
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="submit">
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
           <label for="" class="">Department</label>
@@ -261,7 +272,7 @@ onMounted(() => getData());
             class="form-control"
             name="status"
             id=""
-            v-model="official.employeeType"
+            v-model="official.employeeTypeId"
           >
             <option selected disabled>select</option>
             <option v-for="typ in emptypes" :key="typ.id" :value="typ.id">
