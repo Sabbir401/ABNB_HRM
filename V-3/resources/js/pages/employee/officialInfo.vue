@@ -11,7 +11,7 @@ const store = useStore();
 const empId = parseInt(route.params.id);
 
 const official = ref({
-  eid: store.state.employeeId,
+  eid: store.state.employeeId || empId,
   departmentId: "",
   designationId: "",
   employeeGrade: "",
@@ -153,7 +153,10 @@ const update = async () => {
 };
 
 const submit = () => {
-  if (empId) {
+  if(empEdit.value == ""){
+    submitForm();
+  }
+  else if (empId) {
     update();
   } else {
     submitForm();
@@ -169,7 +172,7 @@ onMounted(() => getData());
     <form @submit.prevent="submit">
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="" class="">Department</label>
+          <label for="" class="">Department {{ empEdit.value }}</label>
           <select
             class="form-control"
             name="status"

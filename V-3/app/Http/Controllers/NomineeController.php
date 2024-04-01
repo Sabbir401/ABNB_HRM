@@ -85,7 +85,7 @@ class NomineeController extends Controller
 
 
         if (!$nominee) {
-            return response()->json(['message' => 'Nominee not found'], 404);
+            return response()->json(['message' => 'Nominee not found']);
         }
 
         return response()->json([

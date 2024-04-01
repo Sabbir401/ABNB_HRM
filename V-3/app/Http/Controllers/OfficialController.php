@@ -90,7 +90,9 @@ class OfficialController extends Controller
     public function update(Request $request, $id)
     {
         $official = official::find($id);
+
         $official->update([
+            'EID' => $request->input('eid'),
             'Department_Id' => $request->input('departmentId'),
             'Designation_Id' => $request->input('designationId'),
             'Employee_Grade' => $request->input('employeeGrade'),

@@ -8,8 +8,10 @@ const route = useRoute();
 const store = useStore();
 const empId = parseInt(route.params.id);
 
+const empEdit = ref(null);
+
 const nominee = ref({
-  eid: store.state.employeeId,
+  eid: store.state.employeeId || empId,
   nomineeName: "",
   dob: "",
   contactNo: "",
@@ -20,7 +22,7 @@ const nominee = ref({
 });
 
 const child = ref({
-  eid: store.state.employeeId,
+  eid: store.state.employeeId || empId,
   childName: "",
   nid: "",
   email: "",
@@ -28,26 +30,29 @@ const child = ref({
   dob: "",
 });
 
+
+watch(empEdit, (newEmpData) => {
+  if (newEmpData) {
+    nominee.value.nomineeName = newEmpData.nominee[0].Nominee_Name;
+    nominee.value.dob = newEmpData.nominee[0].DOB;
+    nominee.value.contactNo = newEmpData.nominee[0].Contact_No;
+    nominee.value.email = newEmpData.nominee[0].Email;
+    nominee.value.nid = newEmpData.nominee[0].NID;
+    nominee.value.share = newEmpData.nominee[0].Share;
+    nominee.value.presentAddress = newEmpData.nominee[0].Personal_Address;
+    //child Infromation
+    child.value.childName = newEmpData.child[0].Child_Name;
+    child.value.nid = newEmpData.child[0].NID;
+    child.value.email = newEmpData.child[0].Email;
+    child.value.contactNo = newEmpData.child[0].Contact_No;
+    child.value.dob = newEmpData.child[0].DOB;
+  }
+});
+
+
 const error = ref([]);
-const empEdit = ref([]);
 
-// watch(empEdit, (newEmpData) => {
-//   if (newEmpData) {
-//     nominee.value.nomineeName = newEmpData.nominee.Nominee_Name;
-//     nominee.value.dob = newEmpData.nominee.DOB;
-//     nominee.value.contactNo = newEmpData.nominee.Contact_No;
-//     nominee.value.email = newEmpData.nominee.Email;
-//     nominee.value.nid = newEmpData.nominee.NID;
-//     nominee.value.share = newEmpData.nominee.Share;
-//     nominee.value.presentAddress = newEmpData.nominee.Personal_Address;
 
-//     child.value.childName = newEmpData.Child_Name;
-//     child.value.nid = newEmpData.child.NID;
-//     child.value.email = newEmpData.child.Email;
-//     child.value.contactNo = newEmpData.child.Contact_No;
-//     child.value.dob = newEmpData.child.DOB;
-//   }
-// });
 
 const getData = async () => {
   try {
@@ -75,32 +80,43 @@ const resetForm = () => {
   });
 };
 
+// const editHandler = async () => {
+//   try {
+//     const requestData = await axios.get(`/api/nominee/${empId}/edit`);
+//     const responseData = requestData.data;
+
+//     if (responseData.nominee && responseData.nominee.length > 0) {
+//       const nomineeData = responseData.nominee[0];
+//       nominee.value = {
+//         nomineeName: nomineeData.Nominee_Name,
+//         dob: nomineeData.DOB,
+//         contactNo: nomineeData.Contact_No,
+//         email: nomineeData.Email,
+//         nid: nomineeData.NID,
+//         share: nomineeData.Share,
+//         presentAddress: nomineeData.Personal_Address
+//       };
+//     }
+//     if (responseData.child && responseData.child.length > 0) {
+//       const childData = responseData.child[0];
+//       child.value = {
+//         childName: childData.Child_Name,
+//         nid: childData.NID,
+//         email: childData.Email,
+//         contactNo: childData.Contact_No,
+//         dob: childData.DOB
+//       };
+//     }
+//   } catch (err) {
+//     console.error("Error fetching store data for editing:", err);
+//   }
+// };
+
+
 const editHandler = async () => {
   try {
-    const requestData = await axios.get(`/api/nominee/${empId}/edit`);
-    const responseData = requestData.data;
-    if (responseData.nominee && responseData.nominee.length > 0) {
-      const nomineeData = responseData.nominee[0];
-      nominee.value = {
-        nomineeName: nomineeData.Nominee_Name,
-        dob: nomineeData.DOB,
-        contactNo: nomineeData.Contact_No,
-        email: nomineeData.Email,
-        nid: nomineeData.NID,
-        share: nomineeData.Share,
-        presentAddress: nomineeData.Personal_Address
-      };
-    }
-    if (responseData.child && responseData.child.length > 0) {
-      const childData = responseData.child[0];
-      child.value = {
-        childName: childData.Child_Name,
-        nid: childData.NID,
-        email: childData.Email,
-        contactNo: childData.Contact_No,
-        dob: childData.DOB
-      };
-    }
+    const response = await axios.get(`/api/nominee/${empId}/edit`);
+    empEdit.value = response.data;
   } catch (err) {
     console.error("Error fetching store data for editing:", err);
   }
@@ -112,7 +128,7 @@ const submitForm = async () => {
       nominee: nominee.value,
       child: child.value,
     };
-    const response = await axios.post("api/nominee", requestData);
+    const response = await axios.post("/api/nominee", requestData);
     if (response.data.success) {
       alert("Successfully Inserted");
       resetForm();
@@ -140,10 +156,24 @@ const update = async () => {
   }
 };
 
+// const submit = () => {
+//   if (empId) {
+//     update();
+//   } else {
+//     submitForm();
+//   }
+// };
+
 const submit = () => {
-  if (empId) {
+  if(empEdit.nominee == null){
+    console.log('edit');
+    submitForm();
+  }
+  else if (empId) {
+    console.log('update');
     update();
   } else {
+    console.log('insert');
     submitForm();
   }
 };

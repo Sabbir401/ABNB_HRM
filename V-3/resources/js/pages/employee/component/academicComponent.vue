@@ -25,7 +25,6 @@ const educations = ref([]);
 const boards = ref([]);
 const scales = ref([]);
 const degree = ref([]);
-const abc = reactive([]);
 
 const form = ref({
   eid: EID,
@@ -43,11 +42,13 @@ const form = ref({
 
 const instance = getCurrentInstance();
 
-watch(editStore, (newEmpData) => {
+watch(editStore.value, (newEmpData) => {
   if (newEmpData) {
-    form.value.major = newEmpData.EID;
-    console.log(editStore);
+    form.value.institute = "newEmpData";
 
+    // if (newEmpData.department) {
+    //   official.value.departmentId = newEmpData.department.id;
+    // }
 
   }
 });
@@ -133,24 +134,6 @@ const update = async () => {
   }
 };
 
-watch(
-  () => editStore,
-  (newValue) => {
-    if (newValue) {
-      form.levelofEduId = newValue.levelofEduId;
-      form.degreeId = newValue.degreeId;
-      form.institute = newValue.institute;
-      form.boardId = newValue.boardId;
-      form.major = newValue.major;
-      form.scaleId = newValue.scaleId;
-      form.result = newValue.result;
-      form.yop = newValue.yop;
-      form.acheivement = newValue.acheivement;
-      form.remarks = newValue.remarks;
-    }
-  },
-  { immediate: true }
-);
 
 const submit = () => {
   if (updateinfo === "Save") {
