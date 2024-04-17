@@ -7,16 +7,17 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 
 const empId = parseInt(route.params.id);
-console.log(empId);
-
 const emp = ref([]);
 const error = ref([]);
+const emp_img = ref([]);
 
 const getData = async () => {
   try {
     const response = await axios.get(`/api/employee/${empId}/edit`);
-
     emp.value = response.data;
+    const responseimg = await axios.get(`/api/empimg/${empId}`);
+    emp_img.value = responseimg.data;
+    // console.log(emp_img.value);
   } catch (err) {
     error.value = err.message || "Error fetching data";
   } finally {
@@ -32,7 +33,6 @@ const mapGender = (status) => {
 
   return statusMap[status] || "N/A";
 };
-
 
 const mapStatus = (status) => {
   const statusMap = {
@@ -61,11 +61,7 @@ onMounted(() => getData());
     <div class="col-lg-4 col-md-4 col-sm-6 border">
       <div class="card mb-3 mt-3">
         <div class="card-body text-center">
-          <img
-            src="../../assets/images/profile/profile.jpg"
-            width="40%"
-            alt=""
-          />
+          <div v-for="i in emp_img" :key="i.id"><img :src="i.img_url" height="100%" width="100%" /></div>
           <h5 class="pt-3">{{ emp.Full_Name }}</h5>
           <p class="m-0" v-for="desig in emp.official" :key="desig.id">
             {{ desig.designation.Name }}
@@ -78,7 +74,12 @@ onMounted(() => getData());
       <div class="card pi mb-3">
         <div class="card-body p-2">
           <h4 class="text-center">Nominee Information</h4>
-          <table border="1" width="100%" v-for="nom in emp.nominee" :key="nom.id">
+          <table
+            border="1"
+            width="100%"
+            v-for="nom in emp.nominee"
+            :key="nom.id"
+          >
             <tr>
               <th>Full Name</th>
               <td>{{ nom.Nominee_Name }}</td>
@@ -197,7 +198,12 @@ onMounted(() => getData());
       </div>
       <div class="card mb-3">
         <div class="card-body p-2">
-          <table border="1" width="100%" v-for="off in emp.official" :key="off.id">
+          <table
+            border="1"
+            width="100%"
+            v-for="off in emp.official"
+            :key="off.id"
+          >
             <tr>
               <th class="p-2 text-center" colspan="4">Official Information</th>
             </tr>
@@ -231,13 +237,17 @@ onMounted(() => getData());
               <th class="p-2">Shift</th>
               <td class="p-2">{{ mapShift(emp.Shift) }}</td>
             </tr>
-
           </table>
         </div>
       </div>
       <div class="card mb-3">
         <div class="card-body p-2">
-          <table border="1" width="100%" v-for="work in emp.experience" :key="work.id">
+          <table
+            border="1"
+            width="100%"
+            v-for="work in emp.experience"
+            :key="work.id"
+          >
             <tr>
               <th class="p-2 text-center" colspan="4">Work Experience</th>
             </tr>
@@ -276,7 +286,12 @@ onMounted(() => getData());
       </div>
       <div class="card mb-3">
         <div class="card-body p-2">
-          <table border="1" width="100%" v-for="train in emp.training" :key="train.id">
+          <table
+            border="1"
+            width="100%"
+            v-for="train in emp.training"
+            :key="train.id"
+          >
             <tr>
               <th class="p-2 text-center" colspan="4">Training Information</th>
             </tr>
@@ -296,7 +311,6 @@ onMounted(() => getData());
               <th class="p-2">Topic Covered</th>
               <td class="p-2">{{ train.Topic_Covered }}</td>
             </tr>
-
           </table>
         </div>
       </div>
@@ -315,15 +329,13 @@ onMounted(() => getData());
               <th class="p-2">Acheivement</th>
             </tr>
             <tr v-for="aca in emp.academic" :key="aca.id">
-                <td>{{ aca.education.Name }}</td>
-                <td>{{ aca.Institute_Name }}</td>
-                <td>{{ aca.board.Name }}</td>
-                <td>{{ aca.Result }} {{ aca.scale.Name }}</td>
-                <td>{{ aca.Year_of_Passing }}</td>
-                <td>{{ aca.Acheivement }}</td>
+              <td>{{ aca.education.Name }}</td>
+              <td>{{ aca.Institute_Name }}</td>
+              <td>{{ aca.board.Name }}</td>
+              <td>{{ aca.Result }} {{ aca.scale.Name }}</td>
+              <td>{{ aca.Year_of_Passing }}</td>
+              <td>{{ aca.Acheivement }}</td>
             </tr>
-
-
           </table>
         </div>
       </div>
@@ -341,7 +353,7 @@ onMounted(() => getData());
   width: 60%;
 }
 
-*{
-    font-size: 14px;
+* {
+  font-size: 14px;
 }
 </style>

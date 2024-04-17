@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('EID');
             $table->string('img_url',255);
+            $table->timestamps();
 
             $table->foreign('EID')->references('id')->on('employees')->onDelete('cascade');
         });

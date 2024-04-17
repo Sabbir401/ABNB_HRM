@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\company;
+use App\Models\emp_img;
 use App\Models\employee;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,16 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $request->validate([
+            'file' => 'required|mimes:jpg,jpeg,png,csv,txt,xlx,xls,xlsx,pdf|max:2048'
+        ]);
+
+        $file = new employee();
+        if ($request->file()) {
+            $file_name = time() . '_' . $request->file->getClientOriginalName();
+            $file_path = $request->file('file')->storeAs('uploads', $file_name, 'public');
+        }
+
         $store = employee::create([
             'Company_Id' => $request->input('companyId'),
             'Employee_Id' => $request->input('employeeId'),
@@ -53,6 +63,11 @@ class EmployeeController extends Controller
             'Religion_Id' => $request->input('religion'),
             'Nationality' => $request->input('nationality'),
             'NID' => $request->input('nid'),
+        ]);
+
+        $image = emp_img::create([
+            'EID' => $store->id,
+            'img_url' => '/storage/'. $file_path,
         ]);
 
         $lastId = employee::latest('id')->value('id');
@@ -137,8 +152,8 @@ class EmployeeController extends Controller
             'official.territory',
             'official.supervisor',
             'official.country',
-        ])->where('Department_Id',$id)
-        ->get();;
+        ])->where('Department_Id', $id)
+            ->get();;
 
         if (!$employee) {
             return response()->json(['message' => 'Employee not found'], 404);

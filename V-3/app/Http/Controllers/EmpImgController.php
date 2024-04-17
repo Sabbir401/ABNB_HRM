@@ -42,9 +42,13 @@ class EmpImgController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(emp_img $emp_img)
+    public function edit($id)
     {
-        //
+        $image = emp_img::with('employee')
+        ->where('EID',$id)
+        ->get();
+
+        return response()->json($image);
     }
 
     /**

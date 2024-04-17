@@ -12,6 +12,7 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DegreeController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DesignationController;
+use App\Http\Controllers\EmpImgController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeTypeController;
 use App\Http\Controllers\LevelOfEducationController;
@@ -55,6 +56,7 @@ Route::resource('/brand', BrandController::class);
 // Route::get('/store', [StoreController::class, 'show'])->name('store.index');
 
 Route::get('/emp/{id}', [EmployeeController::class, 'find']);
+Route::get('/empimg/{id}', [EmpImgController::class, 'edit']);
 
 Route::put('/nominee/{id}', [NomineeController::class, 'update']);
 
