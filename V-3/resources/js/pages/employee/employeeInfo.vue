@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, reactive } from "vue";
 import axios from "axios";
 import { useStore } from "vuex";
 
@@ -31,7 +31,7 @@ const employee = ref({
   bloodGroup: "",
   nationality: "",
   nid: "",
-  photo: "",
+  photo: null,
 });
 
 const bloods = ref([]);
@@ -41,7 +41,7 @@ const phones = ref([]);
 const error = ref([]);
 const empEdit = ref([]);
 
-watch(empEdit, (newEmpData) => {
+watch( () => empEdit.value, (newEmpData) => {
   if (newEmpData) {
     employee.value.companyId = newEmpData.company.Name;
     employee.value.employeeId = newEmpData.Employee_Id;
@@ -76,21 +76,17 @@ watch(empEdit, (newEmpData) => {
     }
 
     if (newEmpData.academic) {
-      newEmpData.academic.forEach((academic) => {
-      });
+      newEmpData.academic.forEach((academic) => {});
     }
     if (newEmpData.training) {
-      newEmpData.training.forEach((training) => {
-
-      });
+      newEmpData.training.forEach((training) => {});
     }
     if (newEmpData.experience) {
-      newEmpData.experience.forEach((experience) => {
-      });
+      newEmpData.experience.forEach((experience) => {});
     }
-
   }
 });
+
 
 const getData = async () => {
   try {
@@ -129,7 +125,6 @@ const resetForm = () => {
   });
 };
 
-// const store = useStore();
 
 const editHandler = async () => {
   try {
@@ -140,9 +135,31 @@ const editHandler = async () => {
   }
 };
 
+const getImage = (e) => {
+  employee.photo = e.target.files[0];
+  console.log(employee.photo);
+};
+
 const submitForm = async () => {
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  let data = new FormData();
+
+  // Append the employee photo
+  data.append("file", employee.photo);
+
+  // Append all other properties of the employee object
+  for (const key in employee.value) {
+    if (employee.value.hasOwnProperty(key) && key !== 'photo') {
+      data.append(key, employee.value[key]);
+    }
+  }
+
   try {
-    const response = await axios.post("/api/employee", employee.value);
+    const response = await axios.post("/api/employee", data, config);
     if (response.data.success) {
       store.dispatch("setEmployeeId", response.data.empid);
       resetForm();
@@ -152,6 +169,34 @@ const submitForm = async () => {
     console.error("Error submitting form:", err);
   }
 };
+
+// const submitForm = async () => {
+//   const config = {
+//     headers: {
+//       "Content-Type": "multipart/form-data",
+//     },
+//   };
+//   let data = new FormData();
+//   data.append("file", employee.photo);
+
+//   for (const key in employee) {
+//     if (Object.hasOwnProperty.call(employee, key)) {
+//         const value = employee[key];
+//         data.append(key, value);
+//         console.log(data);
+//     }
+//   }
+//   try {
+//     const response = await axios.post("/api/employee", data, config);
+//     if (response.data.success) {
+//       store.dispatch("setEmployeeId", response.data.empid);
+//       resetForm();
+//       alert("Successfully Inserted");
+//     }
+//   } catch (err) {
+//     console.error("Error submitting form:", err);
+//   }
+// };
 
 const update = async () => {
   try {
@@ -448,6 +493,7 @@ onMounted(() => getData());
             class="form-control"
             id="disabledTextInput"
             aria-describedby="emailHelp"
+            @change="getImage"
           />
         </div>
       </div>

@@ -30,6 +30,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $store = employee::create([
             'Company_Id' => $request->input('companyId'),
             'Employee_Id' => $request->input('employeeId'),
