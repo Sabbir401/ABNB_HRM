@@ -41,52 +41,54 @@ const phones = ref([]);
 const error = ref([]);
 const empEdit = ref([]);
 
-watch( () => empEdit.value, (newEmpData) => {
-  if (newEmpData) {
-    employee.value.companyId = newEmpData.company.Name;
-    employee.value.employeeId = newEmpData.Employee_Id;
-    employee.value.cardNo = newEmpData.Card_No;
-    employee.value.fullName = newEmpData.Full_Name;
-    employee.value.fatherName = newEmpData.Father_Name;
-    employee.value.motherName = newEmpData.Mother_Name;
-    employee.value.spouseName = newEmpData.Spouse_Name;
-    employee.value.maritalStatus = newEmpData.Marital_Status;
-    employee.value.dob = newEmpData.DOB;
-    employee.value.pob = newEmpData.Place_of_Birth;
-    employee.value.presentAddress = newEmpData.Present_Address;
-    employee.value.permanentAddress = newEmpData.Permanent_Address;
-    employee.value.officialContact = newEmpData.Contact_No;
-    employee.value.emergencyContact = newEmpData.Emergency_Contact;
-    employee.value.gender = newEmpData.Gender;
-    employee.value.personalEmail = newEmpData.Personal_Email;
-    employee.value.officialEmail = newEmpData.Official_Email;
-    employee.value.religion = newEmpData.Religion_Id;
-    employee.value.bloodGroup = newEmpData.Blood_Group_Id;
-    employee.value.nationality = newEmpData.Nationality;
-    employee.value.nid = newEmpData.NID;
+watch(
+  () => empEdit.value,
+  (newEmpData) => {
+    if (newEmpData) {
+      employee.value.companyId = newEmpData.company.Name;
+      employee.value.employeeId = newEmpData.Employee_Id;
+      employee.value.cardNo = newEmpData.Card_No;
+      employee.value.fullName = newEmpData.Full_Name;
+      employee.value.fatherName = newEmpData.Father_Name;
+      employee.value.motherName = newEmpData.Mother_Name;
+      employee.value.spouseName = newEmpData.Spouse_Name;
+      employee.value.maritalStatus = newEmpData.Marital_Status;
+      employee.value.dob = newEmpData.DOB;
+      employee.value.pob = newEmpData.Place_of_Birth;
+      employee.value.presentAddress = newEmpData.Present_Address;
+      employee.value.permanentAddress = newEmpData.Permanent_Address;
+      employee.value.officialContact = newEmpData.Contact_No;
+      employee.value.emergencyContact = newEmpData.Emergency_Contact;
+      employee.value.gender = newEmpData.Gender;
+      employee.value.personalEmail = newEmpData.Personal_Email;
+      employee.value.officialEmail = newEmpData.Official_Email;
+      employee.value.religion = newEmpData.Religion_Id;
+      employee.value.bloodGroup = newEmpData.Blood_Group_Id;
+      employee.value.nationality = newEmpData.Nationality;
+      employee.value.nid = newEmpData.NID;
 
-    if (newEmpData.company) {
-      employee.value.companyId = newEmpData.company.id;
-    }
-    if (newEmpData.blood) {
-      employee.value.bloodGroup = newEmpData.blood.id;
-    }
-    if (newEmpData.religion) {
-      employee.value.religion = newEmpData.religion.id;
-    }
+      if (newEmpData.company) {
+        employee.value.companyId = newEmpData.company.id;
+      }
+      if (newEmpData.blood) {
+        employee.value.bloodGroup = newEmpData.blood.id;
+      }
+      if (newEmpData.religion) {
+        employee.value.religion = newEmpData.religion.id;
+      }
 
-    if (newEmpData.academic) {
-      newEmpData.academic.forEach((academic) => {});
-    }
-    if (newEmpData.training) {
-      newEmpData.training.forEach((training) => {});
-    }
-    if (newEmpData.experience) {
-      newEmpData.experience.forEach((experience) => {});
+      if (newEmpData.academic) {
+        newEmpData.academic.forEach((academic) => {});
+      }
+      if (newEmpData.training) {
+        newEmpData.training.forEach((training) => {});
+      }
+      if (newEmpData.experience) {
+        newEmpData.experience.forEach((experience) => {});
+      }
     }
   }
-});
-
+);
 
 const getData = async () => {
   try {
@@ -125,7 +127,6 @@ const resetForm = () => {
   });
 };
 
-
 const editHandler = async () => {
   try {
     const response = await axios.get(`/api/employee/${empId}/edit`);
@@ -148,12 +149,10 @@ const submitForm = async () => {
   };
   let data = new FormData();
 
-  // Append the employee photo
   data.append("file", employee.photo);
 
-  // Append all other properties of the employee object
   for (const key in employee.value) {
-    if (employee.value.hasOwnProperty(key) && key !== 'photo') {
+    if (employee.value.hasOwnProperty(key) && key !== "photo") {
       data.append(key, employee.value[key]);
     }
   }
@@ -170,34 +169,6 @@ const submitForm = async () => {
   }
 };
 
-// const submitForm = async () => {
-//   const config = {
-//     headers: {
-//       "Content-Type": "multipart/form-data",
-//     },
-//   };
-//   let data = new FormData();
-//   data.append("file", employee.photo);
-
-//   for (const key in employee) {
-//     if (Object.hasOwnProperty.call(employee, key)) {
-//         const value = employee[key];
-//         data.append(key, value);
-//         console.log(data);
-//     }
-//   }
-//   try {
-//     const response = await axios.post("/api/employee", data, config);
-//     if (response.data.success) {
-//       store.dispatch("setEmployeeId", response.data.empid);
-//       resetForm();
-//       alert("Successfully Inserted");
-//     }
-//   } catch (err) {
-//     console.error("Error submitting form:", err);
-//   }
-// };
-
 const update = async () => {
   try {
     const response = await axios.put(`/api/employee/${empId}`, employee.value);
@@ -206,7 +177,7 @@ const update = async () => {
       resetForm();
     }
   } catch (error) {
-    console.error("Error updating store:", error);
+    console.error("Error updating employee:", error);
     // Handle the error, e.g., display an error message
   }
 };
@@ -234,7 +205,7 @@ onMounted(() => getData());
     <form @submit.prevent="submit">
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="" class="">Company Name</label>
+          <label for="" class="">Company Name*</label>
           <select
             v-model="employee.companyId"
             name=""
@@ -252,7 +223,7 @@ onMounted(() => getData());
           </select>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="exampleInputEmail1" class="">Employee ID</label>
+          <label for="exampleInputEmail1" class="">Employee ID*</label>
           <input
             type="text"
             class="form-control"
@@ -275,7 +246,7 @@ onMounted(() => getData());
 
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="exampleInputEmail1" class="">Full Name</label>
+          <label for="exampleInputEmail1" class="">Full Name*</label>
           <input
             type="text"
             class="form-control"
@@ -333,7 +304,7 @@ onMounted(() => getData());
           </select>
         </div>
         <div class="col-lg-2 col-md-3 col-sm-6">
-          <label for="exampleInputEmail1" class="">Date of Birth</label>
+          <label for="exampleInputEmail1" class="">Date of Birth*</label>
           <input
             type="date"
             class="form-control"

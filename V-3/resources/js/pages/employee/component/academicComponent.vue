@@ -42,17 +42,6 @@ const form = ref({
 
 const instance = getCurrentInstance();
 
-watch(editStore.value, (newEmpData) => {
-  if (newEmpData) {
-    form.value.institute = "newEmpData";
-
-    // if (newEmpData.department) {
-    //   official.value.departmentId = newEmpData.department.id;
-    // }
-
-  }
-});
-
 const getData = async () => {
   try {
     const responseEducation = await axios.get("/api/education");
@@ -130,7 +119,6 @@ const update = async () => {
     }
   } catch (error) {
     console.error("Error updating store:", error);
-    // Handle the error, e.g., display an error message
   }
 };
 
@@ -156,8 +144,8 @@ const submit = () => {
   >
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Academic Information {{ editStore }}</h4>
-        <form class="forms-sample" @submit.prevent="submit">
+        <h4 class="card-title">Academic Information</h4>
+        <form class="forms-sample" @submit.prevent="create">
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">

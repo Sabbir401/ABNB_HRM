@@ -189,7 +189,7 @@ onMounted(() => getData());
     <form @submit.prevent="submit">
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="exampleInputEmail1" class="">Nominee Name</label>
+          <label for="exampleInputEmail1" class="">Nominee Name*</label>
           <input
             type="text"
             class="form-control"
@@ -199,7 +199,7 @@ onMounted(() => getData());
           />
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="exampleInputEmail1" class="">Date of Birth</label>
+          <label for="exampleInputEmail1" class="">Date of Birth*</label>
           <input
             type="date"
             class="form-control"
@@ -209,7 +209,7 @@ onMounted(() => getData());
           />
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="exampleInputEmail1" class="">Contact No</label>
+          <label for="exampleInputEmail1" class="">Contact No*</label>
           <input
             type="text"
             class="form-control"

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('emp_imgs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('EID');
-            $table->string('img_url',255);
+            $table->unsignedBigInteger('EID')->nullable();
+            $table->string('img_url',255)->nullable();
             $table->timestamps();
 
             $table->foreign('EID')->references('id')->on('employees')->onDelete('cascade');

@@ -6,6 +6,7 @@ use App\Models\company;
 use App\Models\emp_img;
 use App\Models\employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
@@ -31,53 +32,80 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'file' => 'required|mimes:jpg,jpeg,png,csv,txt,xlx,xls,xlsx,pdf|max:2048'
-        ]);
+        // $request->validate([
+        //     'file' => 'required|mimes:jpg,jpeg,png,csv,txt,xlx,xls,xlsx,pdf|max:2048'
+        // ]);
 
-        $file = new employee();
-        if ($request->file()) {
+        // $file = new employee();
+        // if ($request->file()) {
+        //     $file_name = time() . '_' . $request->file->getClientOriginalName();
+        //     $file_path = $request->file('file')->storeAs('uploads', $file_name, 'public');
+        // }
+
+        // $request->validate([
+        //     'file' => 'nullable|mimes:jpg,jpeg,png,csv,txt,xlx,xls,xlsx,pdf|max:2048'
+        // ]);
+
+        $file_path = null;
+
+        if ($request->hasFile('file')) {
+            $request->validate([
+                'file' => 'required|mimes:jpg,jpeg,png,csv,txt,xlx,xls,xlsx,pdf|max:2048'
+            ]);
+
             $file_name = time() . '_' . $request->file->getClientOriginalName();
             $file_path = $request->file('file')->storeAs('uploads', $file_name, 'public');
         }
 
-        $store = employee::create([
-            'Company_Id' => $request->input('companyId'),
-            'Employee_Id' => $request->input('employeeId'),
-            'Card_No' => $request->input('cardNo'),
-            'Full_Name' => $request->input('fullName'),
-            'Father_Name' => $request->input('fatherName'),
-            'Mother_Name' => $request->input('motherName'),
-            'Spouse_Name' => $request->input('spouseName'),
-            'Marital_Status' => $request->input('maritalStatus'),
-            'DOB' => $request->input('dob'),
-            'Place_of_Birth' => $request->input('pob'),
-            'Present_Address' => $request->input('presentAddress'),
-            'Permanent_Address' => $request->input('permanentAddress'),
-            'Contact_No' => $request->input('officialContact'),
-            'Emergency_Contact' => $request->input('emergencyContact'),
-            'Gender' => $request->input('gender'),
-            'Personal_Email' => $request->input('personalEmail'),
-            'Official_Email' => $request->input('officialEmail'),
-            'Blood_Group_Id' => $request->input('bloodGroup'),
-            'Religion_Id' => $request->input('religion'),
-            'Nationality' => $request->input('nationality'),
-            'NID' => $request->input('nid'),
-        ]);
+        try {
+            DB::beginTransaction();
 
-        $image = emp_img::create([
-            'EID' => $store->id,
-            'img_url' => '/storage/'. $file_path,
-        ]);
+            $store = employee::create([
+                'Company_Id' => $request->input('companyId'),
+                'Employee_Id' => $request->input('employeeId'),
+                'Card_No' => $request->input('cardNo'),
+                'Full_Name' => $request->input('fullName'),
+                'Father_Name' => $request->input('fatherName'),
+                'Mother_Name' => $request->input('motherName'),
+                'Spouse_Name' => $request->input('spouseName'),
+                'Marital_Status' => $request->input('maritalStatus'),
+                'DOB' => $request->input('dob'),
+                'Place_of_Birth' => $request->input('pob'),
+                'Present_Address' => $request->input('presentAddress'),
+                'Permanent_Address' => $request->input('permanentAddress'),
+                'Contact_No' => $request->input('officialContact'),
+                'Emergency_Contact' => $request->input('emergencyContact'),
+                'Gender' => $request->input('gender'),
+                'Personal_Email' => $request->input('personalEmail'),
+                'Official_Email' => $request->input('officialEmail'),
+                'Blood_Group_Id' => $request->input('bloodGroup'),
+                'Religion_Id' => $request->input('religion'),
+                'Nationality' => $request->input('nationality'),
+                'NID' => $request->input('nid'),
+            ]);
 
-        $lastId = employee::latest('id')->value('id');
-        $response = [
-            'success'   =>  true,
-            'message'   =>  'Successfully inserted',
-            'empid' => $lastId,
-        ];
+            $image = emp_img::create([
+                'EID' => $store->id,
+                'img_url' => '/storage/' . $file_path,
+            ]);
 
-        return response()->json($response);
+            $lastId = employee::latest('id')->value('id');
+            $response = [
+                'success'   =>  true,
+                'message'   =>  'Successfully inserted',
+                'empid' => $lastId,
+            ];
+
+            DB::commit();
+            return response()->json($response);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $response = [
+                'success'   =>  false,
+                'message'   =>  'Error while inserting',
+            ];
+            return response()->json($response);
+        }
     }
 
     /**
@@ -167,37 +195,49 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $employee = employee::find($id);
-        $employee->update([
-            'Company_Id' => $request->input('companyId'),
-            'Employee_Id' => $request->input('employeeId'),
-            'Card_No' => $request->input('cardNo'),
-            'Full_Name' => $request->input('fullName'),
-            'Father_Name' => $request->input('fatherName'),
-            'Mother_Name' => $request->input('motherName'),
-            'Spouse_Name' => $request->input('spouseName'),
-            'Marital_Status' => $request->input('maritalStatus'),
-            'DOB' => $request->input('dob'),
-            'Place_of_Birth' => $request->input('pob'),
-            'Present_Address' => $request->input('presentAddress'),
-            'Permanent_Address' => $request->input('permanentAddress'),
-            'Contact_No' => $request->input('officialContact'),
-            'Emergency_Contact' => $request->input('emergencyContact'),
-            'Gender' => $request->input('gender'),
-            'Personal_Email' => $request->input('personalEmail'),
-            'Official_Email' => $request->input('officialEmail'),
-            'Blood_Group_Id' => $request->input('bloodGroup'),
-            'Religion_Id' => $request->input('religion'),
-            'Nationality' => $request->input('nationality'),
-            'NID' => $request->input('nid'),
-        ]);
 
-        $response = [
-            'success' => true,
-            'message'  => 'Updated Successfully'
-        ];
+        try {
+            DB::beginTransaction();
 
-        return response()->json($response);
+            $employee = employee::find($id);
+            $employee->update([
+                'Company_Id' => $request->input('companyId'),
+                'Employee_Id' => $request->input('employeeId'),
+                'Card_No' => $request->input('cardNo'),
+                'Full_Name' => $request->input('fullName'),
+                'Father_Name' => $request->input('fatherName'),
+                'Mother_Name' => $request->input('motherName'),
+                'Spouse_Name' => $request->input('spouseName'),
+                'Marital_Status' => $request->input('maritalStatus'),
+                'DOB' => $request->input('dob'),
+                'Place_of_Birth' => $request->input('pob'),
+                'Present_Address' => $request->input('presentAddress'),
+                'Permanent_Address' => $request->input('permanentAddress'),
+                'Contact_No' => $request->input('officialContact'),
+                'Emergency_Contact' => $request->input('emergencyContact'),
+                'Gender' => $request->input('gender'),
+                'Personal_Email' => $request->input('personalEmail'),
+                'Official_Email' => $request->input('officialEmail'),
+                'Blood_Group_Id' => $request->input('bloodGroup'),
+                'Religion_Id' => $request->input('religion'),
+                'Nationality' => $request->input('nationality'),
+                'NID' => $request->input('nid'),
+            ]);
+
+            $response = [
+                'success' => true,
+                'message'  => 'Updated Successfully'
+            ];
+            DB::commit();
+            return response()->json($response);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $response = [
+                'success'   =>  false,
+                'message'   =>  'Error while inserting',
+            ];
+            return response()->json($response);
+        }
     }
 
     /**

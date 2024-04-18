@@ -34,8 +34,6 @@ const form = ref({
 
 const instance = getCurrentInstance();
 
-
-
 const getData = async () => {
   try {
     const responseScale = await axios.get("/api/scale");
@@ -117,8 +115,8 @@ const submit = () => {
   >
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Training Information {{ editStore }}</h4>
-        <form class="forms-sample" @submit.prevent="submit">
+        <h4 class="card-title">Training Information</h4>
+        <form class="forms-sample" @submit.prevent="create">
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">

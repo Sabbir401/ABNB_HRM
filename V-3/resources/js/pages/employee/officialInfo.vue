@@ -172,7 +172,7 @@ onMounted(() => getData());
     <form @submit.prevent="submit">
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="" class="">Department {{ empEdit.value }}</label>
+          <label for="" class="">Department*</label>
           <select
             class="form-control"
             name="status"
@@ -190,7 +190,7 @@ onMounted(() => getData());
           </select>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="" class="">Designation</label>
+          <label for="" class="">Designation*</label>
           <select
             class="form-control"
             name="status"
@@ -208,7 +208,7 @@ onMounted(() => getData());
           </select>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="" class="">Employee Grade</label>
+          <label for="" class="">Employee Grade*</label>
           <select
             name=""
             id=""
@@ -270,7 +270,7 @@ onMounted(() => getData());
           </select>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="" class="">Employee Type</label>
+          <label for="" class="">Employee Type*</label>
           <select
             class="form-control"
             name="status"
