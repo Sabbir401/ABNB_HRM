@@ -9,9 +9,10 @@ const store = useStore();
 const empId = parseInt(route.params.id);
 
 const empEdit = ref(null);
+var flag = 0;
 
 const nominee = ref({
-  eid: store.state.employeeId || empId,
+  eid: empId || store.state.employeeId,
   nomineeName: "",
   dob: "",
   contactNo: "",
@@ -22,14 +23,13 @@ const nominee = ref({
 });
 
 const child = ref({
-  eid: store.state.employeeId || empId,
+  eid: empId || store.state.employeeId,
   childName: "",
   nid: "",
   email: "",
   contactNo: "",
   dob: "",
 });
-
 
 watch(empEdit, (newEmpData) => {
   if (newEmpData) {
@@ -49,17 +49,13 @@ watch(empEdit, (newEmpData) => {
   }
 });
 
-
 const error = ref([]);
-
-
 
 const getData = async () => {
   try {
     if (empId) {
       editHandler();
     }
-
   } catch (err) {
     error.value = err.message || "Error fetching data";
   } finally {
@@ -73,50 +69,21 @@ const resetForm1 = () => {
 };
 
 const resetForm = () => {
-  Object.keys(employee.value).forEach((key) => {
-    if (typeof employee.value[key] === "string") {
-      employee.value[key] = "";
+  Object.keys(nominee.value).forEach((key) => {
+    if (typeof nominee.value[key] === "string") {
+        nominee.value[key] = "";
     }
   });
 };
-
-// const editHandler = async () => {
-//   try {
-//     const requestData = await axios.get(`/api/nominee/${empId}/edit`);
-//     const responseData = requestData.data;
-
-//     if (responseData.nominee && responseData.nominee.length > 0) {
-//       const nomineeData = responseData.nominee[0];
-//       nominee.value = {
-//         nomineeName: nomineeData.Nominee_Name,
-//         dob: nomineeData.DOB,
-//         contactNo: nomineeData.Contact_No,
-//         email: nomineeData.Email,
-//         nid: nomineeData.NID,
-//         share: nomineeData.Share,
-//         presentAddress: nomineeData.Personal_Address
-//       };
-//     }
-//     if (responseData.child && responseData.child.length > 0) {
-//       const childData = responseData.child[0];
-//       child.value = {
-//         childName: childData.Child_Name,
-//         nid: childData.NID,
-//         email: childData.Email,
-//         contactNo: childData.Contact_No,
-//         dob: childData.DOB
-//       };
-//     }
-//   } catch (err) {
-//     console.error("Error fetching store data for editing:", err);
-//   }
-// };
-
 
 const editHandler = async () => {
   try {
     const response = await axios.get(`/api/nominee/${empId}/edit`);
     empEdit.value = response.data;
+    console.log(empEdit.nominee.Nominee_Name);
+    if(empEdit){
+        flag =1;
+    }
   } catch (err) {
     console.error("Error fetching store data for editing:", err);
   }
@@ -147,8 +114,6 @@ const update = async () => {
     const response = await axios.put(`/api/nominee/${empId}`, requestData);
     if (response.data.success) {
       alert("Successfully Updated");
-      resetForm();
-      resetForm1();
     }
   } catch (error) {
     console.error("Error updating store:", error);
@@ -164,16 +129,13 @@ const update = async () => {
 //   }
 // };
 
-const submit = () => {
-  if(empEdit.nominee == null){
-    console.log('edit');
-    submitForm();
-  }
-  else if (empId) {
+const submit = async () => {
+    console.log(empEdit);
+  if(flag == 1){
     console.log('update');
     update();
   } else {
-    console.log('insert');
+    console.log('else');
     submitForm();
   }
 };
@@ -185,7 +147,7 @@ onMounted(() => getData());
 
 <template>
   <div class="mt-5">
-    <h2 class="fs-4">Nominee Information </h2>
+    <h2 class="fs-4">Nominee Information</h2>
     <form @submit.prevent="submit">
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">

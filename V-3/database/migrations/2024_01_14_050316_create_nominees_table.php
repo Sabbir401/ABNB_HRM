@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('nominees', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('EID');
+            $table->unsignedBigInteger('EID')->unique();
             $table->string('Nominee_Name',50);
             $table->date('DOB');
             $table->string('Contact_No',20);

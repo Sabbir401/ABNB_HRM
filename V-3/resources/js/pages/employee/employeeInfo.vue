@@ -170,8 +170,24 @@ const submitForm = async () => {
 };
 
 const update = async () => {
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  let data = new FormData();
+
+  data.append("file", employee.photo);
+
+  for (const key in employee.value) {
+    if (employee.value.hasOwnProperty(key) && key !== "photo") {
+      data.append(key, employee.value[key]);
+    }
+  }
+  console.log(data);
+
   try {
-    const response = await axios.put(`/api/employee/${empId}`, employee.value);
+    const response = await axios.put(`/api/employee/${empId}`, data, config);
     if (response.data.success) {
       alert("Successfully Updated");
       resetForm();

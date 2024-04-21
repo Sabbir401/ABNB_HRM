@@ -221,7 +221,8 @@ onMounted(() => getData());
             </tr>
             <tr>
               <th class="p-2">Supervisor</th>
-              <td class="p-2">{{ off.supervisor.Full_Name }}</td>
+              <td class="p-2">{{ off.supervisor ? off.supervisor.Full_Name : '' }}</td>
+              <!-- <th class="p-2">Supervisor</th> -->
               <th class="p-2">Provation Period</th>
               <td class="p-2">{{ off.Provation_period }}</td>
             </tr>
@@ -233,7 +234,7 @@ onMounted(() => getData());
             </tr>
             <tr>
               <th class="p-2">Job Location</th>
-              <td class="p-2">{{ off.country.Name }}</td>
+              <td class="p-2">{{ off.country ? off.country.Name : '' }}</td>
               <th class="p-2">Shift</th>
               <td class="p-2">{{ mapShift(emp.Shift) }}</td>
             </tr>

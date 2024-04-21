@@ -48,19 +48,10 @@ class EmployeeController extends Controller
 
         $file_path = null;
 
-        if ($request->hasFile('file')) {
-            $request->validate([
-                'file' => 'required|mimes:jpg,jpeg,png,csv,txt,xlx,xls,xlsx,pdf|max:2048'
-            ]);
-
-            $file_name = time() . '_' . $request->file->getClientOriginalName();
-            $file_path = $request->file('file')->storeAs('uploads', $file_name, 'public');
-        }
-
         try {
             DB::beginTransaction();
 
-            $store = employee::create([
+            $employee = employee::create([
                 'Company_Id' => $request->input('companyId'),
                 'Employee_Id' => $request->input('employeeId'),
                 'Card_No' => $request->input('cardNo'),
@@ -84,10 +75,21 @@ class EmployeeController extends Controller
                 'NID' => $request->input('nid'),
             ]);
 
-            $image = emp_img::create([
-                'EID' => $store->id,
-                'img_url' => '/storage/' . $file_path,
-            ]);
+            if ($request->hasFile('file')) {
+                $request->validate([
+                    'file' => 'required|mimes:jpg,jpeg,png,csv,txt,xlx,xls,xlsx,pdf|max:2048'
+                ]);
+
+                $file_name = time() . '_' . $request->file->getClientOriginalName();
+                $file_path = $request->file('file')->storeAs('uploads', $file_name, 'public');
+
+                $image = emp_img::create([
+                    'EID' => $employee->id,
+                    'img_url' => '/storage/' . $file_path,
+                ]);
+            }
+
+
 
             $lastId = employee::latest('id')->value('id');
             $response = [
@@ -196,8 +198,10 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
 
+
         try {
             DB::beginTransaction();
+            dd($request);
 
             $employee = employee::find($id);
             $employee->update([
@@ -224,6 +228,32 @@ class EmployeeController extends Controller
                 'NID' => $request->input('nid'),
             ]);
 
+            if ($request->hasFile('file')) {
+                $request->validate([
+                    'file' => 'required|mimes:jpg,jpeg,png,csv,txt,xlx,xls,xlsx,pdf|max:2048'
+                ]);
+
+                $existingImage = emp_img::where('EID', $employee->id)->first();
+                dd($existingImage);
+
+                if ($existingImage) {
+                    $file_name = time() . '_' . $request->file->getClientOriginalName();
+                    $file_path = $request->file('file')->storeAs('uploads', $file_name, 'public');
+
+                    $existingImage->update([
+                        'img_url' => '/storage/' . $file_path,
+                    ]);
+                } else {
+                    $file_name = time() . '_' . $request->file->getClientOriginalName();
+                    $file_path = $request->file('file')->storeAs('uploads', $file_name, 'public');
+
+                    $image = emp_img::create([
+                        'EID' => $employee->id,
+                        'img_url' => '/storage/' . $file_path,
+                    ]);
+                }
+            }
+
             $response = [
                 'success' => true,
                 'message'  => 'Updated Successfully'
@@ -234,7 +264,7 @@ class EmployeeController extends Controller
             DB::rollback();
             $response = [
                 'success'   =>  false,
-                'message'   =>  'Error while inserting',
+                'message'   =>  'Error while updating',
             ];
             return response()->json($response);
         }

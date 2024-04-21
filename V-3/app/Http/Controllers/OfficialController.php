@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\official;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OfficialController extends Controller
 {
@@ -75,7 +76,8 @@ class OfficialController extends Controller
             'supervisor',
             'country'
 
-        ])->find($id);
+            ])->where('EID', $id)->first();
+            // dd($official);
 
         if (!$official) {
             return response()->json(['message' => 'Employee not found'], 404);
