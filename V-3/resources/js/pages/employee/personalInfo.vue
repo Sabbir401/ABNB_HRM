@@ -9,7 +9,6 @@ const store = useStore();
 const empId = parseInt(route.params.id);
 
 const empEdit = ref(null);
-var flag = 0;
 
 const nominee = ref({
   eid: empId || store.state.employeeId,
@@ -81,9 +80,7 @@ const editHandler = async () => {
     const response = await axios.get(`/api/nominee/${empId}/edit`);
     empEdit.value = response.data;
     console.log(empEdit.nominee.Nominee_Name);
-    if(empEdit){
-        flag =1;
-    }
+
   } catch (err) {
     console.error("Error fetching store data for editing:", err);
   }
@@ -121,17 +118,10 @@ const update = async () => {
   }
 };
 
-// const submit = () => {
-//   if (empId) {
-//     update();
-//   } else {
-//     submitForm();
-//   }
-// };
 
 const submit = async () => {
-    console.log(empEdit);
-  if(flag == 1){
+    // console.log(empEdit.value.nominee[0].id);
+  if(empEdit.value.nominee && empEdit.value.nominee.length > 0 && empEdit.value.nominee[0].id){
     console.log('update');
     update();
   } else {

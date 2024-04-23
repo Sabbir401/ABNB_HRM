@@ -51,20 +51,21 @@ const getData = async () => {
     educations.value = responseEducation.data;
     boards.value = responseBoard.data;
     scales.value = responseScale.data;
-    // if (responseBoard) {
-    //   form.value = {
-    //     levelofEduId: editStore.education.education_id,
-    //     degreeId: editStore.education.id,
-    //     institute: editStore.Institute_Name,
-    //     boardId: editStore.Board_Id,
-    //     major: editStore.Group,
-    //     scaleId: editStore.Scale_Id,
-    //     result: editStore.Result,
-    //     yop: editStore.Year_of_Passing,
-    //     acheivement: editStore.Acheivement,
-    //     remarks: editStore.Remarks,
-    //   };
-    // }
+    if (updateinfo === "Update") {
+      console.log("edit");
+      form.value = {
+        levelofEduId: editStore.education.education_id,
+        degreeId: editStore.education.id,
+        institute: editStore.Institute_Name,
+        boardId: editStore.Board_Id,
+        major: editStore.Group,
+        scaleId: editStore.Scale_Id,
+        result: editStore.Result,
+        yop: editStore.Year_of_Passing,
+        acheivement: editStore.Acheivement,
+        remarks: editStore.Remarks,
+      };
+    }
   } catch (err) {
     error.value = err.message || "Error fetching data";
   } finally {
@@ -121,7 +122,6 @@ const update = async () => {
     console.error("Error updating store:", error);
   }
 };
-
 
 const submit = () => {
   if (updateinfo === "Save") {
