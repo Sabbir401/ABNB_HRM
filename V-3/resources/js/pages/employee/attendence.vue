@@ -144,7 +144,9 @@ onMounted(() => getData());
                   </div>
                 </div>
                 <div class="row">
-                    <input type="submit" class="btn btn-primary pl-2 ml-2">
+                    <div class="col-lg-12">
+                        <input type="submit" class="btn btn-success pl-2 form-control">
+                    </div>
                 </div>
               </form>
             </div>
