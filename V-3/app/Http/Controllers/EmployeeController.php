@@ -161,29 +161,11 @@ class EmployeeController extends Controller
 
     public function find($id)
     {
-        $employee = employee::with([
-            'company',
-            'blood',
-            'religion',
-            'academic',
-            'training',
-            'experience',
-            'official',
-            'nominee',
-            'child',
-            'academic.scale',
-            'academic.board',
-            'academic.education',
-            'academic.education.degree',
-            'official.designation',
-            'official.department',
-            'official.area',
-            'official.employeeType',
-            'official.territory',
-            'official.supervisor',
-            'official.country',
-        ])->where('Department_Id', $id)
-            ->get();;
+        $employee = Employee::select('employees.id', 'employees.Full_Name','employees.Employee_Id' , 'departments.Name',)
+            ->join('officials', 'officials.EID', '=', 'employees.id')
+            ->join('departments', 'officials.Department_Id', '=', 'departments.id')
+            ->where('departments.id', '=', $id)
+            ->get();
 
         if (!$employee) {
             return response()->json(['message' => 'Employee not found'], 404);
@@ -197,8 +179,6 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-
         try {
             DB::beginTransaction();
             dd($request);
@@ -234,7 +214,6 @@ class EmployeeController extends Controller
                 ]);
 
                 $existingImage = emp_img::where('EID', $employee->id)->first();
-                dd($existingImage);
 
                 if ($existingImage) {
                     $file_name = time() . '_' . $request->file->getClientOriginalName();

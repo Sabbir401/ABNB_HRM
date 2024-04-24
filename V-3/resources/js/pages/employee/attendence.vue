@@ -8,12 +8,13 @@ import { useRoute } from "vue-router";
 const employee = ref([]);
 const department = ref([]);
 const empp = ref([]);
+const emp_img = ref([]);
 
 const error = ref([]);
 
 const form = ref({
   department: "",
-  degreeId: "",
+  Employee_Name: "",
 });
 
 const getData = async () => {
@@ -33,7 +34,19 @@ const getEmployee = async (id) => {
   try {
     const response = await axios.get(`/api/emp/${id}`);
     empp.value = response.data;
-  } catch (eempprror) {
+    console.log(empp);
+  } catch (error) {
+    console.error("Error updating store:", error);
+    // Handle the error, e.g., display an error message
+  }
+};
+
+const getEmployeeImg = async (id) => {
+  try {
+    const responseimg = await axios.get(`/api/empimg/${id}`);
+    emp_img.value = responseimg.data;
+    console.log(emp_img);
+  } catch (error) {
     console.error("Error updating store:", error);
     // Handle the error, e.g., display an error message
   }
@@ -44,75 +57,109 @@ onMounted(() => getData());
 
 <template>
   <div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <div class="d-flex">
-          <!-- <div class="mr-auto p-2">
-              <div class="row">
-
-              </div>
-            </div>
-            <div class="p-2">
-              <select name="" id="" class="form-control" @change="getDegree(form.levelofEduId)">
-                <option selected disabled>select</option>
-                <option
-                  v-for="emp in employee.data"
-                  :key="emp.id"
-                  :value="emp.id"
-                >
-                  {{ emp.Full_Name }}
-                </option>
-              </select>
-            </div> -->
-          <div class="col-lg-3">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Company</label>
-              <select class="form-control" name="status" id="">
-                <option selected disabled>select</option>
-                <option></option>
-              </select>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Department</label>
-              <select
-                class="form-control"
-                name="status"
-                id=""
-                v-model="form.department"
-                @change="getEmployee(form.department)"
-              >
-                <option selected disabled>select</option>
-                <option
-                  v-for="dept in department"
-                  :key="dept.id"
-                  :value="dept.id"
-                >
-                  {{ dept.Name }}
-                </option>
-              </select>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Employee Name</label>
-              <select class="form-control" name="status" id="">
-                <option selected disabled>select</option>
-                <option
-                  v-for="emp in employee.data"
-                  :key="emp.id"
-                  :value="emp.id"
-                >
-                  {{ emp.Full_Name }}
-                </option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="row text-center">
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
           <div class="text-center">
-            <h3>Attendance of {{}}</h3>
+            <h3 class="mb-5">Manual Attendance Form</h3>
+          </div>
+          <div class="d-flex">
+            <div class="col-lg-8">
+              <form class="forms-sample" @submit.prevent="create">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Department</label>
+                      <select
+                        class="form-control"
+                        name="status"
+                        id=""
+                        v-model="form.department"
+                        @change="getEmployee(form.department)"
+                      >
+                        <option selected disabled>select</option>
+                        <option
+                          v-for="dept in department"
+                          :key="dept.id"
+                          :value="dept.id"
+                        >
+                          {{ dept.Name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Employee Name</label>
+                      <select
+                        class="form-control"
+                        name="status"
+                        id=""
+                        v-model="form.Employee_Name"
+                        @change="getEmployeeImg(form.Employee_Name)"
+                      >
+                        <option v-for="e in empp" :key="e.id" :value="e.id">
+                          {{ e.Full_Name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Office Time In</label>
+                      <input
+                        type="time"
+                        class="form-control"
+                        id="exampleInputEmail1"
+                        placeholder="Address"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Office Time Out</label>
+                      <input
+                        type="time"
+                        class="form-control"
+                        id="exampleInputEmail1"
+                        placeholder="Address"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Date</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="exampleInputEmail1"
+                        placeholder="Address"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <input type="submit" class="btn btn-primary pl-2 ml-2">
+                </div>
+              </form>
+            </div>
+
+            <div class="col-lg-4">
+              <div v-for="i in emp_img" :key="i.id">
+                <img
+                  :src="i.img_url"
+                  height="100%"
+                  width="300px"
+                  style="padding-right: 20%; padding-left: 20%"
+                />
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
