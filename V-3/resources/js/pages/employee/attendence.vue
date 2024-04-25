@@ -14,15 +14,15 @@ const error = ref([]);
 
 const form = ref({
   department: "",
-  Employee_Name: "",
+  Employee_Id: "",
+  Time_In: "",
+  Time_Out: "",
+  Date: "",
 });
 
 const getData = async () => {
   try {
-    // const response = await axios.get("/api/employee");
     const responsedept = await axios.get("/api/department");
-
-    // employee.value = response.data;
     department.value = responsedept.data;
   } catch (err) {
     error.value = err.message || "Error fetching data";
@@ -45,10 +45,29 @@ const getEmployeeImg = async (id) => {
   try {
     const responseimg = await axios.get(`/api/empimg/${id}`);
     emp_img.value = responseimg.data;
-    console.log(emp_img);
   } catch (error) {
     console.error("Error updating store:", error);
     // Handle the error, e.g., display an error message
+  }
+};
+
+const resetForm = () => {
+  Object.keys(form.value).forEach((key) => {
+    if (typeof form.value[key] === "string") {
+      form.value[key] = "";
+    }
+  });
+};
+
+const submit = async () => {
+  try {
+    const response = await axios.post("/api/attendence", form.value);
+    if (response.data.success) {
+      resetForm();
+      alert("Successfully Inserted Attendence");
+    }
+  } catch (error) {
+    console.error("Error submitting Attendence:", error);
   }
 };
 
@@ -61,11 +80,11 @@ onMounted(() => getData());
       <div class="card">
         <div class="card-body">
           <div class="text-center">
-            <h3 class="mb-5">Manual Attendance Form</h3>
+            <h1 class="mb-5">Manual Attendance Form</h1>
           </div>
           <div class="d-flex">
             <div class="col-lg-8">
-              <form class="forms-sample" @submit.prevent="create">
+              <form class="forms-sample" @submit.prevent="submit">
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="form-group">
@@ -95,8 +114,8 @@ onMounted(() => getData());
                         class="form-control"
                         name="status"
                         id=""
-                        v-model="form.Employee_Name"
-                        @change="getEmployeeImg(form.Employee_Name)"
+                        v-model="form.Employee_Id"
+                        @change="getEmployeeImg(form.Employee_Id)"
                       >
                         <option v-for="e in empp" :key="e.id" :value="e.id">
                           {{ e.Full_Name }}
@@ -115,6 +134,7 @@ onMounted(() => getData());
                         class="form-control"
                         id="exampleInputEmail1"
                         placeholder="Address"
+                        v-model="form.Time_In"
                       />
                     </div>
                   </div>
@@ -126,6 +146,7 @@ onMounted(() => getData());
                         class="form-control"
                         id="exampleInputEmail1"
                         placeholder="Address"
+                        v-model="form.Time_Out"
                       />
                     </div>
                   </div>
@@ -139,14 +160,18 @@ onMounted(() => getData());
                         class="form-control"
                         id="exampleInputEmail1"
                         placeholder="Address"
+                        v-model="form.Date"
                       />
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12">
-                        <input type="submit" class="btn btn-success pl-2 form-control">
-                    </div>
+                  <div class="col-lg-12">
+                    <input
+                      type="submit"
+                      class="btn btn-success pl-2 form-control"
+                    />
+                  </div>
                 </div>
               </form>
             </div>
@@ -160,7 +185,6 @@ onMounted(() => getData());
                   style="padding-right: 20%; padding-left: 20%"
                 />
               </div>
-
             </div>
           </div>
         </div>

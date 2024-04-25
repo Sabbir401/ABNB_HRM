@@ -40,6 +40,7 @@ const companies = ref([]);
 const phones = ref([]);
 const error = ref([]);
 const empEdit = ref([]);
+const photoRef = ref(null);
 
 watch(
   () => empEdit.value,
@@ -138,7 +139,9 @@ const editHandler = async () => {
 
 const getImage = (e) => {
   employee.photo = e.target.files[0];
-  console.log(employee.photo);
+  photoRef = e.target.files[0];
+
+  //   console.log(employee.photo);
 };
 
 const submitForm = async () => {
@@ -156,6 +159,7 @@ const submitForm = async () => {
       data.append(key, employee.value[key]);
     }
   }
+  console.log(data);
 
   try {
     const response = await axios.post("/api/employee", data, config);
@@ -177,14 +181,13 @@ const update = async () => {
   };
   let data = new FormData();
 
-  data.append("file", employee.photo);
+  data.append("file", photoRef.value); // Use photoRef.value for the file
 
   for (const key in employee.value) {
     if (employee.value.hasOwnProperty(key) && key !== "photo") {
       data.append(key, employee.value[key]);
     }
   }
-  console.log(data);
 
   try {
     const response = await axios.put(`/api/employee/${empId}`, data, config);

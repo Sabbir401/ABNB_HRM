@@ -3,6 +3,7 @@
 use App\Http\Controllers\AcademicInfoController;
 use App\Http\Controllers\API\azizAuthController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\AttendenceController;
 use App\Http\Controllers\BloodGroupController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\BrandController;
@@ -83,6 +84,7 @@ Route::resource('/empType', EmployeeTypeController::class);
 Route::resource('/area', AreaController::class);
 Route::resource('/territory', TerritoryController::class);
 Route::resource('/official', OfficialController::class);
+Route::resource('/attendence', AttendenceController::class);
 
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\attendence;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AttendenceController extends Controller
 {
@@ -28,7 +29,35 @@ class AttendenceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $timeIn = $request->input('Time_In');
+            $status = ($timeIn && $timeIn > '11:00:00') ? 'Late' : 'Present';
+
+            $employee = attendence::create([
+                'EID' => $request->input('Employee_Id'),
+                'Date' => $request->input('Date'),
+                'Time_In' => $timeIn,
+                'Time_Out' => $request->input('Time_Out'),
+                'Status' => $status,
+            ]);
+
+            $response = [
+                'success'   =>  true,
+                'message'   =>  'Successfully inserted',
+            ];
+
+            DB::commit();
+            return response()->json($response);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $response = [
+                'success'   =>  false,
+                'message'   =>  'Error while inserting',
+            ];
+            return response()->json($response);
+        }
     }
 
     /**
