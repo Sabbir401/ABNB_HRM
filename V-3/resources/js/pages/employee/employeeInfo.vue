@@ -181,8 +181,8 @@ const update = async () => {
   };
   let data = new FormData();
 
-  data.append("file", photoRef.value); // Use photoRef.value for the file
-
+  data.append("file", photoRef.value);
+console.log(data);
   for (const key in employee.value) {
     if (employee.value.hasOwnProperty(key) && key !== "photo") {
       data.append(key, employee.value[key]);

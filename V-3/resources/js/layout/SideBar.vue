@@ -108,13 +108,13 @@
                     <span class="menu-icon">
                         <i class="mdi mdi-cart"></i>
                     </span>
-                    <span class="menu-title">Purchase</span>
+                    <span class="menu-title">Reports</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="ui-purchase">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
-                            <Router-Link class="nav-link" :to="{ name: 'StorePage' }">Purchase Requisation</Router-Link>
+                            <Router-Link class="nav-link" :to="{ name: 'AttendenceReport' }">Attendence Report</Router-Link>
                         </li>
                         <li class="nav-item">
                             <Router-Link class="nav-link" :to="{ name: 'CustomerPage' }">Purchase Order</Router-Link>
