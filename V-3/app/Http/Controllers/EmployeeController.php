@@ -7,6 +7,7 @@ use App\Models\emp_img;
 use App\Models\employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
 {
@@ -179,10 +180,8 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
+        // try {
             DB::beginTransaction();
-            dd($request);
-
             $employee = employee::find($id);
             $employee->update([
                 'Company_Id' => $request->input('companyId'),
@@ -219,6 +218,7 @@ class EmployeeController extends Controller
                     $file_name = time() . '_' . $request->file->getClientOriginalName();
                     $file_path = $request->file('file')->storeAs('uploads', $file_name, 'public');
 
+                    Storage::delete($existingImage->img_url);
                     $existingImage->update([
                         'img_url' => '/storage/' . $file_path,
                     ]);
@@ -239,14 +239,14 @@ class EmployeeController extends Controller
             ];
             DB::commit();
             return response()->json($response);
-        } catch (\Exception $e) {
-            DB::rollback();
-            $response = [
-                'success'   =>  false,
-                'message'   =>  'Error while updating',
-            ];
-            return response()->json($response);
-        }
+        // } catch (\Exception $e) {
+        //     DB::rollback();
+        //     $response = [
+        //         'success'   =>  false,
+        //         'message'   =>  'Error while updating',
+        //     ];
+        //     return response()->json($response);
+        // }
     }
 
     /**
@@ -254,6 +254,6 @@ class EmployeeController extends Controller
      */
     public function destroy(employee $employee)
     {
-        //
+
     }
 }

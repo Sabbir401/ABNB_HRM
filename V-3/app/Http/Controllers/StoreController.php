@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StoreController extends Controller
 {
@@ -73,6 +74,8 @@ class StoreController extends Controller
     public function update(Request $request, $id)
     {
         $store = store::find($id);
+        // Storage::delete('./public/storage/uploads/1714197818_er.jpg');
+        Storage::disk('local')->delete('/storage/uploads/1714197818_er.jpg');
         $store->update([
             'Name' => $request->input('name'),
             'Address' => $request->input('address'),

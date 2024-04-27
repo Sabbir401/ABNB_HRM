@@ -40,7 +40,6 @@ const companies = ref([]);
 const phones = ref([]);
 const error = ref([]);
 const empEdit = ref([]);
-const photoRef = ref(null);
 
 watch(
   () => empEdit.value,
@@ -114,12 +113,6 @@ const getData = async () => {
 
 const store = useStore();
 
-// const resetForm = () => {
-//   Object.keys(employee.value).forEach((key) => {
-//     employee[key] = "";
-//   });
-// };
-
 const resetForm = () => {
   Object.keys(employee.value).forEach((key) => {
     if (typeof employee.value[key] === "string") {
@@ -139,7 +132,6 @@ const editHandler = async () => {
 
 const getImage = (e) => {
   employee.photo = e.target.files[0];
-  photoRef = e.target.files[0];
 
   //   console.log(employee.photo);
 };
@@ -150,19 +142,19 @@ const submitForm = async () => {
       "Content-Type": "multipart/form-data",
     },
   };
-  let data = new FormData();
+  const formdata = new FormData();
 
-  data.append("file", employee.photo);
+  formdata.append("file", employee.photo);
 
   for (const key in employee.value) {
     if (employee.value.hasOwnProperty(key) && key !== "photo") {
-      data.append(key, employee.value[key]);
+      formdata.append(key, employee.value[key]);
     }
   }
-  console.log(data);
+  console.log(formdata);
 
   try {
-    const response = await axios.post("/api/employee", data, config);
+    const response = await axios.post("/api/employee", formdata, config);
     if (response.data.success) {
       store.dispatch("setEmployeeId", response.data.empid);
       resetForm();
@@ -181,8 +173,8 @@ const update = async () => {
   };
   let data = new FormData();
 
-  data.append("file", photoRef.value);
-console.log(data);
+  data.append("file", employee.photo);
+  console.log(data);
   for (const key in employee.value) {
     if (employee.value.hasOwnProperty(key) && key !== "photo") {
       data.append(key, employee.value[key]);
@@ -190,7 +182,7 @@ console.log(data);
   }
 
   try {
-    const response = await axios.put(`/api/employee/${empId}`, data, config);
+    const response = await axios.post(`/api/employee/${empId}`, data, config);
     if (response.data.success) {
       alert("Successfully Updated");
       resetForm();
