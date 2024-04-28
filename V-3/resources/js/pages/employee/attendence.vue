@@ -17,7 +17,8 @@ const form = ref({
   Employee_Id: "",
   Time_In: "",
   Time_Out: "",
-  Date: "",
+  From_Date: "",
+  To_Date: "",
 });
 
 const getData = async () => {
@@ -154,13 +155,25 @@ onMounted(() => getData());
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Date</label>
+                      <label for="exampleInputEmail1">From Date</label>
                       <input
                         type="date"
                         class="form-control"
                         id="exampleInputEmail1"
                         placeholder="Address"
-                        v-model="form.Date"
+                        v-model="form.From_Date"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">To Date</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="exampleInputEmail1"
+                        placeholder="Address"
+                        v-model="form.To_Date"
                       />
                     </div>
                   </div>

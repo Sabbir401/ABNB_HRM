@@ -57,7 +57,6 @@ Route::resource('/brand', BrandController::class);
 // Route::get('/store', [StoreController::class, 'show'])->name('store.index');
 
 Route::get('/emp/{id}', [EmployeeController::class, 'find']);
-Route::get('/employee', [EmployeeController::class, 'delete']);
 Route::get('/empimg/{id}', [EmpImgController::class, 'edit']);
 Route::post('/employee/{id}', [EmployeeController::class, 'update']);
 
