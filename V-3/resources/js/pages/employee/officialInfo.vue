@@ -10,6 +10,8 @@ const store = useStore();
 
 const empId = parseInt(route.params.id);
 
+console.log(empId);
+
 const official = ref({
   eid: store.state.employeeId || empId,
   departmentId: "",
