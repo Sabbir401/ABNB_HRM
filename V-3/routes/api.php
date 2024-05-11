@@ -86,7 +86,10 @@ Route::resource('/empType', EmployeeTypeController::class);
 Route::resource('/area', AreaController::class);
 Route::resource('/territory', TerritoryController::class);
 Route::resource('/official', OfficialController::class);
-Route::resource('/attendence', AttendenceController::class);
+
+
+Route::post('/attendence', [AttendenceController::class, 'store']);
+Route::post('/attendence/edit', [AttendenceController::class, 'edit']);
 
 
 

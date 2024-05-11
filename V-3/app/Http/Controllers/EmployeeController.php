@@ -33,19 +33,6 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'file' => 'required|mimes:jpg,jpeg,png,csv,txt,xlx,xls,xlsx,pdf|max:2048'
-        // ]);
-
-        // $file = new employee();
-        // if ($request->file()) {
-        //     $file_name = time() . '_' . $request->file->getClientOriginalName();
-        //     $file_path = $request->file('file')->storeAs('uploads', $file_name, 'public');
-        // }
-
-        // $request->validate([
-        //     'file' => 'nullable|mimes:jpg,jpeg,png,csv,txt,xlx,xls,xlsx,pdf|max:2048'
-        // ]);
 
         $file_path = null;
 
@@ -175,9 +162,6 @@ class EmployeeController extends Controller
         return response()->json($employee);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
         // try {

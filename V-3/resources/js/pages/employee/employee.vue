@@ -15,103 +15,114 @@ const phones = ref([]);
 const empEdit = ref([]);
 
 const getData = async () => {
-  try {
-    // const responseBlood = await axios.get("/api/blood");
-    // const responseReligion = await axios.get("/api/religion");
-    // const responseCompany = await axios.get("/api/company");
-    // const responsePhone = await axios.get("/api/phone");
+    try {
+        // const responseBlood = await axios.get("/api/blood");
+        // const responseReligion = await axios.get("/api/religion");
+        // const responseCompany = await axios.get("/api/company");
+        // const responsePhone = await axios.get("/api/phone");
 
-    // bloods.value = responseBlood.data;
-    // religions.value = responseReligion.data;
-    // companies.value = responseCompany.data;
-    // phones.value = responsePhone.data;
+        // bloods.value = responseBlood.data;
+        // religions.value = responseReligion.data;
+        // companies.value = responseCompany.data;
+        // phones.value = responsePhone.data;
 
-    if (empId) {
-      editHandler();
+        if (empId) {
+            editHandler();
+        }
+    } catch (err) {
+        error.value = err.message || "Error fetching data";
     }
-  } catch (err) {
-    error.value = err.message || "Error fetching data";
-  }
 };
 
 const editHandler = async () => {
-  try {
-    const response = await axios.get(`/api/employee/${empId}/edit`);
-    empEdit.value = response.data;
-  } catch (err) {
-    console.error("Error fetching store data for editing:", err);
-  }
+    try {
+        const response = await axios.get(`/api/employee/${empId}/edit`);
+        empEdit.value = response.data;
+    } catch (err) {
+        console.error("Error fetching store data for editing:", err);
+    }
 };
 
 onMounted(() => getData());
 </script>
 
-
 <template>
-  <div v-if="empId">
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <router-link
-          class="nav-link"
-          active-class="active"
-          :to="{
-            name: 'Employeeid',
-            params: { id: empId },
-            query: { response: empEdit },
-          }"
-          >Employee Information</router-link
-        >
-      </li>
-      <li class="nav-item">
-        <router-link
-          class="nav-link"
-          active-class="active"
-          :to="{ name: 'Personalid', params: { id: empId } }"
-          >Personal Information</router-link
-        >
-      </li>
-      <li class="nav-item">
-        <router-link
-          class="nav-link"
-          active-class="active"
-          :to="{ name: 'Professionalid', params: { id: empId } }"
-          >Professional Information</router-link
-        >
-      </li>
-      <li class="nav-item">
-        <router-link
-          class="nav-link"
-          active-class="active"
-          :to="{ name: 'Officialid', params: { id: empId } }"
-          >Official Information</router-link
-        >
-      </li>
-    </ul>
-    <RouterView />
-  </div>
-  <div v-else>
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <router-link class="nav-link" active-class="active" to="/employee"
-          >Employee Information</router-link
-        >
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" active-class="active" to="/personal"
-          >Personal Information</router-link
-        >
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" active-class="active" to="/professional"
-          >Professional Information</router-link
-        >
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" active-class="active" to="/official"
-          >Official Information</router-link
-        >
-      </li>
-    </ul>
-    <RouterView />
-  </div>
+    <div v-if="empId">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <router-link
+                    class="nav-link"
+                    active-class="active"
+                    :to="{
+                        name: 'Employeeid',
+                        params: { id: empId },
+                        query: { response: empEdit },
+                    }"
+                    >Employee Information</router-link
+                >
+            </li>
+            <li class="nav-item">
+                <router-link
+                    class="nav-link"
+                    active-class="active"
+                    :to="{ name: 'Personalid', params: { id: empId } }"
+                    >Personal Information</router-link
+                >
+            </li>
+            <li class="nav-item">
+                <router-link
+                    class="nav-link"
+                    active-class="active"
+                    :to="{ name: 'Professionalid', params: { id: empId } }"
+                    >Professional Information</router-link
+                >
+            </li>
+            <li class="nav-item">
+                <router-link
+                    class="nav-link"
+                    active-class="active"
+                    :to="{ name: 'Officialid', params: { id: empId } }"
+                    >Official Information</router-link
+                >
+            </li>
+        </ul>
+        <RouterView />
+    </div>
+    <div v-else>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <router-link
+                    class="nav-link"
+                    active-class="active"
+                    to="/employee"
+                    >Employee Information</router-link
+                >
+            </li>
+            <li class="nav-item">
+                <router-link
+                    class="nav-link"
+                    active-class="active"
+                    to="/personal"
+                    >Personal Information</router-link
+                >
+            </li>
+            <li class="nav-item">
+                <router-link
+                    class="nav-link"
+                    active-class="active"
+                    to="/professional"
+                    >Professional Information</router-link
+                >
+            </li>
+            <li class="nav-item">
+                <router-link
+                    class="nav-link"
+                    active-class="active"
+                    to="/official"
+                    >Official Information</router-link
+                >
+            </li>
+        </ul>
+        <RouterView />
+    </div>
 </template>

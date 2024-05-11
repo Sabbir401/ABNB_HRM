@@ -105,6 +105,7 @@ const getData = async () => {
     if (empId) {
       editHandler();
     }
+    
   } catch (err) {
     error.value = err.message || "Error fetching data";
   } finally {
@@ -485,6 +486,9 @@ onMounted(() => getData());
         <button type="submit" class="btn btn-primary btn-lg m-3">Save</button>
       </div>
     </form>
+
+
+
   </div>
 </template>
 
