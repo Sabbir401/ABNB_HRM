@@ -29,6 +29,8 @@ class OfficialController extends Controller
      */
     public function store(Request $request)
     {
+
+        dd($request);
         $store = official::create([
             'EID' => $request->input('eid'),
             'Department_Id' => $request->input('departmentId'),
