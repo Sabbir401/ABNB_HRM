@@ -35,10 +35,8 @@ class EmployeeController extends Controller
     {
 
         $file_path = null;
-
         try {
             DB::beginTransaction();
-
             $employee = employee::create([
                 'Company_Id' => $request->input('companyId'),
                 'Employee_Id' => $request->input('employeeId'),
@@ -67,10 +65,10 @@ class EmployeeController extends Controller
                 $request->validate([
                     'file' => 'required|mimes:jpg,jpeg,png,csv,txt,xlx,xls,xlsx,pdf|max:2048'
                 ]);
-
+                
                 $file_name = time() . '_' . $request->file->getClientOriginalName();
                 $file_path = $request->file('file')->storeAs('uploads', $file_name, 'public');
-
+                
                 $image = emp_img::create([
                     'EID' => $employee->id,
                     'img_url' => '/storage/' . $file_path,
@@ -88,6 +86,7 @@ class EmployeeController extends Controller
 
             DB::commit();
             return response()->json($response);
+
         } catch (\Exception $e) {
             DB::rollback();
             $response = [
@@ -108,7 +107,6 @@ class EmployeeController extends Controller
         if (!$emp) {
             return response()->json(['message' => 'Store not found'], 404);
         }
-
         return response()->json($emp);
     }
 

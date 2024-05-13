@@ -11,10 +11,6 @@ const empEdit = ref(null);
 const heading = ref(null);
 let search = ref("");
 
-
-
-
-
 const getData = async (page = 1) => {
   try {
     const response = await axios.get(`api/employee?page=${page}`);
@@ -108,51 +104,21 @@ onMounted(() => getData());
           <table class="table table-dark">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Company name</th>
+                <th>Employee ID</th>
                 <th>Full Name</th>
-                <th>Father name</th>
-                <th>Mother Name</th>
-                <th>Spouse Name</th>
-                <th>Marital Status</th>
                 <th>Date of Birth</th>
-                <th>Place of Birth</th>
-                <th>Present Address</th>
-                <th>Permanent Address</th>
                 <th>Contact</th>
-                <th>Emergency Contact</th>
-                <th>Gender</th>
-                <th>Personal Email</th>
                 <th>Official Email</th>
-                <th>Blood Group</th>
-                <th>Religion</th>
-                <th>Nationality</th>
-                <th>NID</th>
                 <th>Operation</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="employee in employees.data" :key="employee.id">
-                <td>{{ employee.id }}</td>
-                <td>{{ employee.company ? employee.company.Name : "N/A" }}</td>
+                <td>{{ employee.Employee_Id }}</td>
                 <td>{{ employee.Full_Name }}</td>
-                <td>{{ employee.Father_Name }}</td>
-                <td>{{ employee.Mother_Name }}</td>
-                <td>{{ employee.Spouse_Name }}</td>
-                <td>{{ mapMaritalStatus(employee.Marital_Status) }}</td>
                 <td>{{ employee.DOB }}</td>
-                <td>{{ employee.Place_of_Birth }}</td>
-                <td>{{ employee.Present_Address }}</td>
-                <td>{{ employee.Permanent_Address }}</td>
                 <td>{{ employee.Contact_No }}</td>
-                <td>{{ employee.Emergency_Contact }}</td>
-                <td>{{ mapGender(employee.Gender) }}</td>
-                <td>{{ employee.Personal_Email }}</td>
                 <td>{{ employee.Official_Email }}</td>
-                <td>{{ employee.blood ? employee.blood.Name : "N/A" }}</td>
-                <td>{{ employee.religion ? employee.religion.Name : "N/A" }}</td>
-                <td>{{ employee.Nationality }}</td>
-                <td>{{ employee.NID }}</td>
                 <td>
                   <button
                     class="btn btn-primary mr-2 p-1"
