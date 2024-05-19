@@ -1,13 +1,14 @@
 <script setup>
 import { ref, onMounted, watch } from "vue";
 import axios from "axios";
-import { Bootstrap5Pagination } from "laravel-vue-pagination";
+// import { Bootstrap5Pagination } from "laravel-vue-pagination";
 
 import { useRoute } from "vue-router";
 
 const department = ref([]);
 const empp = ref([]);
 const emp_img = ref([]);
+const attendences = ref([]);
 
 const error = ref([]);
 
@@ -34,7 +35,6 @@ const getEmployee = async (id) => {
         empp.value = response.data;
     } catch (error) {
         console.error("Error updating store:", error);
-        // Handle the error, e.g., display an error message
     }
 };
 
@@ -58,6 +58,7 @@ const resetForm = () => {
 const submit = async () => {
     try {
         const response = await axios.post(`/api/attendence/edit`, form.value);
+        attendences.value = response.data;
         if (response.data.success) {
             resetForm();
             alert("Successfully Inserted Attendence");
@@ -199,8 +200,7 @@ onMounted(() => getData());
                         <table class="table table-dark">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
+                                    <th>Date</th>
                                     <th>Date</th>
                                     <th>Time In</th>
                                     <th>Time Out</th>
@@ -208,16 +208,23 @@ onMounted(() => getData());
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>IS240001</td>
-                                    <td>Herman Beck</td>
-                                    <td>$ 77.99</td>
-                                    <td>May 15, 2015</td>
-                                    <td>Active</td>
+                                <tr
+                                    v-for="(attend, index) in attendences"
+                                    :key="attend.id"
+                                >
+                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ attend.Date }}</td>
+                                    <td>{{ attend.Time_In }}</td>
+                                    <td>{{ attend.Time_Out }}</td>
+                                    <td>{{ attend.Status }}</td>
                                 </tr>
                             </tbody>
                         </table>
+                        <br />
+                        <!-- <Bootstrap5Pagination
+                            :data="attendences"
+                            @pagination-change-page="submit"
+                        /> -->
                     </div>
                 </div>
             </div>
