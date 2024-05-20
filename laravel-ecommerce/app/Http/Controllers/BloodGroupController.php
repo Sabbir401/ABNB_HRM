@@ -12,7 +12,9 @@ class BloodGroupController extends Controller
      */
     public function index()
     {
-        //
+        $blood = blood_group::all();
+
+        return response()->json($blood);
     }
 
     public function submitForm(Request $request)
