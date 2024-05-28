@@ -312,7 +312,6 @@ const getData = async () => {
         bloods.value = responseBlood.data;
         religions.value = responseReligion.data;
         companies.value = responseCompany.data;
-        console.log(companies.value);
     } catch (err) {
         error.value = err.message || "Error fetching data";
     } finally {

@@ -4,270 +4,89 @@ import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 export default {
-  setup() {
-    const router = useRouter();
-    const store = useStore();
-    const form = reactive({
-      email: "",
-      password: "",
-    });
-    const err = ref("");
+    setup() {
+        const router = useRouter();
+        const store = useStore();
+        const form = reactive({
+            email: "",
+            password: "",
+        });
+        const err = ref("");
 
-    const login = async () => {
-      await axios.post("/api/login", form).then((res) => {
-        if (res.data.success) {
-          // localStorage.setItem('token',res.data.data.token);
-          store.dispatch("setToken", res.data.data.token);
-          router.push({ name: "Dashboard" });
-        } else {
-          err.value = res.data.message;
-        }
-      });
-    };
+        const login = async () => {
+            await axios.post("/api/login", form).then((res) => {
+                if (res.data.success) {
+                    // localStorage.setItem('token',res.data.data.token);
+                    store.dispatch("setToken", res.data.data.token);
+                    router.push({ name: "Dashboard" });
+                } else {
+                    err.value = res.data.message;
+                }
+            });
+        };
 
-    return {
-      form,
-      login,
-      err,
-    };
-  },
+        return {
+            form,
+            login,
+            err,
+        };
+    },
 };
 </script>
 <template>
-    <div class="container-scroller">
-      <div class="container-fluid page-body-wrapper full-page-wrapper">
-        <div class="row w-100 m-0">
-          <div
-            class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg"
-          >
-            <div class="card col-lg-4 mx-auto">
-              <div class="card-body px-5 py-5">
-                <h3 class="card-title text-left mb-3">Login</h3>
-                <form @submit.prevent="login">
-                  <div class="form-group">
+    <div class="text-center mb-5">
+        <h1>Welcome to</h1>
+        <h1>Artisan Human Resource Information System</h1>
+    </div>
+    <div class="card col-lg-4 mx-auto">
+        <div class="card-body px-5 py-5">
+            <h3 class="card-title text-left mb-3">Login</h3>
+            <form @submit.prevent="login">
+                <div class="form-group">
                     <label>Username or email *</label>
                     <input
-                      type="text"
-                      class="form-control p_input"
-                      v-model="form.email"
+                        type="text"
+                        class="form-control p_input"
+                        v-model="form.email"
                     />
-                  </div>
-                  <div class="form-group">
+                </div>
+                <div class="form-group">
                     <label>Password *</label>
                     <input
-                      type="password"
-                      class="form-control p_input"
-                      v-model="form.password"
+                        type="password"
+                        class="form-control p_input"
+                        v-model="form.password"
                     />
-                  </div>
-                  <div
+                </div>
+                <div
                     class="form-group d-flex align-items-center justify-content-between"
-                  >
+                >
                     <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" />
-                        Remember me
-                      </label>
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" />
+                            Remember me
+                        </label>
                     </div>
                     <a href="#" class="forgot-pass">Forgot password</a>
-                  </div>
-                  <div class="text-center">
+                </div>
+                <div class="text-center">
                     <button
-                      type="submit"
-                      class="btn btn-primary btn-block enter-btn"
+                        type="submit"
+                        class="btn btn-primary btn-block enter-btn"
                     >
-                      Login
+                        Login
                     </button>
-                  </div>
-                  <p class="sign-up">
+                </div>
+                <p class="sign-up">
                     Don't have an Account?<a href="#"> Sign Up</a>
-                  </p>
-                </form>
-              </div>
-            </div>
-          </div>
-          <!-- content-wrapper ends -->
+                </p>
+            </form>
         </div>
-        <!-- row ends -->
-      </div>
-      <!-- page-body-wrapper ends -->
     </div>
-  </template>
+</template>
 
 <style scoped>
-body {
-  margin: 0;
-  color: #6a6f8c;
-  background: #c8c8c8;
-  font: 600 16px/18px "Open Sans", sans-serif;
-}
-
-.login-box {
-  width: 100%;
-  margin: auto;
-  max-width: 525px;
-  min-height: 670px;
-  position: relative;
-  background: url(https://images.unsplash.com/photo-1507208773393-40d9fc670acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1268&q=80)
-    no-repeat center;
-  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
-    0 17px 50px 0 rgba(0, 0, 0, 0.19);
-}
-.login-snip {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  padding: 90px 70px 50px 70px;
-  background: rgba(0, 77, 77, 0.9);
-}
-.login-snip .login,
-.login-snip .sign-up-form {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: absolute;
-  transform: rotateY(180deg);
-  backface-visibility: hidden;
-  transition: all 0.4s linear;
-}
-.login-snip .sign-in,
-.login-snip .sign-up,
-.login-space .group .check {
-  display: none;
-}
-.login-snip .tab,
-.login-space .group .label,
-.login-space .group .button {
-  text-transform: uppercase;
-}
-.login-snip .tab {
-  font-size: 22px;
-  margin-right: 15px;
-  padding-bottom: 5px;
-  margin: 0 15px 10px 0;
-  display: inline-block;
-  border-bottom: 2px solid transparent;
-}
-.login-snip .sign-in:checked + .tab,
-.login-snip .sign-up:checked + .tab {
-  color: #fff;
-  border-color: #1161ee;
-}
-.login-space {
-  min-height: 345px;
-  position: relative;
-  perspective: 1000px;
-  transform-style: preserve-3d;
-}
-.login-space .group {
-  margin-bottom: 15px;
-}
-.login-space .group .label,
-.login-space .group .input,
-.login-space .group .button {
-  width: 100%;
-  color: #fff;
-  display: block;
-}
-.login-space .group .input,
-.login-space .group .button {
-  border: none;
-  padding: 15px 20px;
-  border-radius: 25px;
-  background: rgba(255, 255, 255, 0.1);
-}
-.login-space .group input[data-type="password"] {
-  text-security: circle;
-  -webkit-text-security: circle;
-}
-.login-space .group .label {
-  color: #aaa;
-  font-size: 12px;
-}
-.login-space .group .button {
-  background: #1161ee;
-}
-.login-space .group label .icon {
-  width: 15px;
-  height: 15px;
-  border-radius: 2px;
-  position: relative;
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.1);
-}
-.login-space .group label .icon:before,
-.login-space .group label .icon:after {
-  content: "";
-  width: 10px;
-  height: 2px;
-  background: #fff;
-  position: absolute;
-  transition: all 0.2s ease-in-out 0s;
-}
-.login-space .group label .icon:before {
-  left: 3px;
-  width: 5px;
-  bottom: 6px;
-  transform: scale(0) rotate(0);
-}
-.login-space .group label .icon:after {
-  top: 6px;
-  right: 0;
-  transform: scale(0) rotate(0);
-}
-.login-space .group .check:checked + label {
-  color: #fff;
-}
-.login-space .group .check:checked + label .icon {
-  background: #1161ee;
-}
-.login-space .group .check:checked + label .icon:before {
-  transform: scale(1) rotate(45deg);
-}
-.login-space .group .check:checked + label .icon:after {
-  transform: scale(1) rotate(-45deg);
-}
-.login-snip .sign-in:checked + .tab + .sign-up + .tab + .login-space .login {
-  transform: rotate(0);
-}
-.login-snip .sign-up:checked + .tab + .login-space .sign-up-form {
-  transform: rotate(0);
-}
-
-*,
-:after,
-:before {
-  box-sizing: border-box;
-}
-.clearfix:after,
-.clearfix:before {
-  content: "";
-  display: table;
-}
-.clearfix:after {
-  clear: both;
-  display: block;
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.hr {
-  height: 2px;
-  margin: 60px 0 50px 0;
-  background: rgba(255, 255, 255, 0.2);
-}
-.foot {
-  text-align: center;
-}
-.card {
-  width: 500px;
-  left: 100px;
-}
-
-::placeholder {
-  color: #b3b3b3;
-}
+    h1{
+        font-size: 60px;
+    }
 </style>

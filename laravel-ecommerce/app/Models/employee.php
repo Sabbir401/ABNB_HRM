@@ -12,6 +12,7 @@ class employee extends Model
     protected $fillable = [
         'Company_Id',
         'Card_No',
+        'Employee_Id',
         'Full_Name',
         'Father_Name',
         'Mother_Name',

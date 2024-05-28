@@ -15,7 +15,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 const routes = [
     { path: '/', component: () => import("../page/home.vue") },
     { path: '/category', component: () => import("../page/category.vue") },
-    { path: '/details', component: () => import("../page/details.vue") },
+    { path: '/employeelist', component: () => import("../page/employeelist.vue") },
     { path: '/employeeInfo', component: () => import("../page/components/employeeInfo.vue") },
     { path: '/personalInfo', component: () => import("../page/components/personalInfo.vue") },
     { path: '/professionalInfo', component: () => import("../page/components/professionalInfo.vue") },

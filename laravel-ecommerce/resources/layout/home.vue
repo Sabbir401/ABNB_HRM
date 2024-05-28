@@ -67,7 +67,7 @@
                                     >
                                 </q-item>
                                 <q-item
-                                    @click="$router.push('/details')"
+                                    @click="$router.push('/employeelist')"
                                     clickable
                                 >
                                     <q-item-section

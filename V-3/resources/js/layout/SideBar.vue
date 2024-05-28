@@ -13,12 +13,12 @@
                 <div class="profile-desc">
                     <div class="profile-pic">
                         <div class="count-indicator">
-                            <img class="img-xs rounded-circle " src="./../assets/images/faces/face15.jpg" alt="">
+                            <img class="img-xs rounded-circle " src="./../assets/images/faces/face15" alt="">
                             <span class="count bg-success"></span>
                         </div>
                         <div class="profile-name">
-                            <h5 class="mb-0 font-weight-normal">Sabbir Ahmed</h5>
-                            <span>Jr. Executive IT</span>
+                            <h5 class="mb-0 font-weight-normal">Artisan</h5>
+                            <span>HR</span>
                         </div>
                     </div>
                     <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>

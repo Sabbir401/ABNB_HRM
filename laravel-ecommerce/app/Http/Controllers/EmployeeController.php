@@ -13,7 +13,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employee = employee::with('company', 'blood', 'religion')->get();
+        return response()->json($employee);
     }
 
     /**
@@ -29,7 +30,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
         try {
             DB::beginTransaction();
             $employee = employee::create([
@@ -37,23 +38,23 @@ class EmployeeController extends Controller
                 'Employee_Id' => $request->input('employeeId'),
                 'Card_No' => $request->input('cardNo'),
                 'Full_Name' => $request->input('fullName'),
-                // 'Father_Name' => $request->input('fatherName'),
-                // 'Mother_Name' => $request->input('motherName'),
-                // 'Spouse_Name' => $request->input('spouseName'),
-                // 'Marital_Status' => $request->input('maritalStatus'),
+                'Father_Name' => $request->input('fatherName'),
+                'Mother_Name' => $request->input('motherName'),
+                'Spouse_Name' => $request->input('spouseName'),
+                'Marital_Status' => $request->input('maritalStatus'),
                 'DOB' => $request->input('dob'),
-                // 'Place_of_Birth' => $request->input('pob'),
-                // 'Present_Address' => $request->input('presentAddress'),
-                // 'Permanent_Address' => $request->input('permanentAddress'),
-                // 'Contact_No' => $request->input('officialContact'),
-                // 'Emergency_Contact' => $request->input('emergencyContact'),
-                // 'Gender' => $request->input('gender'),
-                // 'Personal_Email' => $request->input('personalEmail'),
-                // 'Official_Email' => $request->input('officialEmail'),
-                // 'Blood_Group_Id' => $request->input('bloodGroup.id'),
-                // 'Religion_Id' => $request->input('religion.id'),
-                // 'Nationality' => $request->input('nationality'),
-                // 'NID' => $request->input('nid'),
+                'Place_of_Birth' => $request->input('pob'),
+                'Present_Address' => $request->input('presentAddress'),
+                'Permanent_Address' => $request->input('permanentAddress'),
+                'Contact_No' => $request->input('officialContact'),
+                'Emergency_Contact' => $request->input('emergencyContact'),
+                'Gender' => $request->input('gender'),
+                'Personal_Email' => $request->input('personalEmail'),
+                'Official_Email' => $request->input('officialEmail'),
+                'Blood_Group_Id' => $request->input('bloodGroup.id'),
+                'Religion_Id' => $request->input('religion.id'),
+                'Nationality' => $request->input('nationality'),
+                'NID' => $request->input('nid'),
             ]);
 
             $lastId = employee::latest('id')->value('id');
