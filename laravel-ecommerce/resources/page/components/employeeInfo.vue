@@ -93,6 +93,7 @@
                             v-model="emp.dob"
                             mask="date"
                             :rules="['date']"
+                            label="Date of Birth"
                         >
                             <template v-slot:append>
                                 <q-icon name="event" class="cursor-pointer">
@@ -328,16 +329,16 @@ const Submit = async () => {
                 icon: "warning",
                 message: "Saved Successfully",
             });
-        }else{
-          $q.notify({
-            color: "red-5",
-            textColor: "white",
-            icon: "warning",
-            message: "Something Went Wrong",
-        });
+        } else {
+            $q.notify({
+                color: "red-5",
+                textColor: "white",
+                icon: "warning",
+                message: "Something Went Wrong",
+            });
         }
     } catch (err) {
-      console.error("Error submitting form:", err);
+        console.error("Error submitting form:", err);
     }
 };
 

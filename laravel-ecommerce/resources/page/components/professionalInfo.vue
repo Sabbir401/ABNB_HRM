@@ -1,309 +1,206 @@
 <template>
-    <div class="container q-my-xl q-mx-xl">
-      <q-form @submit="onSubmit" @reset="onReset">
-        <div class="row bg-white q-mt-sm">
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-input dense filled v-model="cmpname" label="Company Name" />
+    <div class="q-pa-md row items-start q-gutter-md">
+      <store
+        :isOpen="isModalOpened"
+        :editStore="selectedStore"
+        :updateinfo="heading"
+        @modal-close="closeModal"
+        @submit="submitHandler"
+        name="first-modal"
+      />
+      <q-card class="my-card">
+        <q-card-section class="bg-primary text-white">
+          <div class="text-h6">
+            Work Experience
+            <q-btn push color="green" label="Add" icon="add" @click="choose" />
           </div>
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-input dense filled v-model="id" label="Employee ID" />
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-input dense filled v-model="card" label="Card No" />
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-input dense filled v-model="fullname" label="Full Name" />
-          </div>
-        </div>
-
-        <div class="row bg-white q-mt-sm">
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-input dense filled v-model="fathername" label="Father's Name" />
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-input dense filled v-model="mothername" label="Mother's Name" />
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-input dense filled v-model="spousename" label="Spouse Name" />
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-select
-              filled
-              v-model="mary"
-              dense
-              :options="options"
-              label="Marital Status"
+        </q-card-section>
+        <q-separator />
+        <q-card-section>
+          <div class="q-pa-md">
+            <q-table
+              flat
+              bordered
+              :rows="stores"
+              :columns="columns"
+              row-key="name"
+              hide-bottom
             />
           </div>
-        </div>
-
-        <div class="row bg-white q-mt-sm">
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-input dense v-model="pob" filled label="Place of Birth" />
+        </q-card-section>
+      </q-card>
+  
+      <q-card class="my-card">
+        <q-card-section class="bg-primary text-white">
+          <div class="text-h6">
+            Training Information
+            <q-btn push color="green" label="Add" icon="add" />
           </div>
-
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <div>
-              <q-input
-                filled
-                dense
-                v-model="date"
-                mask="date"
-                label="Date of Birth"
-                :rules="['date']"
-              >
-                <template v-slot:append>
-                  <q-icon name="event" class="cursor-pointer">
-                    <q-popup-proxy
-                      cover
-                      transition-show="scale"
-                      transition-hide="scale"
-                    >
-                      <q-date dense v-model="date">
-                        <div class="row items-center justify-end">
-                          <q-btn
-                            v-close-popup
-                            label="Close"
-                            color="primary"
-                            flat
-                          />
-                        </div>
-                      </q-date>
-                    </q-popup-proxy>
-                  </q-icon>
-                </template>
-              </q-input>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-input dense filled v-model="offcontact" label="Official Contact" />
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-input
-              dense
-              filled
-              v-model="emercontact"
-              label="Emergency Contact"
+        </q-card-section>
+        <q-separator />
+        <q-card-section>
+          <div class="q-pa-md">
+            <q-table
+              flat
+              bordered
+              :rows="stores"
+              :columns="columns"
+              row-key="name"
+              hide-bottom
             />
           </div>
-        </div>
-
-        <div class="row bg-white">
-          <div class="col-lg-6 col-md-6 col-sm-12 q-px-sm">
-            <q-input
-              v-model="permanent"
-              filled
-              dense
-              type="textarea"
-              label="Permanent Address"
+        </q-card-section>
+      </q-card>
+  
+      <q-card class="my-card">
+        <q-card-section class="bg-primary text-white">
+          <div class="text-h6">
+            Academic Information
+            <q-btn push color="green" label="Add" icon="add" />
+          </div>
+        </q-card-section>
+        <q-separator />
+        <q-card-section>
+          <div class="q-pa-md">
+            <q-table
+              flat
+              bordered
+              :rows="stores"
+              :columns="columns"
+              row-key="name"
+              hide-bottom
             />
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-12 q-px-sm">
-            <q-input
-              v-model="present"
-              filled
-              dense
-              type="textarea"
-              label="Present Address"
-            />
-          </div>
-        </div>
-
-        <div class="row bg-white q-mt-sm">
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-select
-              filled
-              dense
-              v-model="gender"
-              :options="gen"
-              label="Gender"
-            />
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-input
-              filled
-              dense
-              v-model="peremail"
-              type="email"
-              label="Personal Email"
-            >
-              <template v-slot:append>
-                <q-icon name="mail" />
-              </template>
-            </q-input>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-input
-              filled
-              dense
-              v-model="offemail"
-              type="email"
-              label="Official Email"
-            >
-              <template v-slot:append>
-                <q-icon name="mail" />
-              </template>
-            </q-input>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-select
-              filled
-              dense
-              v-model="religion"
-              :options="reli"
-              label="Religion"
-            />
-          </div>
-        </div>
-
-        <div class="row bg-white q-mt-sm">
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-select
-              filled
-              dense
-              v-model="blood"
-              :options="bld"
-              label="Blood group"
-            />
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-input dense v-model="nation" filled label="Nationality" />
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm">
-            <q-input dense v-model="nid" filled label="NID" />
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-12 q-px-sm"></div>
-        </div>
-      </q-form>
-    </div>
-
-    <div class="q-pa-md" style="max-width: 400px">
-      <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-        <q-toggle
-          class="q-ml-xl"
-          v-model="accept"
-          label="I accept the license and terms"
-        />
-
-        <div>
-          <q-btn label="Submit" type="submit" color="info" class="q-ml-xl" />
-          <q-btn label="Reset" type="reset" color="primary" class="q-ml-md" />
-        </div>
-      </q-form>
+        </q-card-section>
+      </q-card>
     </div>
   </template>
 
 
+<script>
+import { ref, onMounted, watch } from "vue";
+import axios from "axios";
+import store from "./work.vue";
 
-  <script>
-  import { useQuasar } from "quasar";
-  import { ref } from "vue";
+const columns = [
+  {
+    name: "name",
+    required: true,
+    label: "Level of Education",
+    align: "left",
+    field: (row) => row.name,
+    sortable: true,
+  },
+  {
+    name: "calories",
+    align: "center",
+    label: "Degree",
+    field: "calories",
+    sortable: true,
+  },
+  { name: "fat", label: "Institute", field: "fat", sortable: true },
+  { name: "carbs", label: "Board", field: "carbs" },
+  { name: "protein", label: "Major/Group", field: "protein" },
+  { name: "sodium", label: "Result", field: "sodium" },
+  {
+    name: "calcium",
+    label: "Passing Year",
+    field: "calcium",
+    sortable: true,
+    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
+  },
+  {
+    name: "iron",
+    label: "Achievements",
+    field: "iron",
+    sortable: true,
+    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
+  },
+];
 
-  export default {
-    setup() {
-      const $q = useQuasar();
+export default {
+  setup() {
+    const isModalOpened = ref(false);
+    const stores = ref([]);
+    const isLoading = ref(true);
+    const error = ref(null);
+    const selectedStore = ref(null);
+    const heading = ref(null);
+    let search = ref("");
 
-      const fullname = ref(null);
-      const cmpname = ref(null);
-      const fathername = ref(null);
-      const mothername = ref(null);
-      const sopusename = ref(null);
-      const mary = ref(null);
-      const pob = ref(null);
-      const offcontact = ref(null);
-      const emercontact = ref(null);
-      const permanent = ref(null);
-      const present = ref(null);
-      const gender = ref(null);
-      const peremail = ref(null);
-      const offemail = ref(null);
-      const religion = ref(null);
-      const blood = ref(null);
-      const nation = ref(null);
-      const nid = ref(null);
+    watch(search, (value) => {
+      // Add your logic for handling search changes
+    });
 
-      const accept = ref(false);
+    const openModal = () => {
+      isModalOpened.value = true;
+    };
 
-      return {
-        fullname,
-        cmpname,
-        fathername,
-        mothername,
-        sopusename,
-        mary,
-        accept,
-        pob,
-        offcontact,
-        emercontact,
-        permanent,
-        present,
-        gender,
-        peremail,
-        offemail,
-        religion,
-        blood,
-        nation,
-        nid,
+    const closeModal = () => {
+      isModalOpened.value = false;
+    };
 
-        date: ref("2019/02/01"),
-        model: ref(null),
-        options: ["Married", "Unmarried"],
-        text: ref(""),
-        gen: ["Male", "Female"],
-        reli: ["Muslim", "Hindu", "Buddhist"],
-        bld: [
-          "A+(ve)",
-          "A-(ve)",
-          "B+(ve)",
-          "B-(ve)",
-          "O+(ve)",
-          "O-(ve)",
-          "AB+(ve)",
-          "AB-(ve)",
-        ],
+    const choose = () => {
+      heading.value = "Insert";
+      openModal();
+    };
 
-        onSubmit() {
-          if (accept.value !== true) {
-            $q.notify({
-              color: "red-5",
-              textColor: "white",
-              icon: "warning",
-              message: "You need to accept the license and terms first",
-            });
-          } else {
-            $q.notify({
-              color: "green-5",
-              textColor: "white",
-              icon: "cloud_done",
-              message: "Submitted",
-            });
-          }
-        },
+    const getData = async (page = 1) => {
+      try {
+        const response = await axios.get(`api/store?page=${page}`);
+        stores.value = response.data;
+      } catch (err) {
+        error.value = err.message || "Error fetching data";
+      } finally {
+        isLoading.value = false;
+      }
+    };
 
-        onReset() {
-          fullname.value = null;
-          cmpname.value = null;
-          fathername.value = null;
-          mothername.value = null;
-          sopusename.value = null;
-          mary.value = null;
-          pob.value = null,
-          offcontact.value = null;
-          emercontact.value = null;
-          permanent.value = null;
-          present.value = null;
-          gender.value = null;
-          peremail.value = null;
-          offemail.value = null;
-          religion.value = null;
-          blood.value = null;
-          nation.value = null;
-          nid.value = null;
+    const editHandler = async (id) => {
+      try {
+        const response = await axios.get(`api/store/${id}/edit`);
+        selectedStore.value = response.data;
+        heading.value = "Update";
+        openModal();
+      } catch (err) {
+        console.error("Error fetching store data for editing:", err);
+      }
+    };
 
-          accept.value = false;
-        },
-      };
-    },
-  };
-  </script>
+    const submitHandler = async () => {
+      await getData();
+    };
+
+    onMounted(() => getData());
+
+    return {
+      isModalOpened,
+      stores,
+      isLoading,
+      error,
+      selectedStore,
+      heading,
+      search,
+      columns,
+      openModal,
+      closeModal,
+      choose,
+      getData,
+      editHandler,
+      submitHandler,
+    };
+  },
+};
+</script>
+
+
+<style scoped>
+.my-card {
+  width: 100%;
+}
+</style>
+
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+</style>
