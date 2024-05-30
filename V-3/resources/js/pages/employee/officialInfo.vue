@@ -48,7 +48,7 @@ const getData = async () => {
     const responseEmpType = await axios.get("/api/empType");
     const responseArea = await axios.get("/api/area");
     const responseTerritory = await axios.get("/api/territory");
-    const responseSuper = await axios.get("/api/employee");
+    const responseSuper = await axios.get("/api/employee/allemp");
     const responseCountry = await axios.get("/api/phone");
 
     departments.value = responseDepartment.data;
@@ -298,7 +298,7 @@ onMounted(() => getData());
           >
             <option selected disabled>select</option>
             <option
-              v-for="des in supervisor.data"
+              v-for="des in supervisor"
               :key="des.id"
               :value="des.id"
             >

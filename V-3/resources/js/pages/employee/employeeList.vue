@@ -104,6 +104,7 @@ onMounted(() => getData());
           <table class="table table-dark">
             <thead>
               <tr>
+                <th>S/N</th>
                 <th>Employee ID</th>
                 <th>Full Name</th>
                 <th>Date of Birth</th>
@@ -113,7 +114,8 @@ onMounted(() => getData());
               </tr>
             </thead>
             <tbody>
-              <tr v-for="employee in employees.data" :key="employee.id">
+              <tr v-for="(employee, index) in employees.data" :key="employee.id">
+                <td>{{ index+1 }}</td>
                 <td>{{ employee.Employee_Id }}</td>
                 <td>{{ employee.Full_Name }}</td>
                 <td>{{ employee.DOB }}</td>

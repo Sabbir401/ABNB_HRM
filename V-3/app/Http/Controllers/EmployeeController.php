@@ -20,6 +20,12 @@ class EmployeeController extends Controller
         return response()->json($employee);
     }
 
+    public function allemp()
+    {
+        $employee = employee::get();
+        return response()->json($employee);
+    }
+
 
     /**
      * Show the form for creating a new resource.

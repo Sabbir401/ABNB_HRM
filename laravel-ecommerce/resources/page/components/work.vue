@@ -4,8 +4,6 @@ import { ref, onMounted, reactive, watch } from "vue";
 export default {
   props: {
     isOpen: Boolean,
-    editStore: Object,
-    updateinfo: String,
   },
   setup(props, { emit }) {
     const target = ref(null);
@@ -17,16 +15,6 @@ export default {
       status: "",
     });
 
-    watch(
-      () => props.editStore,
-      (newVal) => {
-        form.id = props.editStore.id;
-        form.name = props.editStore.Name;
-        form.address = props.editStore.Address;
-        form.date = props.editStore.Date;
-        form.status = props.editStore.Status;
-      }
-    );
 
     onMounted(() => {
       onClickOutside(target, () => emit("modal-close"));
@@ -36,49 +24,6 @@ export default {
       emit("modal-close");
     };
 
-    const resetForm = () => {
-      Object.keys(form).forEach((key) => {
-        form[key] = "";
-      });
-    };
-
-    const create = async () => {
-      try {
-        const response = await axios.post("/api/store", form);
-        if (response.data.success) {
-          emit("modal-close");
-          alert("Successfully Inserted");
-          resetForm();
-        }
-      } catch (error) {
-        console.error("Error creating store:", error);
-        // Handle the error, e.g., display an error message
-      }
-    };
-
-    const update = async () => {
-      try {
-        const response = await axios.put(`api/store/${form.id}`, form);
-        if (response.data.success) {
-          emit("modal-close");
-          alert("Successfully Updated");
-          resetForm();
-        }
-      } catch (error) {
-        console.error("Error updating store:", error);
-        // Handle the error, e.g., display an error message
-      }
-    };
-
-    const submit = () => {
-      if (props.updateinfo === "Insert") {
-        create();
-      } else if (props.updateinfo === "Update") {
-        update();
-      } else {
-        console.error("Invalid updateinfo value:", props.updateinfo);
-      }
-    };
 
     return {
       target,
@@ -98,7 +43,7 @@ export default {
   >
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">{{ updateinfo }} Information</h4>
+        <h4 class="card-title">Information</h4>
         <form class="forms-sample" @submit.prevent="submit">
           <div class="form-group">
             <label for="exampleInputUsername1">Name</label>
@@ -143,7 +88,7 @@ export default {
             </select>
           </div>
           <button type="submit" class="btn btn-primary mr-2">
-            {{ updateinfo }}
+            Submit
           </button>
           <button class="btn btn-dark" @click.stop="closeModal">Cancel</button>
         </form>

@@ -59,6 +59,8 @@ Route::resource('/brand', BrandController::class);
 Route::get('/emp/{id}', [EmployeeController::class, 'find']);
 Route::get('/empimg/{id}', [EmpImgController::class, 'edit']);
 Route::post('/employee/{id}', [EmployeeController::class, 'update']);
+Route::get('/employee/allemp', [EmployeeController::class, 'allemp']);
+
 
 
 Route::put('/nominee/{id}', [NomineeController::class, 'update']);
